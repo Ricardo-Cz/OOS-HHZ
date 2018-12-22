@@ -51,7 +51,7 @@ public class CustomVisionSamples {
             e.printStackTrace();
         }
     }
-
+  
     public static void ImageClassification_Sample(TrainingApi trainClient, PredictionEndpoint predictor) {
         try {
             System.out.println("ImageClassification Sample");
@@ -136,6 +136,7 @@ public class CustomVisionSamples {
             //  Normalized Top = Top / Height (in Pixels)
             //  Normalized Bounding Box Width = (Right - Left) / Width (in Pixels)
             //  Normalized Bounding Box Height = (Bottom - Top) / Height (in Pixels)
+            
             HashMap<String, double[]> regionMap = new HashMap<String, double[]>();
             regionMap.put("scissors_1.jpg", new double[] { 0.4007353, 0.194068655, 0.259803921, 0.6617647 });
             regionMap.put("scissors_2.jpg", new double[] { 0.426470578, 0.185898721, 0.172794119, 0.5539216 });
@@ -323,13 +324,13 @@ public class CustomVisionSamples {
             //=============================================================
             // Authenticate
             System.out.println(System.getenv("AZURE_CUSTOMVISION_TRAINING_API_KEY"));
-            /*final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";//System.getenv("AZURE_CUSTOMVISION_TRAINING_API_KEY");;
+            final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";//System.getenv("AZURE_CUSTOMVISION_TRAINING_API_KEY");;
             final String predictionApiKey = "68ecc463ba0c4ccfb9772717cdd1ec38";//System.getenv("AZURE_CUSTOMVISION_PREDICTION_API_KEY");;
 
             TrainingApi trainClient = CustomVisionTrainingManager.authenticate(trainingApiKey);
             PredictionEndpoint predictClient = CustomVisionPredictionManager.authenticate(predictionApiKey);
 
-            runSample(trainClient, predictClient);*/
+            runSample(trainClient, predictClient);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
