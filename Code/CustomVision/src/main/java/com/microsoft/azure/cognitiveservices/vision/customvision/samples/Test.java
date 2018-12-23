@@ -1,6 +1,5 @@
 package com.microsoft.azure.cognitiveservices.vision.customvision.samples;
-//bla
-//blub
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +37,7 @@ public class Test {
     
     public static void TestImage (TrainingApi trainClient, PredictionEndpoint predictor){
         try{
-            byte[] testImage = GetImage("/ObjectTest", "fork.jpg");
+            byte[] testImage = GetImage("/ObjectTest", "test_image.jpg");
             Trainings trainer = trainClient.trainings();
             Project project = trainer.getProject(UUID.fromString("1766da8f-9833-41e1-9893-427a7cc52a04"));
 
