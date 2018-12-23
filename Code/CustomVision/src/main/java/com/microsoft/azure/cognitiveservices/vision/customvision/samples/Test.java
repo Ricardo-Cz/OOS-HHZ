@@ -1,5 +1,5 @@
 package com.microsoft.azure.cognitiveservices.vision.customvision.samples;
-
+//hallo
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
