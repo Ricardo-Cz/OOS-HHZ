@@ -13,6 +13,7 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Map;
+import javax.swing.JFrame;
 import org.apache.http.entity.ByteArrayEntity;
 
 public class Main {
@@ -43,7 +44,7 @@ public class Main {
         //Path to directory with images
         
         Map<String,byte[]> imageDictionary = graphicHelper.getImages(directoryPath);
-
+/*
         CloseableHttpClient httpTextClient = HttpClientBuilder.create().build();
         CloseableHttpClient httpResultClient = HttpClientBuilder.create().build();;
 
@@ -136,6 +137,10 @@ public class Main {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        }
+          
+        } */
+         // DrawBoundingBox dBB = new DrawBoundingBox(imagePathKey);
+            DrawBoundingBox dBB = new DrawBoundingBox("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\img_20150328_131815.jpg");
     }
+   
 }
