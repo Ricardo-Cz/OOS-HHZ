@@ -5,12 +5,19 @@
  */
 package hhz.ocr;
 
+import com.google.gson.Gson;
+import hhz.ocr.json.BoundingBoxObject;
+import hhz.ocr.json.Lines;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -27,6 +34,7 @@ public class DrawBoundingBox extends JFrame {
             public void run() {
                 JFrame frame = new JFrame("Bounding Box from: " + imagePath);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
                 BufferedImage img = null;
 
                 try {
@@ -38,34 +46,49 @@ public class DrawBoundingBox extends JFrame {
                 //Dimension screensize =Toolkit.getDefaultToolkit().getScreenSize();
                 Image image = img.getScaledInstance((int) (img.getWidth() * scaleFactor), (int) (img.getHeight() * scaleFactor), Image.SCALE_SMOOTH);
                 ImageIcon imageIcon = new ImageIcon(image);
+                // Extrakt data
+                JSONObject json = GraphicHelper.ReadJsonFromFile("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\img_20150328_131815.json");
+                Gson gson = new Gson();
+                BoundingBoxObject bbo = new BoundingBoxObject();
+                bbo = gson.fromJson(json.toString(), BoundingBoxObject.class);
+                List<Integer> lineBoundingBox = ExtractLineBoundingBox(bbo);
+                int[] allXCoordinatesOfBoundingBox = ListToIntArray(ExtractTheXCoordinates(lineBoundingBox));
+                int[] allYCoordinatesOfBoundingBox = ListToIntArray(ExtractTheYCoordinates(lineBoundingBox));
+                String recognizedText = ExtractLineText(bbo);
+
                 JLabel jlabel = new JLabel(imageIcon) {
                     public void paint(Graphics g) {
                         super.paint(g);
-                        //g.setColor(Color.red);
-                        //g.drawRect(50, 50, 100, 100);
-                        //g.drawString("1)", 55, 55);
-                        int[] y = {(int) (853 *scaleFactor),
-                            (int)(834*scaleFactor),
-                            (int)(980*scaleFactor),
-                            (int)(999*scaleFactor)};
-                        int[] x ={
-                            (int)(672*scaleFactor),
-                            (int)(1543*scaleFactor),
-                            (int)(1546*scaleFactor),
-                            (int)(675*scaleFactor)};
-                        g.setColor(Color.red);
-                        g.drawPolygon(x , y, x.length);
+                        int[] tempX = new int[4];
+                        int[] tempY = new int[4];
+                        int count = 0;
+                        int number = 1;
+                        for (int i = 0; i < allXCoordinatesOfBoundingBox.length; i++) {
+
+                            for (int j = 0; j < 4; j++) {
+                                tempX[j] = allXCoordinatesOfBoundingBox[count + j];
+                                tempY[j] = allYCoordinatesOfBoundingBox[count + j];
+                            }
+                            g.setColor(Color.red);
+                            g.drawPolygon(tempX, tempY, 4);
+                            g.setColor(Color.GREEN);
+                            g.setFont(new Font("Normal", Font.BOLD,14));
+                            g.drawString(number + ") " , (tempX[1]+5), (tempY[0]+tempY[2])/2);
+                            System.out.println("X: " + tempX[0] + "," + tempX[1] + "," + tempX[2] + "," + tempX[3] + " Y: " + tempY[0] + "," + tempY[1] + "," + tempY[2] + "," + tempY[3]);
+                            count += 4;
+                            number++;
+                            if (count == allXCoordinatesOfBoundingBox.length) {
+                                break;
+                            }
+                        }
                     }
                 };
-                
+
                 frame.getContentPane().add(jlabel, BorderLayout.CENTER);
                 JTextArea textArea = new JTextArea(1, 30);
                 JScrollPane jsp = new JScrollPane(textArea);
-                textArea.setText("Folgender Text wurde erkannt: "
-                        + "\n A text area is a \"plain\" text component, "
-                        + "\n which means that although it can display text "
-                        + "\n in any font, all of the text is in the same font.");
-                textArea.setFont(new Font("Serif", Font.CENTER_BASELINE, 12));
+                textArea.setText("Folgender Text wurde erkannt: " + "\n\n" + recognizedText);
+                textArea.setFont(new Font("Serif", Font.CENTER_BASELINE, 14));
                 textArea.setLineWrap(true);
                 textArea.setWrapStyleWord(true);
                 textArea.setBackground(Color.LIGHT_GRAY);
@@ -82,7 +105,59 @@ public class DrawBoundingBox extends JFrame {
         });
     }
 
-    public void DrawBoundingBoxOnImage(String imagePath) {
+    public int[] ListToIntArray(List<Integer> list) {
+        int[] ret = new int[list.size()];
+        Iterator<Integer> iter = list.iterator();
+        for (int i = 0; iter.hasNext(); i++) {
+            ret[i] = iter.next();
+        }
+        return ret;
+    }
 
+    public static List<Integer> ExtractLineBoundingBox(BoundingBoxObject bbo) {
+
+        List<Integer> coordinats = new ArrayList();
+        for (Lines line : bbo.getRecognitionResult().getLines()) {
+            for (Integer boundingBox : line.getBoundingBox()) {
+                coordinats.add((int) (boundingBox * scaleFactor));
+            }
+        }
+        System.out.println(coordinats);
+        return coordinats;
+    }
+
+    public List<Integer> ExtractTheXCoordinates(List<Integer> wholeList) {
+        List<Integer> xCoordinates = new ArrayList<Integer>();
+        for (int i = 0; i < wholeList.size(); i++) {
+            if ((i % 2) == 0 || i == 0) {
+                xCoordinates.add(wholeList.get(i));
+            }
+        }
+        System.out.println(xCoordinates);
+        return xCoordinates;
+    }
+
+    public List<Integer> ExtractTheYCoordinates(List<Integer> wholeList) {
+        List<Integer> yCoordinates = new ArrayList<Integer>();
+        for (int i = 0; i < wholeList.size(); i++) {
+            if ((i % 2) == 1) {
+                yCoordinates.add(wholeList.get(i));
+            }
+        }
+        System.out.println(yCoordinates);
+        return yCoordinates;
+    }
+
+    public String ExtractLineText(BoundingBoxObject bbo) {
+        String text = "";
+        int counter = 1;
+        //List<String> textList = new ArrayList<String>();
+        for (Lines line : bbo.getRecognitionResult().getLines()) {
+            //textList.add(line.getText());
+            text += counter + ") " + line.getText() + "\n";
+            counter++;
+        }
+        System.out.println(text);
+        return text;
     }
 }

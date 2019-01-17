@@ -6,6 +6,8 @@
 package hhz.ocr;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -99,5 +103,21 @@ public class GraphicHelper {
                 Logger.getLogger(GraphicHelper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    static JSONObject ReadJsonFromFile(String filePath){
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = null;
+        try{
+        Object obj = parser.parse(new FileReader(filePath));
+        
+            jsonObject = (JSONObject) obj;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) { 
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 }
