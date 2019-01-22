@@ -5,7 +5,24 @@
  */
 package hhz.graphicaluserinterface;
 
+import hhz.ocr.DrawBoundingBox;
+import hhz.ocr.GraphicHelper;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -30,6 +47,7 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         sidepanel3 = new javax.swing.JPanel();
         gallaryview3 = new javax.swing.JPanel();
@@ -48,19 +66,36 @@ public class Home extends javax.swing.JFrame {
         jLabelLogoImage = new javax.swing.JLabel();
         footerpanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        StartLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         galleryViewPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         g1Panel = new javax.swing.JPanel();
+        g1Label = new javax.swing.JLabel();
         g2Panel = new javax.swing.JPanel();
+        g2Label = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         g3Panel = new javax.swing.JPanel();
+        g3Label = new javax.swing.JLabel();
         g4Panel = new javax.swing.JPanel();
+        g4Label = new javax.swing.JLabel();
         g5Panel = new javax.swing.JPanel();
+        g5Label = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        openDirectoryButton = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        currentDirectoryPathField = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         virtualRunaroundPanel = new javax.swing.JPanel();
         reportingPanel = new javax.swing.JPanel();
         settingsPanel = new javax.swing.JPanel();
@@ -269,6 +304,17 @@ public class Home extends javax.swing.JFrame {
 
         sidepanel3.add(footerpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, 280, 30));
 
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
+        sidepanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 640, 40, 30));
+
+        StartLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play-button.png"))); // NOI18N
+        StartLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                StartLabelMouseClicked(evt);
+            }
+        });
+        sidepanel3.add(StartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 30, 30));
+
         jPanel1.add(sidepanel3, java.awt.BorderLayout.PAGE_START);
 
         mainPanel.setLayout(new java.awt.CardLayout());
@@ -277,7 +323,10 @@ public class Home extends javax.swing.JFrame {
         galleryViewPanel.setLayout(new java.awt.GridLayout());
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 710, 470));
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 630, 470));
 
         g1Panel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -285,14 +334,14 @@ public class Home extends javax.swing.JFrame {
         g1Panel.setLayout(g1PanelLayout);
         g1PanelLayout.setHorizontalGroup(
             g1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addComponent(g1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
         g1PanelLayout.setVerticalGroup(
             g1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(g1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
         );
 
-        jPanel3.add(g1Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, -1, 131));
+        jPanel3.add(g1Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, -1, 131));
 
         g2Panel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -300,18 +349,18 @@ public class Home extends javax.swing.JFrame {
         g2Panel.setLayout(g2PanelLayout);
         g2PanelLayout.setHorizontalGroup(
             g2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addComponent(g2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
         g2PanelLayout.setVerticalGroup(
             g2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(g2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
         );
 
-        jPanel3.add(g2Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, -1, 131));
+        jPanel3.add(g2Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 560, -1, 131));
 
         jScrollPane2.setViewportView(jTextPane1);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 41, 243, 649));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 41, 270, 470));
 
         g3Panel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -319,14 +368,14 @@ public class Home extends javax.swing.JFrame {
         g3Panel.setLayout(g3PanelLayout);
         g3PanelLayout.setHorizontalGroup(
             g3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addComponent(g3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
         g3PanelLayout.setVerticalGroup(
             g3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(g3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
         );
 
-        jPanel3.add(g3Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 560, -1, 131));
+        jPanel3.add(g3Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 560, -1, 131));
 
         g4Panel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -334,14 +383,14 @@ public class Home extends javax.swing.JFrame {
         g4Panel.setLayout(g4PanelLayout);
         g4PanelLayout.setHorizontalGroup(
             g4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addComponent(g4Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
         g4PanelLayout.setVerticalGroup(
             g4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 131, Short.MAX_VALUE)
+            .addComponent(g4Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
         );
 
-        jPanel3.add(g4Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, -1, -1));
+        jPanel3.add(g4Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, -1, -1));
 
         g5Panel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -349,20 +398,56 @@ public class Home extends javax.swing.JFrame {
         g5Panel.setLayout(g5PanelLayout);
         g5PanelLayout.setHorizontalGroup(
             g5PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
+            .addComponent(g5Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
         );
         g5PanelLayout.setVerticalGroup(
             g5PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 131, Short.MAX_VALUE)
+            .addComponent(g5Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
         );
 
-        jPanel3.add(g5Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, -1, -1));
+        jPanel3.add(g5Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.png"))); // NOI18N
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 60, 90));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 60, 90));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next.png"))); // NOI18N
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 590, 50, 70));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 210, 50, 70));
+
+        jLabel12.setText(" Change picture directory:");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 570, -1, 30));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 560, 250, 10));
+
+        openDirectoryButton.setText("Open");
+        openDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openDirectoryButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(openDirectoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 570, 70, 30));
+
+        jLabel13.setText(" Current directory:");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 630, 110, 20));
+        jPanel3.add(currentDirectoryPathField, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 650, 220, 30));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel15.setText("CAM 5");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 700, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel16.setText("CAM 1");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 700, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel17.setText("CAM 2");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 700, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel18.setText("CAM 3");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 700, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel19.setText("CAM 4");
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 700, -1, -1));
 
         galleryViewPanel.add(jPanel3);
 
@@ -374,7 +459,7 @@ public class Home extends javax.swing.JFrame {
         virtualRunaroundPanel.setLayout(virtualRunaroundPanelLayout);
         virtualRunaroundPanelLayout.setHorizontalGroup(
             virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1068, Short.MAX_VALUE)
+            .addGap(0, 1098, Short.MAX_VALUE)
         );
         virtualRunaroundPanelLayout.setVerticalGroup(
             virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +474,7 @@ public class Home extends javax.swing.JFrame {
         reportingPanel.setLayout(reportingPanelLayout);
         reportingPanelLayout.setHorizontalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1068, Short.MAX_VALUE)
+            .addGap(0, 1098, Short.MAX_VALUE)
         );
         reportingPanelLayout.setVerticalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,7 +489,7 @@ public class Home extends javax.swing.JFrame {
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1068, Short.MAX_VALUE)
+            .addGap(0, 1098, Short.MAX_VALUE)
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,7 +550,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_virtualrunaroundMouseClicked
 
     private void gallaryviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gallaryviewMouseClicked
-       //removing panel
+        //removing panel
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
@@ -475,48 +560,90 @@ public class Home extends javax.swing.JFrame {
         mainPanel.revalidate();
     }//GEN-LAST:event_gallaryviewMouseClicked
 
+    private void openDirectoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openDirectoryButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+            System.out.println("You chose to open this directory: "
+                    + chooser.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_openDirectoryButtonActionPerformed
+
+    private void StartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartLabelMouseClicked
+       String directoryPath = currentDirectoryPathField.getText();
+        if(directoryPath.equals("")){
+            JOptionPane.showMessageDialog(mainPanel, "Please first choose the directory with analysed images!");
+        }else{
+             GraphicHelper gh = new GraphicHelper();
+            try {
+                imagePathMap = gh.getImages(directoryPath);
+            } catch (IOException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("String: " + imagePathMap.keySet() + ", byteArray " + imagePathMap.values());
+            //setJLabels g1-g5
+         //   List<String> image = (List<String>) imagePathMap.keySet();
+          
+                
+            ImageIcon i = new ImageIcon("C:/Users/Valerij/Desktop/Projekt 2/OCR/img_20150328_131815.jpg");
+            jLabel9.setIcon(i);
+            int iHeight = i.getIconHeight();
+            int iWidth = i.getIconWidth();
+            
+        
+        }
+    }//GEN-LAST:event_StartLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
+    static Map<String, byte[]> imagePathMap = new HashMap<>();
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+               
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
-               
+
             }
         });
-    }
+        
+       // g1Label.setIcon(new ImageIcon("/images/kauflandLogo.png"));
+        
+            //Eingelesene jpgs in g1-g5 darstellen 
+            int index = 0;
+           // LinkedHashMap<String,byte[]> imagePathLinkedMap = new LinkedHashMap<>(imagePathMap);
+           List<String> keyIndexes = new ArrayList<String>(imagePathMap.keySet());
+         //  String key;
+          //  for(int i = index; i < index + 5; i++){
+          //   key = keyIndexes.get(i);
+          //    showPicturesInGallaryView(key,imagePathMap.get(key));
+          //  }
+           /* 
+            showPicturesInGallaryView(img);  */
 
+            //DrawBoundingBox bounding = new DrawBoundingBox();
+       
+    }
+    private static void showPicturesInGallaryView(String str, byte[] b){
+        System.out.println("String: " + str + ", byteArray " + b);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel StartLabel;
+    private static javax.swing.JTextField currentDirectoryPathField;
     private javax.swing.JPanel footerpanel;
+    private static javax.swing.JLabel g1Label;
     private javax.swing.JPanel g1Panel;
+    private javax.swing.JLabel g2Label;
     private javax.swing.JPanel g2Panel;
+    private javax.swing.JLabel g3Label;
     private javax.swing.JPanel g3Panel;
+    private javax.swing.JLabel g4Label;
     private javax.swing.JPanel g4Panel;
+    private javax.swing.JLabel g5Label;
     private javax.swing.JPanel g5Panel;
     private javax.swing.JPanel gallaryview;
     private javax.swing.JPanel gallaryview1;
@@ -526,6 +653,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -549,9 +684,12 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelBg1;
     private javax.swing.JPanel jPanelBg2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JPanel logopanel;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton openDirectoryButton;
     private javax.swing.JPanel reporting;
     private javax.swing.JPanel reportingPanel;
     private javax.swing.JPanel settings;
