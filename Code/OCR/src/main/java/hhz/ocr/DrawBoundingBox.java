@@ -29,7 +29,7 @@ public class DrawBoundingBox extends JFrame {
     Polygon P;
 
     //Constructor
-    DrawBoundingBox(String imagePath) {
+    public DrawBoundingBox(String imagePath) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new JFrame("Bounding Box from: " + imagePath);
@@ -43,7 +43,6 @@ public class DrawBoundingBox extends JFrame {
                     e.printStackTrace();
                     System.exit(1);
                 }
-                //Dimension screensize =Toolkit.getDefaultToolkit().getScreenSize();
                 Image image = img.getScaledInstance((int) (img.getWidth() * scaleFactor), (int) (img.getHeight() * scaleFactor), Image.SCALE_SMOOTH);
                 ImageIcon imageIcon = new ImageIcon(image);
                 // Extrakt data
@@ -92,7 +91,6 @@ public class DrawBoundingBox extends JFrame {
                 textArea.setLineWrap(true);
                 textArea.setWrapStyleWord(true);
                 textArea.setBackground(Color.LIGHT_GRAY);
-                //textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 textArea.setMargin(new Insets(10, 10, 10, 10));
                 textArea.setEditable(false);
                 frame.getContentPane().add(textArea, BorderLayout.EAST);
@@ -151,9 +149,7 @@ public class DrawBoundingBox extends JFrame {
     public String ExtractLineText(BoundingBoxObject bbo) {
         String text = "";
         int counter = 1;
-        //List<String> textList = new ArrayList<String>();
         for (Lines line : bbo.getRecognitionResult().getLines()) {
-            //textList.add(line.getText());
             text += counter + ") " + line.getText() + "\n";
             counter++;
         }
