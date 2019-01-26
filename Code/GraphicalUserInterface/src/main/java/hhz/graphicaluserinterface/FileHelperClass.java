@@ -29,7 +29,7 @@ import org.json.simple.parser.ParseException;
 //load and convert images to binary from directory
 public class FileHelperClass {
 
-    public Map<String, byte[]> getImages(String rootPath) throws IOException {
+    public static Map<String, byte[]> getImages(String rootPath) throws IOException {
 
         ArrayList<File> files = getPaths(new File(rootPath),
                 new ArrayList<File>());
@@ -42,7 +42,6 @@ public class FileHelperClass {
         for (int i = 0; i < files.size(); i++) {
 
             if (getFileExtension(files.get(i)).toLowerCase().equals("jpg")) {
-                System.out.println(files.get(i).getCanonicalPath());
                 fileContent = Files.readAllBytes(files.get(i).toPath());
                 imageMap.put(files.get(i).getCanonicalPath(), fileContent);
             }
@@ -53,7 +52,7 @@ public class FileHelperClass {
     }
 
     //Recursive directory lookup
-    private static ArrayList<File> getPaths(File file, ArrayList<File> list) {
+    public static ArrayList<File> getPaths(File file, ArrayList<File> list) {
         if (file == null || list == null || !file.isDirectory()) {
             return null;
         }
@@ -81,7 +80,7 @@ public class FileHelperClass {
     }
 
     //Get Extension from File
-    private static String getFileExtension(File file) {
+    public static String getFileExtension(File file) {
         String fileName = file.getName();
         if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
             return fileName.substring(fileName.lastIndexOf(".") + 1);

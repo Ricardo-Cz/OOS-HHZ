@@ -477,6 +477,9 @@
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=" Temporarily unavailable"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="g1LabelMouseClicked"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
                       </AuxValues>
@@ -517,6 +520,9 @@
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=" Temporarily unavailable"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="g2LabelMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -577,6 +583,9 @@
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=" Temporarily unavailable"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="g3LabelMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -613,6 +622,9 @@
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=" Temporarily unavailable"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="g4LabelMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -649,6 +661,9 @@
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value=" Temporarily unavailable"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="g5LabelMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

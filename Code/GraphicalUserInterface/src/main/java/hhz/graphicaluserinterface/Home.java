@@ -20,7 +20,13 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,6 +41,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.json.simple.JSONObject;
 
 /**
@@ -330,6 +337,11 @@ public class Home extends javax.swing.JFrame {
         g1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         g1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
         g1Label.setToolTipText(" Temporarily unavailable");
+        g1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g1LabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout g1PanelLayout = new javax.swing.GroupLayout(g1Panel);
         g1Panel.setLayout(g1PanelLayout);
@@ -350,6 +362,11 @@ public class Home extends javax.swing.JFrame {
         g2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         g2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
         g2Label.setToolTipText(" Temporarily unavailable");
+        g2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g2LabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout g2PanelLayout = new javax.swing.GroupLayout(g2Panel);
         g2Panel.setLayout(g2PanelLayout);
@@ -375,6 +392,11 @@ public class Home extends javax.swing.JFrame {
         g3Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         g3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
         g3Label.setToolTipText(" Temporarily unavailable");
+        g3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g3LabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout g3PanelLayout = new javax.swing.GroupLayout(g3Panel);
         g3Panel.setLayout(g3PanelLayout);
@@ -394,6 +416,11 @@ public class Home extends javax.swing.JFrame {
         g4Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         g4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
         g4Label.setToolTipText(" Temporarily unavailable");
+        g4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g4LabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout g4PanelLayout = new javax.swing.GroupLayout(g4Panel);
         g4Panel.setLayout(g4PanelLayout);
@@ -413,6 +440,11 @@ public class Home extends javax.swing.JFrame {
         g5Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         g5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
         g5Label.setToolTipText(" Temporarily unavailable");
+        g5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g5LabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout g5PanelLayout = new javax.swing.GroupLayout(g5Panel);
         g5Panel.setLayout(g5PanelLayout);
@@ -683,34 +715,166 @@ public class Home extends javax.swing.JFrame {
     static List<String> imagesJsonPath;
     int[] allXCoordinatesOfBoundingBox;
     int[] allYCoordinatesOfBoundingBox;
-
+    static List<String> imagePahtCopyForCamEvent;
+    static List<String> imagesJsonPahtCopyForCamEvent;
     private void StartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartLabelMouseClicked
         Map<String, byte[]> imagePathMap = new HashMap<>();
-
+        
         String directoryPath = currentDirectoryPathField.getText();
         if (directoryPath.equals("")) {
             JOptionPane.showMessageDialog(mainPanel, "Please first choose the directory with analysed images!");
         } else {
-            FileHelperClass fhc = new FileHelperClass();
             try {
-                imagePathMap = fhc.getImages(directoryPath);
+                FileHelperClass fhc = new FileHelperClass();
+          /*      try {
+                    imagePathMap = fhc.getImages(directoryPath);
+                } catch (IOException ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
+                imagePath = sortPathsByTheFolderAndCreationTime(directoryPath);
+                imagesJsonPath = fhc.ChangeFileExtensionToDotJson(imagePath);
+                //initialisiere g1Label bis g5Label
+                setFirstPictureToCamLabelN(imagePath);
+                imagePahtCopyForCamEvent = imagePath;
+                imagesJsonPahtCopyForCamEvent =imagesJsonPath;
+                
+                BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPath.get(0));
+                setXAndYCoordinates(bbo);
+                String recognizedText = getRecognizedText(bbo);
+                
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePath.get(0));
+                
+                jTextPane1.setText(recognizedText);
+                jLabel9.setIcon(imageIcon);
+                repaint(jLabel9.getGraphics());
+                
             } catch (IOException ex) {
                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
             }
-            imagePath = new ArrayList<>(imagePathMap.keySet());
-            imagesJsonPath = fhc.ChangeFileExtensionToDotJson(imagePath);
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPath.get(0));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePath.get(0));
-
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
           
         }
     }//GEN-LAST:event_StartLabelMouseClicked
+    
+    public void setFirstPictureToCamLabelN(List<String> imagePaths){
+        boolean cam1IsSet = false; 
+        boolean cam2IsSet = false; 
+        boolean cam3IsSet = false; 
+        boolean cam4IsSet = false; 
+        boolean cam5IsSet = false; 
+        for(String p : imagePaths)
+         switch(getDirectoryName(p)){
+             case"cam1":
+                 if(!cam1IsSet){
+                 g1Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                 g1Label.setToolTipText("Cam1");
+                 cam1IsSet=true;
+                }
+                 break;
+             case"cam2":
+                 if(!cam2IsSet){
+                 g2Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                 g2Label.setToolTipText("Cam2");
+                 cam2IsSet=true;
+                }
+                 break;
+             case"cam3":
+                 if(!cam3IsSet){
+                 g3Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                 g3Label.setToolTipText("Cam3");
+                 cam3IsSet=true;
+                }
+                 break;
+             case"cam4":
+                 if(!cam4IsSet){
+                 g4Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                 g4Label.setToolTipText("Cam4");
+                 cam4IsSet=true;
+                }
+                 break;
+             case"cam5":
+                 if(!cam5IsSet){
+                 g5Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                 g5Label.setToolTipText("Cam5");
+                 cam5IsSet=true;
+                }
+                 break;
+             default: 
+              JOptionPane.showMessageDialog(mainPanel, "The images should be stored in directories with the name cam1 to cam5");   
+         }
+        if(!cam1IsSet)
+            g1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+        if(!cam2IsSet)
+            g2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+        if(!cam3IsSet)
+            g3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+        if(!cam4IsSet)
+            g4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+        if(!cam5IsSet)
+            g5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+    }
+    public String getDirectoryName(String path){
+        if (path.lastIndexOf("\\") != -1 && path.lastIndexOf("\\") != 0) {
+            return path.substring(path.lastIndexOf("\\") -4, path.lastIndexOf("\\"));
+        } else {
+            return "";
+        }
+    }
+    
+    private List<String> sortPathsByTheFolderAndCreationTime(String directoryPath) throws IOException{
+        //sort by directory
+        File[] files = sortPathByFolder(directoryPath);
+        //fill the orderedlist as Path object
+        List<File[]> orderedFileListByDirAndCreationTime = new ArrayList();
+            for (int i = 0; i < files.length; i++) {
+                orderedFileListByDirAndCreationTime.add(files[i].listFiles());
+            }
+             for (int i = 0; i < orderedFileListByDirAndCreationTime.size(); i++) {
+               sortFilesByDateCreated(orderedFileListByDirAndCreationTime.get(i));
+            }
+        List<String> resultList = new ArrayList();    
+        for(File[] f : orderedFileListByDirAndCreationTime){
+            for(File file : f){
+                if(FileHelperClass.getFileExtension(file).toLowerCase().equals("jpg")){
+                    resultList.add(file.getAbsolutePath());
+                }
+            }
+        }
+        return resultList;
+    }
+    public static File[] sortPathByFolder(String directoryPath){
+        File dir = new File(directoryPath);
+        File[] files = dir.listFiles();
+        Arrays.sort(files, (f1, f2) -> {
+            if (f1.isDirectory() && !f2.isDirectory()) {
+                return -1;
+            } else if (!f1.isDirectory() && f2.isDirectory()) {
+                return 1;
+            } else {
+                return f1.compareTo(f2);
+            }
+        });
+        return files;
+    }
+     public static void sortFilesByDateCreated (File[] files) {
+      Arrays.sort(files, new Comparator<File>() {
+          public int compare (File f2, File f1) {
+              long l1 = getFileCreationEpoch(f1);
+              long l2 = getFileCreationEpoch(f2);
+              return Long.valueOf(l1).compareTo(l2);
+          }
+      });
+  }
+
+  public static long getFileCreationEpoch (File file) {
+      try {
+          BasicFileAttributes attr = Files.readAttributes(file.toPath(),
+                  BasicFileAttributes.class);
+          return attr.creationTime()
+                     .toInstant().toEpochMilli();
+      } catch (IOException e) {
+          throw new RuntimeException(file.getAbsolutePath(), e);
+      }
+  }
     private ImageIcon getScaledImageIconFromImagePath(String imagePath) {
         BufferedImage img = null;
         try {
@@ -721,6 +885,19 @@ public class Home extends javax.swing.JFrame {
         }
         newScaleFactorWidth = img.getWidth() / jLabel9.getWidth();
         newScaleFactorHeight = img.getHeight() / jLabel9.getHeight();
+        Image image = img.getScaledInstance((int) (img.getWidth() / newScaleFactorWidth), (int) (img.getHeight() / newScaleFactorHeight), Image.SCALE_SMOOTH);
+        return new ImageIcon(image);
+    }
+    private ImageIcon getScaledImageIconFromImagePathForCamLabel(String imagePath) { 
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(imagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        float newScaleFactorWidth = img.getWidth() / g1Label.getWidth();
+        float newScaleFactorHeight = img.getHeight() / g1Label.getHeight();
         Image image = img.getScaledInstance((int) (img.getWidth() / newScaleFactorWidth), (int) (img.getHeight() / newScaleFactorHeight), Image.SCALE_SMOOTH);
         return new ImageIcon(image);
     }
@@ -743,16 +920,16 @@ public class Home extends javax.swing.JFrame {
     int count = 0;
     private void lastImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastImageMouseClicked
     
-        if (count >= imagePath.size()) {
-            count = imagePath.size() - 1;
+        if (count >= imagePahtCopyForCamEvent.size()) {
+            count = imagePahtCopyForCamEvent.size() - 1;
         }
-        if (count >= 0 && count < imagePath.size()) {
+        if (count >= 0 && count < imagePahtCopyForCamEvent.size()) {
             count--;
             if(count>=0){
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPath.get(count));
+            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(count));
             setXAndYCoordinates(bbo);
             String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePath.get(count));
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(count));
             
             jTextPane1.setText(recognizedText);
             jLabel9.setIcon(imageIcon);
@@ -767,22 +944,131 @@ public class Home extends javax.swing.JFrame {
         if (count < 0) {
             count = 0;
         }
-        if (count >= 0 && count < imagePath.size()) {
+        if (count >= 0 && count < imagePahtCopyForCamEvent.size()) {
             count++;
-            if(count< imagePath.size()){
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPath.get(count));
+            if(count< imagePahtCopyForCamEvent.size()){
+            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(count));
             setXAndYCoordinates(bbo);
             String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePath.get(count));
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(count));
 
             jTextPane1.setText(recognizedText);
             jLabel9.setIcon(imageIcon);
             repaint(jLabel9.getGraphics());
-            System.out.println(count + " - " + imagePath.get(count)+ "ImageSize" + imagePath.size());
             }
         }
       
     }//GEN-LAST:event_nextImageMouseClicked
+
+    private void g1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g1LabelMouseClicked
+           List<String> cam1ImagePaths = new ArrayList();
+           FileHelperClass fhc = new FileHelperClass();
+        for(String path : imagePath){
+            if(getDirectoryName(path).equals("cam1")){
+                cam1ImagePaths.add(path);
+            }
+        }
+        if(cam1ImagePaths != null){
+            imagePahtCopyForCamEvent = cam1ImagePaths;
+            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
+            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            setXAndYCoordinates(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
+
+            jTextPane1.setText(recognizedText);
+            jLabel9.setIcon(imageIcon);
+            repaint(jLabel9.getGraphics());
+        }
+    }//GEN-LAST:event_g1LabelMouseClicked
+
+    private void g2LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g2LabelMouseClicked
+        List<String> cam1ImagePaths = new ArrayList();
+           FileHelperClass fhc = new FileHelperClass();
+        for(String path : imagePath){
+            if(getDirectoryName(path).equals("cam2")){
+                cam1ImagePaths.add(path);
+            }
+        }
+        if(cam1ImagePaths != null){
+            imagePahtCopyForCamEvent = cam1ImagePaths;
+            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
+            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            setXAndYCoordinates(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
+
+            jTextPane1.setText(recognizedText);
+            jLabel9.setIcon(imageIcon);
+            repaint(jLabel9.getGraphics());
+        }
+    }//GEN-LAST:event_g2LabelMouseClicked
+
+    private void g3LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g3LabelMouseClicked
+       List<String> cam1ImagePaths = new ArrayList();
+           FileHelperClass fhc = new FileHelperClass();
+        for(String path : imagePath){
+            if(getDirectoryName(path).equals("cam3")){
+                cam1ImagePaths.add(path);
+            }
+        }
+        if(cam1ImagePaths != null){
+            imagePahtCopyForCamEvent = cam1ImagePaths;
+            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
+            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            setXAndYCoordinates(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
+
+            jTextPane1.setText(recognizedText);
+            jLabel9.setIcon(imageIcon);
+            repaint(jLabel9.getGraphics());
+        }
+    }//GEN-LAST:event_g3LabelMouseClicked
+
+    private void g4LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g4LabelMouseClicked
+       List<String> cam1ImagePaths = new ArrayList();
+           FileHelperClass fhc = new FileHelperClass();
+        for(String path : imagePath){
+            if(getDirectoryName(path).equals("cam4")){
+                cam1ImagePaths.add(path);
+            }
+        }
+        if(cam1ImagePaths != null){
+            imagePahtCopyForCamEvent = cam1ImagePaths;
+            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
+            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            setXAndYCoordinates(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
+
+            jTextPane1.setText(recognizedText);
+            jLabel9.setIcon(imageIcon);
+            repaint(jLabel9.getGraphics());
+        }
+    }//GEN-LAST:event_g4LabelMouseClicked
+
+    private void g5LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g5LabelMouseClicked
+        List<String> cam1ImagePaths = new ArrayList();
+           FileHelperClass fhc = new FileHelperClass();
+        for(String path : imagePath){
+            if(getDirectoryName(path).equals("cam5")){
+                cam1ImagePaths.add(path);
+            }
+        }
+        if(cam1ImagePaths != null){
+            imagePahtCopyForCamEvent = cam1ImagePaths;
+            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
+            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            setXAndYCoordinates(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
+
+            jTextPane1.setText(recognizedText);
+            jLabel9.setIcon(imageIcon);
+            repaint(jLabel9.getGraphics());
+        }
+    }//GEN-LAST:event_g5LabelMouseClicked
 
     public void repaint(Graphics g) {
         super.paint(g);
@@ -831,13 +1117,10 @@ public class Home extends javax.swing.JFrame {
                 home.setVisible(true);
                 home.setTitle("Kaufland - Shelf Management System");
                 home.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo40.jpg")).getImage());
+                currentDirectoryPathField.setText("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR");
                 
             }
         });
-    }
-
-    private static void showPicturesInGallaryView(String str, byte[] b) {
-        System.out.println("String: " + str + ", byteArray " + b);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel StartLabel;
