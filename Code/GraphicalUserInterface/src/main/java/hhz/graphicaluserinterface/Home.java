@@ -67,24 +67,6 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator2 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
-        sidepanel3 = new javax.swing.JPanel();
-        gallaryview3 = new javax.swing.JPanel();
-        jLabelGalleryImage3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        virtualrunaround = new javax.swing.JPanel();
-        jLabelVirtualImage = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        reporting = new javax.swing.JPanel();
-        jLabelReportingLabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        settings = new javax.swing.JPanel();
-        jLabelSettingsImage = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        logopanel = new javax.swing.JPanel();
-        jLabelLogoImage = new javax.swing.JLabel();
-        footerpanel = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         galleryViewPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -125,200 +107,28 @@ public class Home extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        sidepanel3 = new javax.swing.JPanel();
+        gallaryview3 = new javax.swing.JPanel();
+        jLabelGalleryImage3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        virtualrunaround = new javax.swing.JPanel();
+        jLabelVirtualImage = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        reporting = new javax.swing.JPanel();
+        jLabelReportingLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        settings = new javax.swing.JPanel();
+        jLabelSettingsImage = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        logopanel = new javax.swing.JPanel();
+        jLabelLogoImage = new javax.swing.JLabel();
+        footerpanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
-
-        sidepanel3.setBackground(new java.awt.Color(204, 35, 42));
-        sidepanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        gallaryview3.setBackground(new java.awt.Color(160, 35, 42));
-        gallaryview3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                gallaryviewMouseClicked(evt);
-            }
-        });
-
-        jLabelGalleryImage3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelGalleryImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gallery.png"))); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Gallery View");
-
-        javax.swing.GroupLayout gallaryview3Layout = new javax.swing.GroupLayout(gallaryview3);
-        gallaryview3.setLayout(gallaryview3Layout);
-        gallaryview3Layout.setHorizontalGroup(
-            gallaryview3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gallaryview3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabelGalleryImage3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-        gallaryview3Layout.setVerticalGroup(
-            gallaryview3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gallaryview3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(gallaryview3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabelGalleryImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidepanel3.add(gallaryview3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 280, -1));
-
-        virtualrunaround.setBackground(new java.awt.Color(204, 35, 42));
-        virtualrunaround.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                virtualrunaroundMouseClicked(evt);
-            }
-        });
-
-        jLabelVirtualImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelVirtualImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye.png"))); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Virtual Runaround");
-
-        javax.swing.GroupLayout virtualrunaroundLayout = new javax.swing.GroupLayout(virtualrunaround);
-        virtualrunaround.setLayout(virtualrunaroundLayout);
-        virtualrunaroundLayout.setHorizontalGroup(
-            virtualrunaroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(virtualrunaroundLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabelVirtualImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        virtualrunaroundLayout.setVerticalGroup(
-            virtualrunaroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(virtualrunaroundLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(virtualrunaroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabelVirtualImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidepanel3.add(virtualrunaround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 280, -1));
-
-        reporting.setBackground(new java.awt.Color(204, 35, 42));
-        reporting.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reportingMouseClicked(evt);
-            }
-        });
-
-        jLabelReportingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelReportingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/analysis.png"))); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Reporting");
-
-        javax.swing.GroupLayout reportingLayout = new javax.swing.GroupLayout(reporting);
-        reporting.setLayout(reportingLayout);
-        reportingLayout.setHorizontalGroup(
-            reportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reportingLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabelReportingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        reportingLayout.setVerticalGroup(
-            reportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reportingLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(reportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabelReportingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidepanel3.add(reporting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 280, -1));
-
-        settings.setBackground(new java.awt.Color(204, 35, 42));
-        settings.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                settingsMouseClicked(evt);
-            }
-        });
-
-        jLabelSettingsImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSettingsImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Settings");
-
-        javax.swing.GroupLayout settingsLayout = new javax.swing.GroupLayout(settings);
-        settings.setLayout(settingsLayout);
-        settingsLayout.setHorizontalGroup(
-            settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabelSettingsImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        settingsLayout.setVerticalGroup(
-            settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabelSettingsImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidepanel3.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 280, -1));
-
-        logopanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabelLogoImage.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelLogoImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelLogoImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/kauflandLogo.png"))); // NOI18N
-
-        javax.swing.GroupLayout logopanelLayout = new javax.swing.GroupLayout(logopanel);
-        logopanel.setLayout(logopanelLayout);
-        logopanelLayout.setHorizontalGroup(
-            logopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(logopanelLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabelLogoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
-        );
-        logopanelLayout.setVerticalGroup(
-            logopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logopanelLayout.createSequentialGroup()
-                .addComponent(jLabelLogoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        sidepanel3.add(logopanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 30));
-
-        footerpanel.setBackground(new java.awt.Color(255, 255, 255));
-        footerpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("© Copyright by HHZ");
-        footerpanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 0, 115, 36));
-
-        sidepanel3.add(footerpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 820, 280, 30));
-
-        jPanel1.add(sidepanel3, java.awt.BorderLayout.PAGE_START);
 
         mainPanel.setLayout(new java.awt.CardLayout());
 
@@ -329,7 +139,8 @@ public class Home extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 35, 42));
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 860, 600));
 
         g1Panel.setBackground(new java.awt.Color(204, 35, 42));
@@ -589,51 +400,257 @@ public class Home extends javax.swing.JFrame {
 
         mainPanel.add(reportingPanel, "card3");
 
-        settingsPanel.setBackground(new java.awt.Color(204, 204, 204));
+        settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 35, 42));
         jLabel2.setText("OCR recognition settings");
 
+        jSeparator3.setForeground(new java.awt.Color(204, 35, 42));
+
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 35, 42));
         jLabel3.setText("Object recognition settings ");
 
-        jLabel4.setText("jLabel4");
+        jSeparator4.setForeground(new java.awt.Color(204, 35, 42));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel10.setText(" General");
+
+        jSeparator5.setForeground(new java.awt.Color(204, 35, 42));
 
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(77, 77, 77)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(201, 201, 201)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(428, Short.MAX_VALUE))
+                    .addComponent(jLabel10)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addContainerGap(707, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(802, Short.MAX_VALUE))
         );
 
         mainPanel.add(settingsPanel, "card2");
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        sidepanel3.setBackground(new java.awt.Color(204, 35, 42));
+        sidepanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        gallaryview3.setBackground(new java.awt.Color(160, 35, 42));
+        gallaryview3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gallaryviewMouseClicked(evt);
+            }
+        });
+
+        jLabelGalleryImage3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGalleryImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gallery.png"))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Gallery View");
+
+        javax.swing.GroupLayout gallaryview3Layout = new javax.swing.GroupLayout(gallaryview3);
+        gallaryview3.setLayout(gallaryview3Layout);
+        gallaryview3Layout.setHorizontalGroup(
+            gallaryview3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gallaryview3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelGalleryImage3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        gallaryview3Layout.setVerticalGroup(
+            gallaryview3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gallaryview3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(gallaryview3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelGalleryImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        sidepanel3.add(gallaryview3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 280, -1));
+
+        virtualrunaround.setBackground(new java.awt.Color(204, 35, 42));
+        virtualrunaround.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                virtualrunaroundMouseClicked(evt);
+            }
+        });
+
+        jLabelVirtualImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelVirtualImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye.png"))); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Virtual Runaround");
+
+        javax.swing.GroupLayout virtualrunaroundLayout = new javax.swing.GroupLayout(virtualrunaround);
+        virtualrunaround.setLayout(virtualrunaroundLayout);
+        virtualrunaroundLayout.setHorizontalGroup(
+            virtualrunaroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(virtualrunaroundLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelVirtualImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        virtualrunaroundLayout.setVerticalGroup(
+            virtualrunaroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(virtualrunaroundLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(virtualrunaroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelVirtualImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        sidepanel3.add(virtualrunaround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 280, -1));
+
+        reporting.setBackground(new java.awt.Color(204, 35, 42));
+        reporting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportingMouseClicked(evt);
+            }
+        });
+
+        jLabelReportingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelReportingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/analysis.png"))); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Reporting");
+
+        javax.swing.GroupLayout reportingLayout = new javax.swing.GroupLayout(reporting);
+        reporting.setLayout(reportingLayout);
+        reportingLayout.setHorizontalGroup(
+            reportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reportingLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelReportingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        reportingLayout.setVerticalGroup(
+            reportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reportingLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(reportingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabelReportingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        sidepanel3.add(reporting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 280, -1));
+
+        settings.setBackground(new java.awt.Color(204, 35, 42));
+        settings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                settingsMouseClicked(evt);
+            }
+        });
+
+        jLabelSettingsImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSettingsImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Settings");
+
+        javax.swing.GroupLayout settingsLayout = new javax.swing.GroupLayout(settings);
+        settings.setLayout(settingsLayout);
+        settingsLayout.setHorizontalGroup(
+            settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelSettingsImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        settingsLayout.setVerticalGroup(
+            settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabelSettingsImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        sidepanel3.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 280, -1));
+
+        logopanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabelLogoImage.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelLogoImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLogoImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/kauflandLogo.png"))); // NOI18N
+
+        javax.swing.GroupLayout logopanelLayout = new javax.swing.GroupLayout(logopanel);
+        logopanel.setLayout(logopanelLayout);
+        logopanelLayout.setHorizontalGroup(
+            logopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logopanelLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabelLogoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
+        );
+        logopanelLayout.setVerticalGroup(
+            logopanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logopanelLayout.createSequentialGroup()
+                .addComponent(jLabelLogoImage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        sidepanel3.add(logopanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 30));
+
+        footerpanel.setBackground(new java.awt.Color(255, 255, 255));
+        footerpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("© Copyright by HHZ");
+        footerpanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 0, 115, 36));
+
+        sidepanel3.add(footerpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 820, 280, 30));
+
+        jPanel1.add(sidepanel3, java.awt.BorderLayout.PAGE_START);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -658,6 +675,11 @@ public class Home extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
+        //set menu color
+        settings.setBackground(new Color(160, 35, 42));
+        reporting.setBackground(new Color(204, 35, 42));
+        virtualrunaround.setBackground(new Color(204, 35, 42));
+        gallaryview3.setBackground(new Color(204, 35, 42));
         //adding virtualrunaroundPanel
         mainPanel.add(settingsPanel);
         mainPanel.repaint();
@@ -669,6 +691,11 @@ public class Home extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
+        //set menu color
+        settings.setBackground(new Color(204, 35, 42));
+        reporting.setBackground(new Color(160, 35, 42));
+        virtualrunaround.setBackground(new Color(204, 35, 42));
+        gallaryview3.setBackground(new Color(204, 35, 42));
         //adding virtualrunaroundPanel
         mainPanel.add(reportingPanel);
         mainPanel.repaint();
@@ -680,6 +707,11 @@ public class Home extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
+        //set menu color
+        settings.setBackground(new Color(204, 35, 42));
+        reporting.setBackground(new Color(204, 35, 42));
+        virtualrunaround.setBackground(new Color(160, 35, 42));
+        gallaryview3.setBackground(new Color(204, 35, 42));
         //adding virtualrunaroundPanel
         mainPanel.add(virtualRunaroundPanel);
         mainPanel.repaint();
@@ -691,6 +723,11 @@ public class Home extends javax.swing.JFrame {
         mainPanel.removeAll();
         mainPanel.repaint();
         mainPanel.revalidate();
+        //set menu color
+        settings.setBackground(new Color(204, 35, 42));
+        reporting.setBackground(new Color(204, 35, 42));
+        virtualrunaround.setBackground(new Color(204, 35, 42));
+        gallaryview3.setBackground(new Color(160, 35, 42));
         //adding virtualrunaroundPanel
         mainPanel.add(galleryViewPanel);
         mainPanel.repaint();
@@ -719,164 +756,119 @@ public class Home extends javax.swing.JFrame {
     static List<String> imagesJsonPahtCopyForCamEvent;
     private void StartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartLabelMouseClicked
         Map<String, byte[]> imagePathMap = new HashMap<>();
-        
+
         String directoryPath = currentDirectoryPathField.getText();
-        if (directoryPath.equals("")) {
-            JOptionPane.showMessageDialog(mainPanel, "Please first choose the directory with analysed images!");
-        } else {
+        if (!directoryPath.equals("")) {
+
             try {
                 FileHelperClass fhc = new FileHelperClass();
-          /*      try {
-                    imagePathMap = fhc.getImages(directoryPath);
-                } catch (IOException ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
-                imagePath = sortPathsByTheFolderAndCreationTime(directoryPath);
-                imagesJsonPath = fhc.ChangeFileExtensionToDotJson(imagePath);
-                //initialisiere g1Label bis g5Label
-                setFirstPictureToCamLabelN(imagePath);
-                imagePahtCopyForCamEvent = imagePath;
-                imagesJsonPahtCopyForCamEvent =imagesJsonPath;
-                
-                BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPath.get(0));
-                setXAndYCoordinates(bbo);
-                String recognizedText = getRecognizedText(bbo);
-                
-                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePath.get(0));
-                
-                jTextPane1.setText(recognizedText);
-                jLabel9.setIcon(imageIcon);
-                repaint(jLabel9.getGraphics());
-                
+                imagePath = fhc.sortPathsByTheFolderAndCreationTime(directoryPath);
+                if (!imagePath.isEmpty() || imagePath != null) {
+                    imagesJsonPath = fhc.ChangeFileExtensionToDotJson(imagePath);
+                    //initialisiere g1Label bis g5Label
+                    boolean emptyCondition = setFirstPictureToCamLabelN(imagePath);
+
+                    imagePahtCopyForCamEvent = imagePath;
+                    imagesJsonPahtCopyForCamEvent = imagesJsonPath;
+                    //Skalierungswerte für Start der Application festlegen
+                    if (!emptyCondition) {
+                        getScaledImageIconFromImagePath(imagePath.get(0));
+                        jLabel9.setText("Please choose an available cam view from below");
+                        jLabel9.setHorizontalAlignment(JLabel.CENTER);
+                    } else {
+                        JOptionPane.showMessageDialog(mainPanel, "Please choose a directory with cam1 to cam5 folders!");
+                    }
+                }
+
             } catch (IOException ex) {
                 Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(mainPanel, "Please first choose the directory with analysed images!");
             }
-          
+        } else {
+            JOptionPane.showMessageDialog(mainPanel, "Please first choose the directory with analysed images!");
         }
     }//GEN-LAST:event_StartLabelMouseClicked
-    
-    public void setFirstPictureToCamLabelN(List<String> imagePaths){
-        boolean cam1IsSet = false; 
-        boolean cam2IsSet = false; 
-        boolean cam3IsSet = false; 
-        boolean cam4IsSet = false; 
-        boolean cam5IsSet = false; 
-        for(String p : imagePaths)
-         switch(getDirectoryName(p)){
-             case"cam1":
-                 if(!cam1IsSet){
-                 g1Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
-                 g1Label.setToolTipText("Cam1");
-                 cam1IsSet=true;
-                }
-                 break;
-             case"cam2":
-                 if(!cam2IsSet){
-                 g2Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
-                 g2Label.setToolTipText("Cam2");
-                 cam2IsSet=true;
-                }
-                 break;
-             case"cam3":
-                 if(!cam3IsSet){
-                 g3Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
-                 g3Label.setToolTipText("Cam3");
-                 cam3IsSet=true;
-                }
-                 break;
-             case"cam4":
-                 if(!cam4IsSet){
-                 g4Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
-                 g4Label.setToolTipText("Cam4");
-                 cam4IsSet=true;
-                }
-                 break;
-             case"cam5":
-                 if(!cam5IsSet){
-                 g5Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
-                 g5Label.setToolTipText("Cam5");
-                 cam5IsSet=true;
-                }
-                 break;
-             default: 
-              JOptionPane.showMessageDialog(mainPanel, "The images should be stored in directories with the name cam1 to cam5");   
-         }
-        if(!cam1IsSet)
-            g1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
-        if(!cam2IsSet)
-            g2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
-        if(!cam3IsSet)
-            g3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
-        if(!cam4IsSet)
-            g4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
-        if(!cam5IsSet)
-            g5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
-    }
-    public String getDirectoryName(String path){
-        if (path.lastIndexOf("\\") != -1 && path.lastIndexOf("\\") != 0) {
-            return path.substring(path.lastIndexOf("\\") -4, path.lastIndexOf("\\"));
-        } else {
-            return "";
-        }
-    }
-    
-    private List<String> sortPathsByTheFolderAndCreationTime(String directoryPath) throws IOException{
-        //sort by directory
-        File[] files = sortPathByFolder(directoryPath);
-        //fill the orderedlist as Path object
-        List<File[]> orderedFileListByDirAndCreationTime = new ArrayList();
-            for (int i = 0; i < files.length; i++) {
-                orderedFileListByDirAndCreationTime.add(files[i].listFiles());
-            }
-             for (int i = 0; i < orderedFileListByDirAndCreationTime.size(); i++) {
-               sortFilesByDateCreated(orderedFileListByDirAndCreationTime.get(i));
-            }
-        List<String> resultList = new ArrayList();    
-        for(File[] f : orderedFileListByDirAndCreationTime){
-            for(File file : f){
-                if(FileHelperClass.getFileExtension(file).toLowerCase().equals("jpg")){
-                    resultList.add(file.getAbsolutePath());
-                }
-            }
-        }
-        return resultList;
-    }
-    public static File[] sortPathByFolder(String directoryPath){
-        File dir = new File(directoryPath);
-        File[] files = dir.listFiles();
-        Arrays.sort(files, (f1, f2) -> {
-            if (f1.isDirectory() && !f2.isDirectory()) {
-                return -1;
-            } else if (!f1.isDirectory() && f2.isDirectory()) {
-                return 1;
-            } else {
-                return f1.compareTo(f2);
-            }
-        });
-        return files;
-    }
-     public static void sortFilesByDateCreated (File[] files) {
-      Arrays.sort(files, new Comparator<File>() {
-          public int compare (File f2, File f1) {
-              long l1 = getFileCreationEpoch(f1);
-              long l2 = getFileCreationEpoch(f2);
-              return Long.valueOf(l1).compareTo(l2);
-          }
-      });
-  }
 
-  public static long getFileCreationEpoch (File file) {
-      try {
-          BasicFileAttributes attr = Files.readAttributes(file.toPath(),
-                  BasicFileAttributes.class);
-          return attr.creationTime()
-                     .toInstant().toEpochMilli();
-      } catch (IOException e) {
-          throw new RuntimeException(file.getAbsolutePath(), e);
-      }
-  }
+    public boolean setFirstPictureToCamLabelN(List<String> imagePaths) {
+        boolean cam1IsSet = false;
+        boolean cam2IsSet = false;
+        boolean cam3IsSet = false;
+        boolean cam4IsSet = false;
+        boolean cam5IsSet = false;
+        boolean emptyCondition = false;
+        for (String p : imagePaths) {
+            switch (FileHelperClass.getDirectoryName(p)) {
+                case "cam1":
+                    if (!cam1IsSet) {
+                        g1Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                        g1Label.setToolTipText("Cam1");
+                        cam1IsSet = true;
+                    }
+                    break;
+                case "cam2":
+                    if (!cam2IsSet) {
+                        g2Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                        g2Label.setToolTipText("Cam2");
+                        cam2IsSet = true;
+                    }
+                    break;
+                case "cam3":
+                    if (!cam3IsSet) {
+                        g3Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                        g3Label.setToolTipText("Cam3");
+                        cam3IsSet = true;
+                    }
+                    break;
+                case "cam4":
+                    if (!cam4IsSet) {
+                        g4Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                        g4Label.setToolTipText("Cam4");
+                        cam4IsSet = true;
+                    }
+                    break;
+                case "cam5":
+                    if (!cam5IsSet) {
+                        g5Label.setIcon(getScaledImageIconFromImagePathForCamLabel(p));
+                        g5Label.setToolTipText("Cam5");
+                        cam5IsSet = true;
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+        }
+        if (!cam1IsSet) {
+            g1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+            g1Label.setToolTipText("Temporarily unavailable");
+        }
+        if (!cam2IsSet) {
+            g2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+            g2Label.setToolTipText("Temporarily unavailable");
+        }
+        if (!cam3IsSet) {
+            g3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+            g3Label.setToolTipText("Temporarily unavailable");
+        }
+        if (!cam4IsSet) {
+            g4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+            g3Label.setToolTipText("Temporarily unavailable");
+        }
+        if (!cam5IsSet) {
+            g5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png")));
+            g5Label.setToolTipText("Temporarily unavailable");
+        }
+        if (!cam1IsSet && !cam2IsSet && !cam1IsSet && !cam1IsSet && !cam1IsSet) {
+            jLabel9.setBackground(Color.WHITE);
+            emptyCondition = true;
+        }
+
+        return emptyCondition;
+    }
+
     private ImageIcon getScaledImageIconFromImagePath(String imagePath) {
         BufferedImage img = null;
+        Image image = null;
         try {
             img = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
@@ -885,10 +877,16 @@ public class Home extends javax.swing.JFrame {
         }
         newScaleFactorWidth = img.getWidth() / jLabel9.getWidth();
         newScaleFactorHeight = img.getHeight() / jLabel9.getHeight();
-        Image image = img.getScaledInstance((int) (img.getWidth() / newScaleFactorWidth), (int) (img.getHeight() / newScaleFactorHeight), Image.SCALE_SMOOTH);
+        if (newScaleFactorWidth != 0 || newScaleFactorHeight != 0) {
+            image = img.getScaledInstance((int) (img.getWidth() / newScaleFactorWidth), (int) (img.getHeight() / newScaleFactorHeight), Image.SCALE_SMOOTH);
+        } else {
+            image = img;
+        }
+
         return new ImageIcon(image);
     }
-    private ImageIcon getScaledImageIconFromImagePathForCamLabel(String imagePath) { 
+
+    private ImageIcon getScaledImageIconFromImagePathForCamLabel(String imagePath) {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(imagePath));
@@ -912,163 +910,83 @@ public class Home extends javax.swing.JFrame {
         allYCoordinatesOfBoundingBox = GraphicHelperClass.ListToIntArray(GraphicHelperClass.ExtractTheYCoordinates(lineBoundingBox));
     }
 
-    private BoundingBoxObject getInitializedBoundingBoxObject(String jsonPath) {
-        Gson gson = new Gson();
-        JSONObject json = FileHelperClass.ReadJsonFromFile(jsonPath);
-        return gson.fromJson(json.toString(), BoundingBoxObject.class);
-    }
-    int count = 0;
+    int sliderIndex = 1;
     private void lastImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastImageMouseClicked
-    
-        if (count >= imagePahtCopyForCamEvent.size()) {
-            count = imagePahtCopyForCamEvent.size() - 1;
+        if (sliderIndex == imagePahtCopyForCamEvent.size()) {
+            sliderIndex = imagePahtCopyForCamEvent.size() - 2;
         }
-        if (count >= 0 && count < imagePahtCopyForCamEvent.size()) {
-            count--;
-            if(count>=0){
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(count));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(count));
-            
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-            }
-            
+        if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
+           
+          //  if (sliderIndex >= 0) {
+                BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+                setXAndYCoordinates(bbo);
+                String recognizedText = getRecognizedText(bbo);
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
+
+                jTextPane1.setText(recognizedText);
+                jLabel9.setIcon(imageIcon);
+                repaint(jLabel9.getGraphics());
+                sliderIndex--;
+          //  }
         }
     }//GEN-LAST:event_lastImageMouseClicked
 
     private void nextImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextImageMouseClicked
-      
-        if (count < 0) {
-            count = 0;
+        if (sliderIndex < 0) {
+            sliderIndex = 1;
         }
-        if (count >= 0 && count < imagePahtCopyForCamEvent.size()) {
-            count++;
-            if(count< imagePahtCopyForCamEvent.size()){
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(count));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(count));
+        if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
+            
+          //  if (sliderIndex < imagePahtCopyForCamEvent.size()) {
+                BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+                setXAndYCoordinates(bbo);
+                String recognizedText = getRecognizedText(bbo);
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
 
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-            }
+                jTextPane1.setText(recognizedText);
+                jLabel9.setIcon(imageIcon);
+                repaint(jLabel9.getGraphics());
+                sliderIndex++;
+           // }
         }
-      
     }//GEN-LAST:event_nextImageMouseClicked
-
     private void g1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g1LabelMouseClicked
-           List<String> cam1ImagePaths = new ArrayList();
-           FileHelperClass fhc = new FileHelperClass();
-        for(String path : imagePath){
-            if(getDirectoryName(path).equals("cam1")){
-                cam1ImagePaths.add(path);
-            }
-        }
-        if(cam1ImagePaths != null){
-            imagePahtCopyForCamEvent = cam1ImagePaths;
-            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
-
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-        }
+        setGLabelSelectionToTextAreaAndMainPanel("cam1");
     }//GEN-LAST:event_g1LabelMouseClicked
-
     private void g2LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g2LabelMouseClicked
-        List<String> cam1ImagePaths = new ArrayList();
-           FileHelperClass fhc = new FileHelperClass();
-        for(String path : imagePath){
-            if(getDirectoryName(path).equals("cam2")){
-                cam1ImagePaths.add(path);
-            }
-        }
-        if(cam1ImagePaths != null){
-            imagePahtCopyForCamEvent = cam1ImagePaths;
-            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
-
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-        }
+        setGLabelSelectionToTextAreaAndMainPanel("cam2");
     }//GEN-LAST:event_g2LabelMouseClicked
-
     private void g3LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g3LabelMouseClicked
-       List<String> cam1ImagePaths = new ArrayList();
-           FileHelperClass fhc = new FileHelperClass();
-        for(String path : imagePath){
-            if(getDirectoryName(path).equals("cam3")){
-                cam1ImagePaths.add(path);
-            }
-        }
-        if(cam1ImagePaths != null){
-            imagePahtCopyForCamEvent = cam1ImagePaths;
-            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
-
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-        }
+        setGLabelSelectionToTextAreaAndMainPanel("cam3");
     }//GEN-LAST:event_g3LabelMouseClicked
-
     private void g4LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g4LabelMouseClicked
-       List<String> cam1ImagePaths = new ArrayList();
-           FileHelperClass fhc = new FileHelperClass();
-        for(String path : imagePath){
-            if(getDirectoryName(path).equals("cam4")){
-                cam1ImagePaths.add(path);
-            }
-        }
-        if(cam1ImagePaths != null){
-            imagePahtCopyForCamEvent = cam1ImagePaths;
-            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
-
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-        }
+        setGLabelSelectionToTextAreaAndMainPanel("cam4");
     }//GEN-LAST:event_g4LabelMouseClicked
-
     private void g5LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g5LabelMouseClicked
+        setGLabelSelectionToTextAreaAndMainPanel("cam5");
+    }//GEN-LAST:event_g5LabelMouseClicked
+    private void setGLabelSelectionToTextAreaAndMainPanel(String cam) {
         List<String> cam1ImagePaths = new ArrayList();
-           FileHelperClass fhc = new FileHelperClass();
-        for(String path : imagePath){
-            if(getDirectoryName(path).equals("cam5")){
+        FileHelperClass fhc = new FileHelperClass();
+        for (String path : imagePath) {
+            if (fhc.getDirectoryName(path).equals(cam)) {
                 cam1ImagePaths.add(path);
             }
         }
-        if(cam1ImagePaths != null){
+        if (!cam1ImagePaths.isEmpty()) {
             imagePahtCopyForCamEvent = cam1ImagePaths;
             imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
-            BoundingBoxObject bbo = getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
             setXAndYCoordinates(bbo);
             String recognizedText = getRecognizedText(bbo);
             ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
 
             jTextPane1.setText(recognizedText);
+            jLabel9.setHorizontalAlignment(jLabel9.LEADING);
             jLabel9.setIcon(imageIcon);
             repaint(jLabel9.getGraphics());
         }
-    }//GEN-LAST:event_g5LabelMouseClicked
+    }
 
     public void repaint(Graphics g) {
         super.paint(g);
@@ -1091,8 +1009,6 @@ public class Home extends javax.swing.JFrame {
                             g.setColor(Color.GREEN);
                             g.setFont(new Font("Normal", Font.BOLD, 14));
                             g.drawString(number + ") ", (tempX[1] + 5), (tempY[0] + tempY[2]) / 2);
-
-                            System.out.println("X: " + tempX[0] + "," + tempX[1] + "," + tempX[2] + "," + tempX[3] + " Y: " + tempY[0] + "," + tempY[1] + "," + tempY[2] + "," + tempY[3]);
                             counter += 4;
                             number++;
                             if (counter == allXCoordinatesOfBoundingBox.length) {
@@ -1109,6 +1025,7 @@ public class Home extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    private static final String defaultPath = "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR";
     public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1117,8 +1034,8 @@ public class Home extends javax.swing.JFrame {
                 home.setVisible(true);
                 home.setTitle("Kaufland - Shelf Management System");
                 home.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo40.jpg")).getImage());
-                currentDirectoryPathField.setText("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR");
-                
+                currentDirectoryPathField.setText(defaultPath);
+
             }
         });
     }
@@ -1139,6 +1056,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel gallaryview3;
     private javax.swing.JPanel galleryViewPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1152,7 +1070,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1170,6 +1087,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lastImage;
     private javax.swing.JPanel logopanel;

@@ -28,79 +28,7 @@ public class GraphicHelperClass extends JFrame {
     Polygon P;
 
     //Constructor
-    public GraphicHelperClass(String imagePath) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame("Bounding Box from: " + imagePath);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                BufferedImage img = null;
-
-                try {
-                    img = ImageIO.read(new File(imagePath));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.exit(1);
-                }
-                Image image = img.getScaledInstance((int) (img.getWidth() * scaleFactor), (int) (img.getHeight() * scaleFactor), Image.SCALE_SMOOTH);
-                ImageIcon imageIcon = new ImageIcon(image);
-                // Extrakt data
-                JSONObject json = FileHelperClass.ReadJsonFromFile("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\img_20150328_131815.json");
-                Gson gson = new Gson();
-                BoundingBoxObject bbo = new BoundingBoxObject();
-                bbo = gson.fromJson(json.toString(), BoundingBoxObject.class);
-                List<Integer> lineBoundingBox = ExtractLineBoundingBox(bbo);
-                int[] allXCoordinatesOfBoundingBox = ListToIntArray(ExtractTheXCoordinates(lineBoundingBox));
-                int[] allYCoordinatesOfBoundingBox = ListToIntArray(ExtractTheYCoordinates(lineBoundingBox));
-                String recognizedText = ExtractLineText(bbo);
-
-                JLabel jlabel = new JLabel(imageIcon) {
-                    public void paint(Graphics g) {
-                        super.paint(g);
-                        int[] tempX = new int[4];
-                        int[] tempY = new int[4];
-                        int count = 0;
-                        int number = 1;
-                        for (int i = 0; i < allXCoordinatesOfBoundingBox.length; i++) {
-
-                            for (int j = 0; j < 4; j++) {
-                                tempX[j] = allXCoordinatesOfBoundingBox[count + j];
-                                tempY[j] = allYCoordinatesOfBoundingBox[count + j];
-                            }
-                            g.setColor(Color.red);
-                            g.drawPolygon(tempX, tempY, 4);
-                            g.setColor(Color.GREEN);
-                            g.setFont(new Font("Normal", Font.BOLD,14));
-                            g.drawString(number + ") " , (tempX[1]+5), (tempY[0]+tempY[2])/2);
-                            System.out.println("X: " + tempX[0] + "," + tempX[1] + "," + tempX[2] + "," + tempX[3] + " Y: " + tempY[0] + "," + tempY[1] + "," + tempY[2] + "," + tempY[3]);
-                            count += 4;
-                            number++;
-                            if (count == allXCoordinatesOfBoundingBox.length) {
-                                break;
-                            }
-                        }
-                    }
-                };
-
-                frame.getContentPane().add(jlabel, BorderLayout.CENTER);
-                JTextArea textArea = new JTextArea(1, 30);
-                JScrollPane jsp = new JScrollPane(textArea);
-                textArea.setText("Folgender Text wurde erkannt: " + "\n\n" + recognizedText);
-                textArea.setFont(new Font("Serif", Font.CENTER_BASELINE, 14));
-                textArea.setLineWrap(true);
-                textArea.setWrapStyleWord(true);
-                textArea.setBackground(Color.LIGHT_GRAY);
-                textArea.setMargin(new Insets(10, 10, 10, 10));
-                textArea.setEditable(false);
-                frame.getContentPane().add(textArea, BorderLayout.EAST);
-
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-
-        });
-    }
+    public GraphicHelperClass() {}
 
     public static int[] ListToIntArray(List<Integer> list) {
         int[] ret = new int[list.size()];
@@ -154,5 +82,11 @@ public class GraphicHelperClass extends JFrame {
         }
         System.out.println(text);
         return text;
+    }
+
+    public static BoundingBoxObject getInitializedBoundingBoxObject(String jsonPath) {
+        Gson gson = new Gson();
+        JSONObject json = FileHelperClass.ReadJsonFromFile(jsonPath);
+        return gson.fromJson(json.toString(), BoundingBoxObject.class);
     }
 }

@@ -11,7 +11,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +91,40 @@ public class FileHelperClass {
             return "";
         }
     }
+
+    public static long getFileCreationEpoch(File file) {
+        try {
+            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+            return attr.creationTime().toInstant().toEpochMilli();
+        } catch (IOException e) {
+            throw new RuntimeException(file.getAbsolutePath(), e);
+        }
+    }
+
+    public static File[] sortPathByFolder(String directoryPath) {
+        File dir = new File(directoryPath);
+        File[] files = dir.listFiles();
+        Arrays.sort(files, (File f1, File f2) -> {
+            if (f1.isDirectory() && !f2.isDirectory()) {
+                return -1;
+            } else if (!f1.isDirectory() && f2.isDirectory()) {
+                return 1;
+            } else {
+                return f1.compareTo(f2);
+            }
+        });
+        return files;
+    }
+
+    public static void sortFilesByDateCreated(File[] files) {
+        Arrays.sort(files, new Comparator<File>() {
+            public int compare(File f2, File f1) {
+                long l1 = FileHelperClass.getFileCreationEpoch(f1);
+                long l2 = FileHelperClass.getFileCreationEpoch(f2);
+                return Long.valueOf(l1).compareTo(l2);
+            }
+        });
+    }
     public List<String> ChangeFileExtensionToDotJson(List<String> filePaths){
         List<String> newFilePathList = new ArrayList();
         for(String str: filePaths){
@@ -129,5 +166,42 @@ public class FileHelperClass {
             e.printStackTrace();
         }
         return jsonObject;
+    }
+
+    List<String> sortPathsByTheFolderAndCreationTime(String directoryPath) throws IOException {
+        //sort by directory
+        File[] files = sortPathByFolder(directoryPath);
+        //fill the orderedlist as Path object
+        List<File[]> orderedFileListByDirAndCreationTime = new ArrayList();
+        for (int i = 0; i < files.length; i++) {
+            if (FileHelperClass.getFileExtension(files[i]).equals("")) {
+                orderedFileListByDirAndCreationTime.add(files[i].listFiles());
+                ;
+            }
+        }
+        if (!orderedFileListByDirAndCreationTime.isEmpty()) {
+            for (int i = 0; i < orderedFileListByDirAndCreationTime.size(); i++) {
+                sortFilesByDateCreated(orderedFileListByDirAndCreationTime.get(i));
+            }
+            List<String> resultList = new ArrayList();
+            for (File[] f : orderedFileListByDirAndCreationTime) {
+                for (File file : f) {
+                    if (FileHelperClass.getFileExtension(file).toLowerCase().equals("jpg")) {
+                        resultList.add(file.getAbsolutePath());
+                    }
+                }
+            }
+            return resultList;
+        } else {
+            return null;
+        }
+    }
+
+    public static String getDirectoryName(String path) {
+        if (path.lastIndexOf("\\") != -1 && path.lastIndexOf("\\") != 0) {
+            return path.substring(path.lastIndexOf("\\") - 4, path.lastIndexOf("\\"));
+        } else {
+            return "";
+        }
     }
 }
