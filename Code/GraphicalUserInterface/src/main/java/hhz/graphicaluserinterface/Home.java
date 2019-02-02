@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -67,48 +68,6 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator2 = new javax.swing.JSeparator();
-        mainPanel = new javax.swing.JPanel();
-        galleryViewPanel = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        g1Panel = new javax.swing.JPanel();
-        g1Label = new javax.swing.JLabel();
-        g2Panel = new javax.swing.JPanel();
-        g2Label = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        g3Panel = new javax.swing.JPanel();
-        g3Label = new javax.swing.JLabel();
-        g4Panel = new javax.swing.JPanel();
-        g4Label = new javax.swing.JLabel();
-        g5Panel = new javax.swing.JPanel();
-        g5Label = new javax.swing.JLabel();
-        lastImage = new javax.swing.JLabel();
-        nextImage = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        openDirectoryButton = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        currentDirectoryPathField = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        StartLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        virtualRunaroundPanel = new javax.swing.JPanel();
-        reportingPanel = new javax.swing.JPanel();
-        settingsPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JSeparator();
-        jLabel10 = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         sidepanel3 = new javax.swing.JPanel();
         gallaryview3 = new javax.swing.JPanel();
@@ -127,339 +86,61 @@ public class Home extends javax.swing.JFrame {
         jLabelLogoImage = new javax.swing.JLabel();
         footerpanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        mainPanel = new javax.swing.JPanel();
+        galleryViewPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        g1Panel = new javax.swing.JPanel();
+        g1Label = new javax.swing.JLabel();
+        g2Panel = new javax.swing.JPanel();
+        g2Label = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        g3Panel = new javax.swing.JPanel();
+        g3Label = new javax.swing.JLabel();
+        g4Panel = new javax.swing.JPanel();
+        g4Label = new javax.swing.JLabel();
+        g5Panel = new javax.swing.JPanel();
+        g5Label = new javax.swing.JLabel();
+        lastImage = new javax.swing.JLabel();
+        nextImage = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel13 = new javax.swing.JLabel();
+        currentDirectoryPathField = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        StartLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        virtualRunaroundPanel = new javax.swing.JPanel();
+        reportingPanel = new javax.swing.JPanel();
+        settingsPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel10 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        generalSettingsPathBox = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        mainPanel.setLayout(new java.awt.CardLayout());
-
-        galleryViewPanel.setBackground(new java.awt.Color(255, 255, 153));
-        galleryViewPanel.setLayout(new java.awt.GridLayout(1, 0));
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(204, 35, 42));
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 860, 600));
-
-        g1Panel.setBackground(new java.awt.Color(204, 35, 42));
-
-        g1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        g1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
-        g1Label.setToolTipText(" Temporarily unavailable");
-        g1Label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                g1LabelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout g1PanelLayout = new javax.swing.GroupLayout(g1Panel);
-        g1Panel.setLayout(g1PanelLayout);
-        g1PanelLayout.setHorizontalGroup(
-            g1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-        );
-        g1PanelLayout.setVerticalGroup(
-            g1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(g1Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 680, -1, 131));
-
-        g2Panel.setBackground(new java.awt.Color(204, 35, 42));
-        g2Panel.setToolTipText("");
-
-        g2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        g2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
-        g2Label.setToolTipText(" Temporarily unavailable");
-        g2Label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                g2LabelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout g2PanelLayout = new javax.swing.GroupLayout(g2Panel);
-        g2Panel.setLayout(g2PanelLayout);
-        g2PanelLayout.setHorizontalGroup(
-            g2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-        );
-        g2PanelLayout.setVerticalGroup(
-            g2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(g2Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 680, -1, 131));
-
-        jTextPane1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTextPane1.setForeground(new java.awt.Color(204, 35, 42));
-        jScrollPane2.setViewportView(jTextPane1);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 90, 270, 470));
-
-        g3Panel.setBackground(new java.awt.Color(204, 35, 42));
-
-        g3Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        g3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
-        g3Label.setToolTipText(" Temporarily unavailable");
-        g3Label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                g3LabelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout g3PanelLayout = new javax.swing.GroupLayout(g3Panel);
-        g3Panel.setLayout(g3PanelLayout);
-        g3PanelLayout.setHorizontalGroup(
-            g3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-        );
-        g3PanelLayout.setVerticalGroup(
-            g3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(g3Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 680, -1, 131));
-
-        g4Panel.setBackground(new java.awt.Color(204, 35, 42));
-
-        g4Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        g4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
-        g4Label.setToolTipText(" Temporarily unavailable");
-        g4Label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                g4LabelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout g4PanelLayout = new javax.swing.GroupLayout(g4Panel);
-        g4Panel.setLayout(g4PanelLayout);
-        g4PanelLayout.setHorizontalGroup(
-            g4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g4Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-        );
-        g4PanelLayout.setVerticalGroup(
-            g4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g4Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(g4Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 680, -1, -1));
-
-        g5Panel.setBackground(new java.awt.Color(204, 35, 42));
-
-        g5Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        g5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
-        g5Label.setToolTipText(" Temporarily unavailable");
-        g5Label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                g5LabelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout g5PanelLayout = new javax.swing.GroupLayout(g5Panel);
-        g5Panel.setLayout(g5PanelLayout);
-        g5PanelLayout.setHorizontalGroup(
-            g5PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g5Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-        );
-        g5PanelLayout.setVerticalGroup(
-            g5PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(g5Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(g5Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 680, -1, -1));
-
-        lastImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lastImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backRedd.png"))); // NOI18N
-        lastImage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lastImageMouseClicked(evt);
-            }
-        });
-        jPanel3.add(lastImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 60, 80));
-
-        nextImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nextImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nextRed.png"))); // NOI18N
-        nextImage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nextImageMouseClicked(evt);
-            }
-        });
-        jPanel3.add(nextImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 320, 50, 80));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel12.setText("Refresh");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 600, 40, 30));
-
-        jSeparator1.setForeground(new java.awt.Color(204, 35, 42));
-        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 640, 290, 10));
-
-        openDirectoryButton.setForeground(new java.awt.Color(204, 35, 42));
-        openDirectoryButton.setText("Open directory");
-        openDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openDirectoryButtonActionPerformed(evt);
-            }
-        });
-        jPanel3.add(openDirectoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 660, 120, 30));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel13.setText(" Current directory:");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 730, 110, 20));
-
-        currentDirectoryPathField.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        currentDirectoryPathField.setForeground(new java.awt.Color(204, 35, 42));
-        currentDirectoryPathField.setSelectedTextColor(new java.awt.Color(204, 35, 42));
-        jPanel3.add(currentDirectoryPathField, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 760, 260, 30));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel15.setText("CAM 5");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 820, -1, -1));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel16.setText("CAM 1");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 820, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel17.setText("CAM 2");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 820, -1, -1));
-
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel18.setText("CAM 3");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 820, -1, -1));
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel19.setText("CAM 4");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 820, -1, -1));
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh1.png"))); // NOI18N
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 600, 40, 30));
-
-        StartLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play-button1.png"))); // NOI18N
-        StartLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                StartLabelMouseClicked(evt);
-            }
-        });
-        jPanel3.add(StartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 600, 30, 30));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel1.setText("Infobox");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 60, -1, -1));
-
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel20.setText(" Change picture directory:");
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 660, 140, 30));
-
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel21.setText("Start");
-        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 600, 40, 30));
-
-        galleryViewPanel.add(jPanel3);
-
-        mainPanel.add(galleryViewPanel, "card5");
-
-        virtualRunaroundPanel.setBackground(new java.awt.Color(204, 255, 204));
-
-        javax.swing.GroupLayout virtualRunaroundPanelLayout = new javax.swing.GroupLayout(virtualRunaroundPanel);
-        virtualRunaroundPanel.setLayout(virtualRunaroundPanelLayout);
-        virtualRunaroundPanelLayout.setHorizontalGroup(
-            virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        virtualRunaroundPanelLayout.setVerticalGroup(
-            virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
-        );
-
-        mainPanel.add(virtualRunaroundPanel, "card4");
-
-        reportingPanel.setBackground(new java.awt.Color(0, 153, 51));
-
-        javax.swing.GroupLayout reportingPanelLayout = new javax.swing.GroupLayout(reportingPanel);
-        reportingPanel.setLayout(reportingPanelLayout);
-        reportingPanelLayout.setHorizontalGroup(
-            reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        reportingPanelLayout.setVerticalGroup(
-            reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
-        );
-
-        mainPanel.add(reportingPanel, "card3");
-
-        settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel2.setText("OCR recognition settings");
-
-        jSeparator3.setForeground(new java.awt.Color(204, 35, 42));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel3.setText("Object recognition settings ");
-
-        jSeparator4.setForeground(new java.awt.Color(204, 35, 42));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel10.setText(" General");
-
-        jSeparator5.setForeground(new java.awt.Color(204, 35, 42));
-
-        javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
-        settingsPanel.setLayout(settingsPanelLayout);
-        settingsPanelLayout.setHorizontalGroup(
-            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(254, Short.MAX_VALUE))
-        );
-        settingsPanelLayout.setVerticalGroup(
-            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(802, Short.MAX_VALUE))
-        );
-
-        mainPanel.add(settingsPanel, "card2");
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -652,6 +333,398 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.add(sidepanel3, java.awt.BorderLayout.PAGE_START);
 
+        mainPanel.setLayout(new java.awt.CardLayout());
+
+        galleryViewPanel.setBackground(new java.awt.Color(255, 255, 153));
+        galleryViewPanel.setLayout(new java.awt.GridLayout(1, 0));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 35, 42)));
+        jPanel4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("Open directory");
+        jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel26.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel26MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel26MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel26MouseExited(evt);
+            }
+        });
+        jPanel4.add(jLabel26, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 660, 110, 30));
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 35, 42));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 860, 600));
+
+        g1Panel.setBackground(new java.awt.Color(204, 35, 42));
+
+        g1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        g1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
+        g1Label.setToolTipText(" Temporarily unavailable");
+        g1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g1LabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout g1PanelLayout = new javax.swing.GroupLayout(g1Panel);
+        g1Panel.setLayout(g1PanelLayout);
+        g1PanelLayout.setHorizontalGroup(
+            g1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+        );
+        g1PanelLayout.setVerticalGroup(
+            g1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(g1Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 680, -1, 131));
+
+        g2Panel.setBackground(new java.awt.Color(204, 35, 42));
+        g2Panel.setToolTipText("");
+
+        g2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        g2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
+        g2Label.setToolTipText(" Temporarily unavailable");
+        g2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g2LabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout g2PanelLayout = new javax.swing.GroupLayout(g2Panel);
+        g2Panel.setLayout(g2PanelLayout);
+        g2PanelLayout.setHorizontalGroup(
+            g2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+        );
+        g2PanelLayout.setVerticalGroup(
+            g2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(g2Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 680, -1, 131));
+
+        jTextPane1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jTextPane1.setForeground(new java.awt.Color(204, 35, 42));
+        jScrollPane2.setViewportView(jTextPane1);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 90, 270, 470));
+
+        g3Panel.setBackground(new java.awt.Color(204, 35, 42));
+
+        g3Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        g3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
+        g3Label.setToolTipText(" Temporarily unavailable");
+        g3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g3LabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout g3PanelLayout = new javax.swing.GroupLayout(g3Panel);
+        g3Panel.setLayout(g3PanelLayout);
+        g3PanelLayout.setHorizontalGroup(
+            g3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+        );
+        g3PanelLayout.setVerticalGroup(
+            g3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(g3Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 680, -1, 131));
+
+        g4Panel.setBackground(new java.awt.Color(204, 35, 42));
+
+        g4Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        g4Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
+        g4Label.setToolTipText(" Temporarily unavailable");
+        g4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g4LabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout g4PanelLayout = new javax.swing.GroupLayout(g4Panel);
+        g4Panel.setLayout(g4PanelLayout);
+        g4PanelLayout.setHorizontalGroup(
+            g4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g4Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+        );
+        g4PanelLayout.setVerticalGroup(
+            g4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g4Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(g4Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 680, -1, -1));
+
+        g5Panel.setBackground(new java.awt.Color(204, 35, 42));
+
+        g5Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        g5Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-stopping128.png"))); // NOI18N
+        g5Label.setToolTipText(" Temporarily unavailable");
+        g5Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                g5LabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout g5PanelLayout = new javax.swing.GroupLayout(g5Panel);
+        g5Panel.setLayout(g5PanelLayout);
+        g5PanelLayout.setHorizontalGroup(
+            g5PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g5Label, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+        );
+        g5PanelLayout.setVerticalGroup(
+            g5PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(g5Label, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(g5Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 680, -1, -1));
+
+        lastImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lastImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backRedd.png"))); // NOI18N
+        lastImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lastImageMouseClicked(evt);
+            }
+        });
+        jPanel3.add(lastImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 60, 80));
+
+        nextImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nextImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nextRed.png"))); // NOI18N
+        nextImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextImageMouseClicked(evt);
+            }
+        });
+        jPanel3.add(nextImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 320, 50, 80));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel12.setText("Refresh");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 600, 40, 30));
+
+        jSeparator1.setForeground(new java.awt.Color(204, 35, 42));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 640, 290, 10));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel13.setText(" Current directory:");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 730, 110, 20));
+
+        currentDirectoryPathField.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        currentDirectoryPathField.setForeground(new java.awt.Color(204, 35, 42));
+        currentDirectoryPathField.setSelectedTextColor(new java.awt.Color(204, 35, 42));
+        jPanel3.add(currentDirectoryPathField, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 760, 270, 30));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel15.setText("CAM 5");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 820, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel16.setText("CAM 1");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 820, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel17.setText("CAM 2");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 820, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel18.setText("CAM 3");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 820, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel19.setText("CAM 4");
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 820, -1, -1));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh1.png"))); // NOI18N
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 600, 40, 30));
+
+        StartLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play-button1.png"))); // NOI18N
+        StartLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                StartLabelMouseClicked(evt);
+            }
+        });
+        jPanel3.add(StartLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 600, 30, 30));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel1.setText("Infobox");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 60, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel20.setText(" Change picture directory:");
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 660, 140, 30));
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel21.setText("Start");
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 600, 40, 30));
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 340, 20));
+
+        galleryViewPanel.add(jPanel3);
+
+        mainPanel.add(galleryViewPanel, "card5");
+
+        virtualRunaroundPanel.setBackground(new java.awt.Color(204, 255, 204));
+
+        javax.swing.GroupLayout virtualRunaroundPanelLayout = new javax.swing.GroupLayout(virtualRunaroundPanel);
+        virtualRunaroundPanel.setLayout(virtualRunaroundPanelLayout);
+        virtualRunaroundPanelLayout.setHorizontalGroup(
+            virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1300, Short.MAX_VALUE)
+        );
+        virtualRunaroundPanelLayout.setVerticalGroup(
+            virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 851, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(virtualRunaroundPanel, "card4");
+
+        reportingPanel.setBackground(new java.awt.Color(0, 153, 51));
+
+        javax.swing.GroupLayout reportingPanelLayout = new javax.swing.GroupLayout(reportingPanel);
+        reportingPanel.setLayout(reportingPanelLayout);
+        reportingPanelLayout.setHorizontalGroup(
+            reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1300, Short.MAX_VALUE)
+        );
+        reportingPanelLayout.setVerticalGroup(
+            reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 851, Short.MAX_VALUE)
+        );
+
+        mainPanel.add(reportingPanel, "card3");
+
+        settingsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        settingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel2.setText("OCR recognition settings");
+        settingsPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 20, -1, -1));
+
+        jSeparator3.setForeground(new java.awt.Color(204, 35, 42));
+        settingsPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 45, 317, 10));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel3.setText("Object recognition settings ");
+        settingsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+
+        jSeparator4.setForeground(new java.awt.Color(204, 35, 42));
+        settingsPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 45, 318, 10));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel10.setText("Default Directory Path:");
+        jLabel10.setToolTipText("");
+        settingsPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 30));
+
+        jSeparator5.setForeground(new java.awt.Color(204, 35, 42));
+        settingsPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 45, 298, 10));
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel22.setText(" General settings");
+        settingsPanel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/questionmark.png"))); // NOI18N
+        jLabel4.setToolTipText("Path used to analyze images");
+        settingsPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 30, 30));
+
+        generalSettingsPathBox.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        generalSettingsPathBox.setForeground(new java.awt.Color(204, 35, 42));
+        generalSettingsPathBox.setToolTipText("");
+        generalSettingsPathBox.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        settingsPanel.add(generalSettingsPathBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 170, 30));
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel23.setText("Analyse Date/Time:");
+        jLabel23.setToolTipText("");
+        settingsPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, 30));
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/questionmark.png"))); // NOI18N
+        jLabel24.setToolTipText("Path used to analyze images");
+        settingsPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 30, 30));
+
+        jComboBox1.setForeground(new java.awt.Color(204, 35, 42));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        settingsPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 60, 30));
+
+        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(204, 35, 42));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Monday - Saturday" }));
+        jComboBox2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        settingsPanel.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 110, 30));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 35, 42)));
+        jPanel2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("Open and Store");
+        jLabel25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel25MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel25MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel25MouseExited(evt);
+            }
+        });
+        jPanel2.add(jLabel25, java.awt.BorderLayout.CENTER);
+
+        settingsPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 110, 30));
+
+        mainPanel.add(settingsPanel, "card2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -733,17 +806,6 @@ public class Home extends javax.swing.JFrame {
         mainPanel.repaint();
         mainPanel.revalidate();
     }//GEN-LAST:event_gallaryviewMouseClicked
-
-    private void openDirectoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openDirectoryButtonActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int returnVal = chooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
-            System.out.println("You chose to open this directory: "
-                    + chooser.getSelectedFile().getAbsolutePath());
-        }
-    }//GEN-LAST:event_openDirectoryButtonActionPerformed
 
     //Globale shared Variablen
     static float newScaleFactorHeight;
@@ -911,43 +973,66 @@ public class Home extends javax.swing.JFrame {
     }
 
     int sliderIndex = 1;
+    boolean changeCam = false;
+    boolean slideBack = false;
+    boolean slideNext = false;
     private void lastImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastImageMouseClicked
         if (sliderIndex == imagePahtCopyForCamEvent.size()) {
             sliderIndex = imagePahtCopyForCamEvent.size() - 2;
         }
+        if (slideBack) {sliderIndex-=2; slideBack =false;}
         if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
-           
-          //  if (sliderIndex >= 0) {
-                BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
-                setXAndYCoordinates(bbo);
-                String recognizedText = getRecognizedText(bbo);
-                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
 
-                jTextPane1.setText(recognizedText);
-                jLabel9.setIcon(imageIcon);
-                repaint(jLabel9.getGraphics());
-                sliderIndex--;
-          //  }
+              if (!changeCam) {
+            BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+            setXAndYCoordinates(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
+            
+            setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
+            jTextPane1.setText(recognizedText);
+            jLabel9.setIcon(imageIcon);
+            repaint(jLabel9.getGraphics());
+            sliderIndex--;
+            if(sliderIndex < 0){
+            slideNext = false;
+              }else {
+                slideNext = true;
+            }
+            }
         }
     }//GEN-LAST:event_lastImageMouseClicked
 
+        private void setCreationTimeToJLabel(String path){
+            File file = new File(path);
+            jLabel27.setText("Creation Time: " + FileHelperClass.getFileCreationTime(file));
+        }
     private void nextImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextImageMouseClicked
         if (sliderIndex < 0) {
             sliderIndex = 1;
         }
+        if (slideNext) {sliderIndex+=2; slideNext =false;}
         if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
             
-          //  if (sliderIndex < imagePahtCopyForCamEvent.size()) {
-                BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
-                setXAndYCoordinates(bbo);
-                String recognizedText = getRecognizedText(bbo);
-                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
+            //  if (sliderIndex < imagePahtCopyForCamEvent.size()) {
+            BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+            setXAndYCoordinates(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
 
-                jTextPane1.setText(recognizedText);
-                jLabel9.setIcon(imageIcon);
-                repaint(jLabel9.getGraphics());
-                sliderIndex++;
-           // }
+            setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
+            jTextPane1.setText(recognizedText);
+            jLabel9.setIcon(imageIcon);
+            repaint(jLabel9.getGraphics());
+            sliderIndex++;
+            changeCam = false;
+            if(sliderIndex == imagePahtCopyForCamEvent.size()){
+                slideBack = false;
+            } else {
+                slideBack = true;
+            }
+            
+            // }
         }
     }//GEN-LAST:event_nextImageMouseClicked
     private void g1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g1LabelMouseClicked
@@ -965,22 +1050,71 @@ public class Home extends javax.swing.JFrame {
     private void g5LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g5LabelMouseClicked
         setGLabelSelectionToTextAreaAndMainPanel("cam5");
     }//GEN-LAST:event_g5LabelMouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jLabel25MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseEntered
+        jLabel25.setForeground(new Color(160, 35, 42));
+        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(160, 35, 42)));
+    }//GEN-LAST:event_jLabel25MouseEntered
+
+    private void jLabel25MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseExited
+        //jPanel2.setBackground(new Color(204, 35, 42));
+        jLabel25.setForeground(new Color(204, 35, 42));
+        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(204, 35, 42)));
+    }//GEN-LAST:event_jLabel25MouseExited
+
+    private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            generalSettingsPathBox.setText(chooser.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_jLabel25MouseClicked
+
+    private void jLabel26MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseClicked
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_jLabel26MouseClicked
+
+    private void jLabel26MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseEntered
+        jLabel26.setForeground(new Color(160, 35, 42));
+        jPanel3.setBorder(BorderFactory.createLineBorder(new Color(160, 35, 42)));
+    }//GEN-LAST:event_jLabel26MouseEntered
+
+    private void jLabel26MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseExited
+       jLabel26.setForeground(new Color(204, 35, 42));
+       jPanel3.setBorder(BorderFactory.createLineBorder(new Color(204, 35, 42)));
+    }//GEN-LAST:event_jLabel26MouseExited
     private void setGLabelSelectionToTextAreaAndMainPanel(String cam) {
-        List<String> cam1ImagePaths = new ArrayList();
+        //Set reset variables when choose new cam
+        slideBack = false;
+        slideNext = false;
+        changeCam = true;
+        sliderIndex = 1;
+        List<String> camXImagePaths = new ArrayList();
         FileHelperClass fhc = new FileHelperClass();
         for (String path : imagePath) {
             if (fhc.getDirectoryName(path).equals(cam)) {
-                cam1ImagePaths.add(path);
+                camXImagePaths.add(path);
             }
         }
-        if (!cam1ImagePaths.isEmpty()) {
-            imagePahtCopyForCamEvent = cam1ImagePaths;
-            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(cam1ImagePaths);
+        if (!camXImagePaths.isEmpty()) {
+            imagePahtCopyForCamEvent = camXImagePaths;
+            imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(camXImagePaths);
             BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
             setXAndYCoordinates(bbo);
             String recognizedText = getRecognizedText(bbo);
             ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
 
+            setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(0));
             jTextPane1.setText(recognizedText);
             jLabel9.setHorizontalAlignment(jLabel9.LEADING);
             jLabel9.setIcon(imageIcon);
@@ -1026,6 +1160,7 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private static final String defaultPath = "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR";
+
     public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1055,6 +1190,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel g5Panel;
     private javax.swing.JPanel gallaryview3;
     private javax.swing.JPanel galleryViewPanel;
+    private javax.swing.JTextField generalSettingsPathBox;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1069,7 +1207,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1081,7 +1226,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSettingsImage;
     private javax.swing.JLabel jLabelVirtualImage;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -1093,7 +1240,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel logopanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel nextImage;
-    private javax.swing.JButton openDirectoryButton;
     private javax.swing.JPanel reporting;
     private javax.swing.JPanel reportingPanel;
     private javax.swing.JPanel settings;

@@ -101,6 +101,15 @@ public class FileHelperClass {
         }
     }
 
+    public static String getFileCreationTime(File file) {
+        try {
+            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+            return attr.creationTime().toString();
+        } catch (IOException e) {
+            throw new RuntimeException(file.getAbsolutePath(), e);
+        }
+    }
+    
     public static File[] sortPathByFolder(String directoryPath) {
         File dir = new File(directoryPath);
         File[] files = dir.listFiles();
