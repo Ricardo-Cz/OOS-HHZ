@@ -56,6 +56,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        BindComboboxSetting();
     }
 
     /**
@@ -135,10 +136,17 @@ public class Home extends javax.swing.JFrame {
         generalSettingsPathBox = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jcombo1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jcombo2 = new javax.swing.JComboBox<>();
+        jLabel30 = new javax.swing.JLabel();
+        jcomboTime2 = new javax.swing.JComboBox<>();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jcomboTime1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -354,12 +362,6 @@ public class Home extends javax.swing.JFrame {
         jLabel26.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel26MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel26MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel26MouseExited(evt);
             }
         });
         jPanel4.add(jLabel26, java.awt.BorderLayout.CENTER);
@@ -633,7 +635,7 @@ public class Home extends javax.swing.JFrame {
         settingsPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 20, -1, -1));
 
         jSeparator3.setForeground(new java.awt.Color(204, 35, 42));
-        settingsPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 45, 317, 10));
+        settingsPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 120, 20, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 35, 42));
@@ -672,7 +674,7 @@ public class Home extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel23.setText("Analyse Date/Time:");
+        jLabel23.setText("Analyse Date & Time:");
         jLabel23.setToolTipText("");
         settingsPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, 30));
 
@@ -680,23 +682,20 @@ public class Home extends javax.swing.JFrame {
         jLabel24.setForeground(new java.awt.Color(204, 35, 42));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/questionmark.png"))); // NOI18N
-        jLabel24.setToolTipText("Path used to analyze images");
-        settingsPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 30, 30));
+        jLabel24.setToolTipText("Day of the week and time period during which images are to be analyzed");
+        settingsPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 30, 30));
 
-        jComboBox1.setForeground(new java.awt.Color(204, 35, 42));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jcombo1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jcombo1.setForeground(new java.awt.Color(204, 35, 42));
+        jcombo1.setBorder(null);
+        jcombo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jcombo1.setFocusTraversalPolicyProvider(true);
+        jcombo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcombo1ActionPerformed(evt);
             }
         });
-        settingsPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 60, 30));
-
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(204, 35, 42));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Monday - Saturday" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        settingsPanel.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 110, 30));
+        settingsPanel.add(jcombo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 150, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 35, 42)));
@@ -722,6 +721,63 @@ public class Home extends javax.swing.JFrame {
         jPanel2.add(jLabel25, java.awt.BorderLayout.CENTER);
 
         settingsPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 110, 30));
+
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel28.setText("Analyse Date & Time:");
+        jLabel28.setToolTipText("");
+        settingsPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 60, -1, 30));
+
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/questionmark.png"))); // NOI18N
+        jLabel29.setToolTipText("Day of the week and time period during which images are to be analyzed");
+        settingsPanel.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 60, 30, 30));
+
+        jcombo2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jcombo2.setForeground(new java.awt.Color(204, 35, 42));
+        jcombo2.setBorder(null);
+        jcombo2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jcombo2.setFocusTraversalPolicyProvider(true);
+        jcombo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcombo2ActionPerformed(evt);
+            }
+        });
+        settingsPanel.add(jcombo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 150, 30));
+
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/link1.png"))); // NOI18N
+        jLabel30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 35, 42)));
+        settingsPanel.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, 30, 30));
+
+        jcomboTime2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jcomboTime2.setForeground(new java.awt.Color(204, 35, 42));
+        jcomboTime2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jcomboTime2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcomboTime2ActionPerformed(evt);
+            }
+        });
+        settingsPanel.add(jcomboTime2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 100, 150, 30));
+
+        jSeparator6.setForeground(new java.awt.Color(204, 35, 42));
+        settingsPanel.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 45, 317, 10));
+
+        jSeparator7.setForeground(new java.awt.Color(204, 35, 42));
+        settingsPanel.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 110, 20, 30));
+
+        jcomboTime1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jcomboTime1.setForeground(new java.awt.Color(204, 35, 42));
+        jcomboTime1.setBorder(null);
+        jcomboTime1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jcomboTime1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcomboTime1ActionPerformed(evt);
+            }
+        });
+        settingsPanel.add(jcomboTime1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 150, 30));
 
         mainPanel.add(settingsPanel, "card2");
 
@@ -838,6 +894,9 @@ public class Home extends javax.swing.JFrame {
                         jLabel9.setText("Please choose an available cam view from below");
                         jLabel9.setHorizontalAlignment(JLabel.CENTER);
                     } else {
+                        jLabel9.setIcon(null);
+                        jLabel9.setHorizontalAlignment(JLabel.CENTER);
+                        jLabel27.setText("");
                         JOptionPane.showMessageDialog(mainPanel, "Please choose a directory with cam1 to cam5 folders!");
                     }
                 }
@@ -980,40 +1039,46 @@ public class Home extends javax.swing.JFrame {
         if (sliderIndex == imagePahtCopyForCamEvent.size()) {
             sliderIndex = imagePahtCopyForCamEvent.size() - 2;
         }
-        if (slideBack) {sliderIndex-=2; slideBack =false;}
+        if (slideBack) {
+            sliderIndex -= 2;
+            slideBack = false;
+        }
         if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
 
-              if (!changeCam) {
-            BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
-            
-            setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-            sliderIndex--;
-            if(sliderIndex < 0){
-            slideNext = false;
-              }else {
-                slideNext = true;
-            }
+            if (!changeCam) {
+                BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+                setXAndYCoordinates(bbo);
+                String recognizedText = getRecognizedText(bbo);
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
+
+                setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
+                jTextPane1.setText(recognizedText);
+                jLabel9.setIcon(imageIcon);
+                repaint(jLabel9.getGraphics());
+                sliderIndex--;
+                if (sliderIndex < 0) {
+                    slideNext = false;
+                } else {
+                    slideNext = true;
+                }
             }
         }
     }//GEN-LAST:event_lastImageMouseClicked
 
-        private void setCreationTimeToJLabel(String path){
-            File file = new File(path);
-            jLabel27.setText("Creation Time: " + FileHelperClass.getFileCreationTime(file));
-        }
+    private void setCreationTimeToJLabel(String path) {
+        File file = new File(path);
+        jLabel27.setText("Creation Time: " + FileHelperClass.getFileCreationTime(file));
+    }
     private void nextImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextImageMouseClicked
         if (sliderIndex < 0) {
             sliderIndex = 1;
         }
-        if (slideNext) {sliderIndex+=2; slideNext =false;}
+        if (slideNext) {
+            sliderIndex += 2;
+            slideNext = false;
+        }
         if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
-            
+
             //  if (sliderIndex < imagePahtCopyForCamEvent.size()) {
             BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
             setXAndYCoordinates(bbo);
@@ -1026,12 +1091,12 @@ public class Home extends javax.swing.JFrame {
             repaint(jLabel9.getGraphics());
             sliderIndex++;
             changeCam = false;
-            if(sliderIndex == imagePahtCopyForCamEvent.size()){
+            if (sliderIndex == imagePahtCopyForCamEvent.size()) {
                 slideBack = false;
             } else {
                 slideBack = true;
             }
-            
+
             // }
         }
     }//GEN-LAST:event_nextImageMouseClicked
@@ -1050,10 +1115,6 @@ public class Home extends javax.swing.JFrame {
     private void g5LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g5LabelMouseClicked
         setGLabelSelectionToTextAreaAndMainPanel("cam5");
     }//GEN-LAST:event_g5LabelMouseClicked
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jLabel25MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseEntered
         jLabel25.setForeground(new Color(160, 35, 42));
@@ -1084,15 +1145,40 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel26MouseClicked
 
-    private void jLabel26MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseEntered
-        jLabel26.setForeground(new Color(160, 35, 42));
-        jPanel3.setBorder(BorderFactory.createLineBorder(new Color(160, 35, 42)));
-    }//GEN-LAST:event_jLabel26MouseEntered
+    private void jcomboTime2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboTime2ActionPerformed
+        Object item = jcomboTime2.getSelectedItem();
+        jcomboTime1.setSelectedItem(item);
+    }//GEN-LAST:event_jcomboTime2ActionPerformed
+    final List<String> day = Arrays.asList("Day of the week", "Monday", "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday", "Monday - Saturday");
+    final List <String> timePeriod = Arrays.asList("Time period (6am-12pm)","every 15 minutes", "every half an hour",
+            "every hour", "every 2 houers");
+    public void BindComboboxSetting() {
+        for (String d : day) {
+            jcombo1.addItem(d);
+            jcombo2.addItem(d);
+        }
+        for (String p: timePeriod){
+            jcomboTime1.addItem(p);
+            jcomboTime2.addItem(p);
+        }
+    }
+    private void jcombo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo1ActionPerformed
+        // TODO daten aus datenbank erfragen und ausgewählten state speichern
+        Object item = jcombo1.getSelectedItem();
+        jcombo2.setSelectedItem(item);
+    }//GEN-LAST:event_jcombo1ActionPerformed
 
-    private void jLabel26MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel26MouseExited
-       jLabel26.setForeground(new Color(204, 35, 42));
-       jPanel3.setBorder(BorderFactory.createLineBorder(new Color(204, 35, 42)));
-    }//GEN-LAST:event_jLabel26MouseExited
+    private void jcombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo2ActionPerformed
+        // TODO daten aus datenbank erfragen und ausgewählten state speichern
+        Object item = jcombo2.getSelectedItem();
+        jcombo1.setSelectedItem(item);
+    }//GEN-LAST:event_jcombo2ActionPerformed
+
+    private void jcomboTime1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboTime1ActionPerformed
+        Object item = jcomboTime1.getSelectedItem();
+        jcomboTime2.setSelectedItem(item);
+    }//GEN-LAST:event_jcomboTime1ActionPerformed
     private void setGLabelSelectionToTextAreaAndMainPanel(String cam) {
         //Set reset variables when choose new cam
         slideBack = false;
@@ -1191,8 +1277,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel gallaryview3;
     private javax.swing.JPanel galleryViewPanel;
     private javax.swing.JTextField generalSettingsPathBox;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1213,7 +1297,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1235,7 +1322,13 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JComboBox<String> jcombo1;
+    private javax.swing.JComboBox<String> jcombo2;
+    private javax.swing.JComboBox<String> jcomboTime1;
+    private javax.swing.JComboBox<String> jcomboTime2;
     private javax.swing.JLabel lastImage;
     private javax.swing.JPanel logopanel;
     private javax.swing.JPanel mainPanel;
