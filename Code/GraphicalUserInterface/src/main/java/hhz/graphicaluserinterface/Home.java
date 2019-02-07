@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -44,12 +46,18 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.json.simple.JSONObject;
+import sqlite.DBController;
 
 /**
  *
  * @author Valerij
  */
 public class Home extends javax.swing.JFrame {
+
+    private final static String ROOT_PATH = "root_path";
+    private final static String SETTINGS_DATA = "settings_data";
+    private final static String SELECTED_DATE = "selected_date";
+    private final static String SELECTED_TIME = "selected_time";
 
     /**
      * Creates new form Home
@@ -121,7 +129,8 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        jLabelFileCreateTime = new javax.swing.JLabel();
+        jFileName = new javax.swing.JLabel();
         virtualRunaroundPanel = new javax.swing.JPanel();
         reportingPanel = new javax.swing.JPanel();
         settingsPanel = new javax.swing.JPanel();
@@ -587,10 +596,15 @@ public class Home extends javax.swing.JFrame {
         jLabel21.setText("Start");
         jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 600, 40, 30));
 
-        jLabel27.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 340, 20));
+        jLabelFileCreateTime.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabelFileCreateTime.setForeground(new java.awt.Color(204, 35, 42));
+        jLabelFileCreateTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel3.add(jLabelFileCreateTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 340, 20));
+
+        jFileName.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jFileName.setForeground(new java.awt.Color(204, 35, 42));
+        jFileName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel3.add(jFileName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 340, 20));
 
         galleryViewPanel.add(jPanel3);
 
@@ -710,12 +724,6 @@ public class Home extends javax.swing.JFrame {
         jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel25MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel25MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel25MouseExited(evt);
             }
         });
         jPanel2.add(jLabel25, java.awt.BorderLayout.CENTER);
@@ -896,7 +904,8 @@ public class Home extends javax.swing.JFrame {
                     } else {
                         jLabel9.setIcon(null);
                         jLabel9.setHorizontalAlignment(JLabel.CENTER);
-                        jLabel27.setText("");
+                        jLabelFileCreateTime.setText("");
+                        jFileName.setName("");
                         JOptionPane.showMessageDialog(mainPanel, "Please choose a directory with cam1 to cam5 folders!");
                     }
                 }
@@ -1050,7 +1059,7 @@ public class Home extends javax.swing.JFrame {
                 setXAndYCoordinates(bbo);
                 String recognizedText = getRecognizedText(bbo);
                 ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
-
+                setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
                 setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
                 jTextPane1.setText(recognizedText);
                 jLabel9.setIcon(imageIcon);
@@ -1064,10 +1073,14 @@ public class Home extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_lastImageMouseClicked
+    private void setFileNameToJLabel(String path) {
+        File file = new File(path);
+        jFileName.setText("File Name: " + file.getName().toString());
+    }
 
     private void setCreationTimeToJLabel(String path) {
         File file = new File(path);
-        jLabel27.setText("Creation Time: " + FileHelperClass.getFileCreationTime(file));
+        jLabelFileCreateTime.setText("Creation Time: " + FileHelperClass.getFileCreationTime(file));
     }
     private void nextImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextImageMouseClicked
         if (sliderIndex < 0) {
@@ -1085,6 +1098,7 @@ public class Home extends javax.swing.JFrame {
             String recognizedText = getRecognizedText(bbo);
             ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
 
+            setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
             setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
             jTextPane1.setText(recognizedText);
             jLabel9.setIcon(imageIcon);
@@ -1116,23 +1130,16 @@ public class Home extends javax.swing.JFrame {
         setGLabelSelectionToTextAreaAndMainPanel("cam5");
     }//GEN-LAST:event_g5LabelMouseClicked
 
-    private void jLabel25MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseEntered
-        jLabel25.setForeground(new Color(160, 35, 42));
-        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(160, 35, 42)));
-    }//GEN-LAST:event_jLabel25MouseEntered
-
-    private void jLabel25MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseExited
-        //jPanel2.setBackground(new Color(204, 35, 42));
-        jLabel25.setForeground(new Color(204, 35, 42));
-        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(204, 35, 42)));
-    }//GEN-LAST:event_jLabel25MouseExited
-
     private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            generalSettingsPathBox.setText(chooser.getSelectedFile().getAbsolutePath());
+            DBController dbc = DBController.getInstance();
+            dbc.handleUpdateDB(chooser.getSelectedFile().getAbsolutePath(), ROOT_PATH, SETTINGS_DATA);
+            String rootPathFromDB = dbc.handleGetDB(ROOT_PATH, SETTINGS_DATA);
+            generalSettingsPathBox.setText(rootPathFromDB);
+            currentDirectoryPathField.setText(rootPathFromDB);
         }
     }//GEN-LAST:event_jLabel25MouseClicked
 
@@ -1146,38 +1153,55 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel26MouseClicked
 
     private void jcomboTime2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboTime2ActionPerformed
+        DBController dbc = DBController.getInstance();
         Object item = jcomboTime2.getSelectedItem();
         jcomboTime1.setSelectedItem(item);
+        dbc.handleUpdateDB(item.toString(), SELECTED_TIME, SETTINGS_DATA);
     }//GEN-LAST:event_jcomboTime2ActionPerformed
-    final List<String> day = Arrays.asList("Day of the week", "Monday", "Tuesday", "Wednesday",
-            "Thursday", "Friday", "Saturday", "Monday - Saturday");
-    final List <String> timePeriod = Arrays.asList("Time period (6am-12pm)","every 15 minutes", "every half an hour",
-            "every hour", "every 2 houers");
+
     public void BindComboboxSetting() {
+        final List<String> day = Arrays.asList("Monday", "Tuesday", "Wednesday",
+                "Thursday", "Friday", "Saturday", "Monday - Saturday");
+        final List<String> timePeriod = Arrays.asList("every 15 minutes", "every half an hour",
+                "every hour", "every 2 houers");
+        DBController dbc = DBController.getInstance();
+        dbc.initDBConnection();
+        String settingDataFromDB = dbc.handleGetDB(SELECTED_DATE, SETTINGS_DATA);
+        String settingTimeFromDB = dbc.handleGetDB(SELECTED_TIME, SETTINGS_DATA);
         for (String d : day) {
             jcombo1.addItem(d);
             jcombo2.addItem(d);
         }
-        for (String p: timePeriod){
+        for (String p : timePeriod) {
             jcomboTime1.addItem(p);
             jcomboTime2.addItem(p);
         }
+        if (!settingDataFromDB.equals("") && !settingTimeFromDB.equals("")) {
+            jcombo1.setSelectedItem(settingDataFromDB);
+            jcombo2.setSelectedItem(settingDataFromDB);
+            jcomboTime1.setSelectedItem(settingTimeFromDB);
+            jcomboTime2.setSelectedItem(settingTimeFromDB);
+        }
     }
     private void jcombo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo1ActionPerformed
-        // TODO daten aus datenbank erfragen und ausgewählten state speichern
+        DBController dbc = DBController.getInstance();
         Object item = jcombo1.getSelectedItem();
         jcombo2.setSelectedItem(item);
+        dbc.handleUpdateDB(item.toString(), SELECTED_DATE, SETTINGS_DATA);
     }//GEN-LAST:event_jcombo1ActionPerformed
 
     private void jcombo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcombo2ActionPerformed
-        // TODO daten aus datenbank erfragen und ausgewählten state speichern
+        DBController dbc = DBController.getInstance();
         Object item = jcombo2.getSelectedItem();
         jcombo1.setSelectedItem(item);
+        dbc.handleUpdateDB(item.toString(), SELECTED_DATE, SETTINGS_DATA);
     }//GEN-LAST:event_jcombo2ActionPerformed
 
     private void jcomboTime1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboTime1ActionPerformed
+        DBController dbc = DBController.getInstance();
         Object item = jcomboTime1.getSelectedItem();
         jcomboTime2.setSelectedItem(item);
+        dbc.handleUpdateDB(item.toString(), SELECTED_TIME, SETTINGS_DATA);
     }//GEN-LAST:event_jcomboTime1ActionPerformed
     private void setGLabelSelectionToTextAreaAndMainPanel(String cam) {
         //Set reset variables when choose new cam
@@ -1200,6 +1224,7 @@ public class Home extends javax.swing.JFrame {
             String recognizedText = getRecognizedText(bbo);
             ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
 
+            setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
             setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(0));
             jTextPane1.setText(recognizedText);
             jLabel9.setHorizontalAlignment(jLabel9.LEADING);
@@ -1245,8 +1270,6 @@ public class Home extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private static final String defaultPath = "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR";
-
     public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1255,7 +1278,12 @@ public class Home extends javax.swing.JFrame {
                 home.setVisible(true);
                 home.setTitle("Kaufland - Shelf Management System");
                 home.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo40.jpg")).getImage());
-                currentDirectoryPathField.setText(defaultPath);
+                //Aus DB PATH abfragen -> der in settings gewählt wurde
+                DBController dbc = DBController.getInstance();
+                dbc.initDBConnection();
+                String currenPath = dbc.handleGetDB(ROOT_PATH, SETTINGS_DATA);
+                currentDirectoryPathField.setText(currenPath);
+                generalSettingsPathBox.setText(currenPath);
 
             }
         });
@@ -1276,7 +1304,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel g5Panel;
     private javax.swing.JPanel gallaryview3;
     private javax.swing.JPanel galleryViewPanel;
-    private javax.swing.JTextField generalSettingsPathBox;
+    private static javax.swing.JTextField generalSettingsPathBox;
+    private javax.swing.JLabel jFileName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1296,7 +1325,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1307,6 +1335,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelFileCreateTime;
     private javax.swing.JLabel jLabelGalleryImage3;
     private javax.swing.JLabel jLabelLogoImage;
     private javax.swing.JLabel jLabelReportingLabel;
