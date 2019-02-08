@@ -66,7 +66,7 @@ public class GraphicHelperClass extends JFrame {
         List<Integer> yCoordinates = new ArrayList<Integer>();
         for (int i = 0; i < wholeList.size(); i++) {
             if ((i % 2) == 1) {
-                yCoordinates.add((int)(wholeList.get(i)/ Home.newScaleFactorHeight));
+                yCoordinates.add((int)((wholeList.get(i) + FileHelperClass.SUB_IMAGE_Y_VALUE) / Home.newScaleFactorHeight));
             }
         }
         System.out.println(yCoordinates);

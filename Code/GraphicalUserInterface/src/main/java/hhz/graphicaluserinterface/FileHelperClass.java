@@ -5,6 +5,9 @@
  */
 package hhz.graphicaluserinterface;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -31,7 +35,7 @@ import org.json.simple.parser.ParseException;
 
 //load and convert images to binary from directory
 public class FileHelperClass {
-
+    public static final int SUB_IMAGE_Y_VALUE = 2200;
     public static Map<String, byte[]> getImages(String rootPath) throws IOException {
 
         ArrayList<File> files = getPaths(new File(rootPath),
@@ -40,12 +44,14 @@ public class FileHelperClass {
         if (files == null) {
             return null;
         }
+        
         byte[] fileContent = null;
         Map<String, byte[]> imageMap = new HashMap<>();
         for (int i = 0; i < files.size(); i++) {
 
             if (getFileExtension(files.get(i)).toLowerCase().equals("jpg")) {
-                fileContent = Files.readAllBytes(files.get(i).toPath());
+                fileContent = getSubBytesFromImage(files.get(i));
+               // fileContent = Files.readAllBytes(files.get(i).toPath());
                 imageMap.put(files.get(i).getCanonicalPath(), fileContent);
             }
         }
@@ -53,7 +59,21 @@ public class FileHelperClass {
         //print(files);
         return imageMap;
     }
-
+    private static byte[] getSubBytesFromImage(File file){
+        byte[] byteArray = null;
+        try {
+            BufferedImage img = ImageIO.read(file);
+            BufferedImage newImg = img.getSubimage(0, SUB_IMAGE_Y_VALUE, img.getWidth(), img.getHeight() - SUB_IMAGE_Y_VALUE);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(newImg, "jpg", baos );
+            baos.flush();
+            byteArray = baos.toByteArray();
+            baos.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return byteArray;
+    }
     //Recursive directory lookup
     public static ArrayList<File> getPaths(File file, ArrayList<File> list) {
         if (file == null || list == null || !file.isDirectory()) {
@@ -144,7 +164,7 @@ public class FileHelperClass {
       }
         return newFilePathList;
     }
-    void WriteJsonToFile(JSONObject json, String filePath) {
+    void WriteJsonToFile(String json, String filePath) {
 
         if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
             filePath = filePath.substring(0, filePath.lastIndexOf(".")) + ".json";

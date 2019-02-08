@@ -18,7 +18,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.Header;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import java.io.IOException;
 import java.util.Map;
 import javax.swing.JFrame;
@@ -29,7 +29,7 @@ import org.apache.http.entity.ByteArrayEntity;
  */
 public class OcrApi {
     
-    private static final String directoryPath= "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR";
+    private static final String directoryPath= "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1";
     // **********************************************
     // *** Update or verify the following values. ***
     // **********************************************
@@ -51,11 +51,11 @@ public class OcrApi {
     //  private static final String imageToAnalyze =
     //  "https://consiliarius.files.wordpress.com/2015/03/img_20150328_131815.jpg";        
     public static void main(String[] args) throws IOException {
-        GraphicHelper graphicHelper = new GraphicHelper();
+        FileHelperClass fh = new FileHelperClass();
         //Path to directory with images
         
-        Map<String,byte[]> imageDictionary = graphicHelper.getImages(directoryPath);
-/*
+        Map<String,byte[]> imageDictionary = FileHelperClass.getImages(directoryPath);
+
         CloseableHttpClient httpTextClient = HttpClientBuilder.create().build();
         CloseableHttpClient httpResultClient = HttpClientBuilder.create().build();;
 
@@ -94,9 +94,9 @@ public class OcrApi {
                     // Format and display the JSON error message.
                     HttpEntity entity = response.getEntity();
                     String jsonString = EntityUtils.toString(entity);
-                    JSONObject json = new JSONObject(jsonString);
-                    System.out.println("Error:\n");
-                    System.out.println(json.toString(2));
+             //       JSONObject json = new JSONObject(jsonString);
+             //       System.out.println("Error:\n");
+             //       System.out.println(json.toString(2));
                     return;
                 }
 
@@ -140,16 +140,17 @@ public class OcrApi {
                 if (responseEntity != null) {
                     // Format and display the JSON response.
                     String jsonString = EntityUtils.toString(responseEntity);
-                    JSONObject json = new JSONObject(jsonString);
-                    System.out.println("Text recognition result response: \n");
-                    System.out.println(json.toString(2));
-                    graphicHelper.WriteJsonToFile(json, imagePathKey);
+                  //  JSONObject json = new JSONObject(jsonString);
+                  //  System.out.println("Text recognition result response: \n");
+                  //  System.out.println(json.toString(2));
+                  //  fh.WriteJsonToFile(json, imagePathKey);
+                    fh.WriteJsonToFile(jsonString, imagePathKey);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
           
-        } */
+        } 
          // DrawBoundingBox dBB = new DrawBoundingBox(imagePathKey);
        //     DrawBoundingBox dBB = new DrawBoundingBox("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\img_20150328_131815.jpg");
     }
