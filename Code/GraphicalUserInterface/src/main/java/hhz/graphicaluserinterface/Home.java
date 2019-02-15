@@ -13,6 +13,7 @@ import hhz.ocr.DrawBoundingBox;
 import hhz.ocr.GraphicHelper;
 import hhz.ocr.json.BoundingBoxObject;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -43,6 +44,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.json.simple.JSONObject;
@@ -132,6 +135,15 @@ public class Home extends javax.swing.JFrame {
         jLabelFileCreateTime = new javax.swing.JLabel();
         jFileName = new javax.swing.JLabel();
         virtualRunaroundPanel = new javax.swing.JPanel();
+        StorePanel = new javax.swing.JPanel();
+        cam2_below = new javax.swing.JLabel();
+        cam1_above = new javax.swing.JLabel();
+        jLabelStore = new javax.swing.JLabel();
+        ShelfPanel = new javax.swing.JPanel();
+        jLabelShelf = new javax.swing.JLabel();
+        jScrollPaneforTable = new javax.swing.JScrollPane();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
         reportingPanel = new javax.swing.JPanel();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -614,18 +626,65 @@ public class Home extends javax.swing.JFrame {
 
         mainPanel.add(galleryViewPanel, "card5");
 
-        virtualRunaroundPanel.setBackground(new java.awt.Color(204, 255, 204));
+        virtualRunaroundPanel.setBackground(new java.awt.Color(255, 255, 255));
+        virtualRunaroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout virtualRunaroundPanelLayout = new javax.swing.GroupLayout(virtualRunaroundPanel);
-        virtualRunaroundPanel.setLayout(virtualRunaroundPanelLayout);
-        virtualRunaroundPanelLayout.setHorizontalGroup(
-            virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        virtualRunaroundPanelLayout.setVerticalGroup(
-            virtualRunaroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
-        );
+        StorePanel.setBackground(new java.awt.Color(255, 255, 255));
+        StorePanel.setPreferredSize(new java.awt.Dimension(1200, 750));
+        StorePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cam2_below.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cam2_below.setForeground(new java.awt.Color(204, 35, 42));
+        cam2_below.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cam2_below.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/video-camera32.png"))); // NOI18N
+        cam2_below.setText("Cam 2 - below");
+        cam2_below.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 35, 42)));
+        cam2_below.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        StorePanel.add(cam2_below, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, 150, 40));
+
+        cam1_above.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cam1_above.setForeground(new java.awt.Color(204, 35, 42));
+        cam1_above.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cam1_above.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/video-camera32.png"))); // NOI18N
+        cam1_above.setText("Cam 1 - above");
+        cam1_above.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 35, 42)));
+        cam1_above.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cam1_above.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cam1_aboveMouseClicked(evt);
+            }
+        });
+        StorePanel.add(cam1_above, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 140, 40));
+
+        jLabelStore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Varound_background.png"))); // NOI18N
+        jLabelStore.setPreferredSize(new java.awt.Dimension(1200, 750));
+        StorePanel.add(jLabelStore, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        virtualRunaroundPanel.add(StorePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1230, 780));
+
+        ShelfPanel.setBackground(new java.awt.Color(255, 255, 255));
+        ShelfPanel.setPreferredSize(new java.awt.Dimension(1200, 750));
+        ShelfPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelShelf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Varound_shelf.png"))); // NOI18N
+        jLabelShelf.setText("jLabel34");
+        ShelfPanel.add(jLabelShelf, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 740, 450));
+        ShelfPanel.add(jScrollPaneforTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 770, 260));
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backRedd.png"))); // NOI18N
+        jLabel34.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel34MouseClicked(evt);
+            }
+        });
+        ShelfPanel.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 60, 70));
+
+        jLabel35.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel35.setText("Back");
+        ShelfPanel.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 40, 30));
+
+        virtualRunaroundPanel.add(ShelfPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1230, 780));
 
         mainPanel.add(virtualRunaroundPanel, "card4");
 
@@ -635,7 +694,7 @@ public class Home extends javax.swing.JFrame {
         reportingPanel.setLayout(reportingPanelLayout);
         reportingPanelLayout.setHorizontalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGap(0, 1350, Short.MAX_VALUE)
         );
         reportingPanelLayout.setVerticalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1231,6 +1290,33 @@ public class Home extends javax.swing.JFrame {
         jcomboTime2.setSelectedItem(item);
         dbc.handleUpdateDB(item.toString(), SELECTED_TIME, SETTINGS_DATA);
     }//GEN-LAST:event_jcomboTime1ActionPerformed
+
+    private void cam1_aboveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cam1_aboveMouseClicked
+        StorePanel.setVisible(false); 
+        ShelfPanel.setVisible(true);
+        jScrollPaneforTable.setVisible(true);
+        createTable();
+        
+        
+       
+    }//GEN-LAST:event_cam1_aboveMouseClicked
+
+    private void jLabel34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseClicked
+        ShelfPanel.setVisible(false);
+        StorePanel.setVisible(true);
+    }//GEN-LAST:event_jLabel34MouseClicked
+    public void createTable(){
+        JTable table;
+        String [] columnNames = {"ID", "Product", "Status" };
+        Object[][] data = {
+            {"1","Spritzgebäck", "OK"},
+            {"2","Souce Hollandaise", "Price Tag incorrect"},
+        };
+        table = new JTable(data, columnNames);
+        table.setPreferredScrollableViewportSize(new Dimension(100,100));
+        table.setFillsViewportHeight(true);
+        jScrollPaneforTable.getViewport().add(table);
+    }
     private void setGLabelSelectionToTextAreaAndMainPanel(String cam) {
         //Set reset variables when choose new cam
         slideBack = false;
@@ -1317,7 +1403,11 @@ public class Home extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ShelfPanel;
     private javax.swing.JLabel StartLabel;
+    private javax.swing.JPanel StorePanel;
+    private javax.swing.JLabel cam1_above;
+    private javax.swing.JLabel cam2_below;
     private static javax.swing.JTextField currentDirectoryPathField;
     private javax.swing.JPanel footerpanel;
     private static javax.swing.JLabel g1Label;
@@ -1361,6 +1451,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1372,12 +1464,15 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelLogoImage;
     private javax.swing.JLabel jLabelReportingLabel;
     private javax.swing.JLabel jLabelSettingsImage;
+    private javax.swing.JLabel jLabelShelf;
+    private javax.swing.JLabel jLabelStore;
     private javax.swing.JLabel jLabelVirtualImage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPaneforTable;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
