@@ -205,7 +205,7 @@ public class FileHelperClass {
         for (int i = 0; i < files.length; i++) {
             if (FileHelperClass.getFileExtension(files[i]).equals("")) {
                 orderedFileListByDirAndCreationTime.add(files[i].listFiles());
-                ;
+                
             }
         }
         if (!orderedFileListByDirAndCreationTime.isEmpty()) {

@@ -16,12 +16,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBController {
 
     public static final DBController dbcontroller = new DBController();
     public static Connection connection;
-    private final String DB_PATH = "jdbc:sqlite:C:\\Users\\Valerij\\Documents\\NetBeansProjects\\OOS-HHZ\\Code\\GraphicalUserInterface\\src\\main\\java\\sqlite\\settings.sqlite";//getClass().getResource("/sqlitle/settings.sqlite").toString();//System.getProperty("user.home") + "/" + "testdb.db"; 
+    private final String DB_PATH = "jdbc:sqlite:C:\\Users\\Valerij\\Documents\\NetBeansProjects\\OOS-HHZ\\Code\\GraphicalUserInterface\\src\\main\\java\\sqlite\\settings.sqlite";
 
     static {
         try {
@@ -40,7 +42,6 @@ public class DBController {
     }
 
     public void initDBConnection() {
-        System.out.print("PATH: " + DB_PATH);
         try {
             if (connection != null) {
                 return;
@@ -69,6 +70,26 @@ public class DBController {
             }
         });
     }
+    public List<String> handleAnyRowsGetDB(String row, int rowAmount, String table) {
+        List<String> resultList = new ArrayList();
+        if(row.equals("")){
+            row = "*";
+        }
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT " + row + " FROM " + table);
+            while (rs.next()) {
+                for(int i = 1; i<= rowAmount; i++){
+                resultList.add(rs.getString(i)); 
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.err.println("Couldn't handle DB-Query");
+            e.printStackTrace();
+        }
+        return resultList;
+    }
 
     public String handleGetDB(String row, String table) {
         String result = "";
@@ -76,7 +97,7 @@ public class DBController {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT " + row + " FROM " + table);
             while (rs.next()) {
-                result = rs.getString(row);
+                result = rs.getString(row); 
             }
             rs.close();
         } catch (SQLException e) {

@@ -29,7 +29,7 @@ import org.apache.http.entity.ByteArrayEntity;
  */
 public class OcrApi {
     
-    private static final String directoryPath= "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1";
+    private static final String directoryPath= "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam2";
     // **********************************************
     // *** Update or verify the following values. ***
     // **********************************************
