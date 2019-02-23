@@ -35,7 +35,7 @@ import org.json.simple.parser.ParseException;
 
 //load and convert images to binary from directory
 public class FileHelperClass {
-    public static final int SUB_IMAGE_Y_VALUE = 2200;
+    public static final int SUB_IMAGE_Y_VALUE = 0;//2200;
     public static Map<String, byte[]> getImages(String rootPath) throws IOException {
 
         ArrayList<File> files = getPaths(new File(rootPath),
@@ -163,6 +163,13 @@ public class FileHelperClass {
        }
       }
         return newFilePathList;
+    }
+    String setPostfixToPathName(String filePath){
+         if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
+             String extension = filePath.substring(filePath.lastIndexOf("."), filePath.length());
+             filePath = filePath.substring(0, filePath.lastIndexOf(".")) + "_" + extension;
+         }
+         return filePath;
     }
     void WriteJsonToFile(String json, String filePath) {
 
