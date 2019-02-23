@@ -28,7 +28,8 @@ public class Test_Ricardo {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        BufferedImage bimg = ImageIO.read(new File("C:\\Users\\Ricardo\\OneDrive\\Netbeans\\Code\\CustomVision\\src\\main\\resources\\ObjectTest\\test_image.JPG"));
+        //BufferedImage bimg = ImageIO.read(new File("C:\\Users\\Ricardo\\OneDrive\\Netbeans\\Code\\CustomVision\\src\\main\\resources\\ObjectTest\\test_image.JPG"));
+        BufferedImage bimg = ImageIO.read(new File("./src/resources/test_image.JPG"));
         int width          = bimg.getWidth(); //width of the whole picture in px
         int height         = bimg.getHeight();  //height of the whole picture in px
         System.out.println(width);
@@ -44,7 +45,7 @@ public class Test_Ricardo {
             
             BufferedImage newImg = bimg.getSubimage((int) (width*box_left), (int) (height*box_top),(int) (box_width*width), (int) (box_height*height));
             //ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(newImg, "jpg", new File("/neu3.jpg"));
+            ImageIO.write(newImg, "jpg", new File("./src/resources/neu3.jpg"));
 //            ImageIO.write(newImg, "jpg", baos );
 //            baos.flush();
 //            byteArray = baos.toByteArray();
