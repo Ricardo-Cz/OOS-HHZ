@@ -28,7 +28,6 @@ public class Test_Ricardo {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        //BufferedImage bimg = ImageIO.read(new File("C:\\Users\\Ricardo\\OneDrive\\Netbeans\\Code\\CustomVision\\src\\main\\resources\\ObjectTest\\test_image.JPG"));
         BufferedImage bimg = ImageIO.read(new File("./src/resources/test_image.JPG"));
         int width          = bimg.getWidth(); //width of the whole picture in px
         int height         = bimg.getHeight();  //height of the whole picture in px
