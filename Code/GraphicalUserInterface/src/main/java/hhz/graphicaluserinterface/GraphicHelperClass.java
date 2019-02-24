@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 /**
  *
  * @author Valerij

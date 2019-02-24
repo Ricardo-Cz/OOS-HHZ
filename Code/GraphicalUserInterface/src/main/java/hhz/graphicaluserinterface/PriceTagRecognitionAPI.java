@@ -41,20 +41,11 @@ import org.json.simple.JSONObject;
  * @author Valerij
  */
 public class PriceTagRecognitionAPI {
-    /*  public static void main(String[] args) {
-        final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";
-        final String predictionApiKey = "68ecc463ba0c4ccfb9772717cdd1ec38";
-
-        TrainingApi trainClient = CustomVisionTrainingManager.authenticate(trainingApiKey);
-        PredictionEndpoint predictClient = CustomVisionPredictionManager.authenticate(predictionApiKey);
-        TestImage(trainClient, predictClient);
-    } */
+    
  public static void main(String[] args) {
-     startAnalyse("","");
+     startAnalyse("","C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1");
  }
     public static void startAnalyse(String StartTime, String directoryPath) {
-        directoryPath = "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1";
-
         final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";
         final String predictionApiKey = "68ecc463ba0c4ccfb9772717cdd1ec38";
 
@@ -62,6 +53,7 @@ public class PriceTagRecognitionAPI {
         PredictionEndpoint predictClient = CustomVisionPredictionManager.authenticate(predictionApiKey);
         Map<String, ImagePrediction> imagePrediction = TestImage(trainClient, predictClient, directoryPath);
         Map<String, List<byte[]>> mapWithPriceTags = FileHelperClass.getSubBytesPriceTagsFromImage(imagePrediction);
+        OcrApi.startOcrAnalyse(mapWithPriceTags);
         
     }
 
@@ -71,8 +63,6 @@ public class PriceTagRecognitionAPI {
             Map<String, byte[]> imageDictionary = FileHelperClass.getImages(directoryPath);
             for (String imagePathKey : imageDictionary.keySet()) {
                 try {
-
-                    // byte[] testImage = GetImage("/ObjectTest", "test_image.jpg");
                     Trainings trainer = trainClient.trainings();
                     Project project = trainer.getProject(UUID.fromString("3f189348-6dee-4918-ab9f-f7e8712953db")); //("34403d0c-7022-4be0-bd90-8116c410b190"));
 
@@ -82,11 +72,7 @@ public class PriceTagRecognitionAPI {
                             .withImageData(imageDictionary.get(imagePathKey))
                             .execute();
                     if (results != null) {
-                    //    for (Prediction prediction : results.predictions()) {
-                        //    if (prediction.probability() * 100.0f >= PASS_THROUGH_PROBABILITY) {
                                 imgPrediction.put(imagePathKey, results);
-                      //      }
-                      //  }
                     }
 
                     for (Prediction prediction : results.predictions()) {
@@ -110,18 +96,3 @@ public class PriceTagRecognitionAPI {
         return imgPrediction;
     }
 }
-// Format and display the JSON response.
-// String jsonString = results.toString();
-
-/* JSONObject newJson = new JSONObject();
-                    String jsonString = "";
-                    for (Prediction prediction : results.predictions()) {
-                            newJson.put("bounding_box", prediction.boundingBox());
-                            newJson.put("probability", prediction.probability()* 100.0f);  
-                            newJson.put("tag_name", prediction.tagName());
-                            jsonString += newJson.toJSONString();
-                    }
-                         
-                     FileHelperClass fh = new FileHelperClass();
-                    String newImagePathKey = fh.setPostfixToPathName(imagePathKey);
-                    fh.WriteJsonToFile(jsonString, newImagePathKey);*/

@@ -26,7 +26,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -65,7 +66,7 @@ public class FileHelperClass {
     }
 
     public static Map<String, List<byte[]>> getSubBytesPriceTagsFromImage(Map<String, ImagePrediction> mapPrediction) {
-        
+
         byte[] byteArray = null;
         Map<String, List<byte[]>> mapWithPriceTags = new HashMap<>();
         for (String path : mapPrediction.keySet()) {
@@ -121,20 +122,20 @@ public class FileHelperClass {
 
                         BufferedImage newImg = bimg.getSubimage(priceBox_left_abs, priceBox_top_abs, priceBox_width_abs, priceBox_height_abs);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        
+
                         ImageIO.write(newImg, "jpg", baos);
                         baos.flush();
                         byteArray = baos.toByteArray();
                         byteArrayList.add(byteArray);
                         baos.close();
-                        
+
                     } catch (IOException ex) {
                         Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
-            if(!byteArrayList.isEmpty()){
-            mapWithPriceTags.put(path, byteArrayList);
+            if (!byteArrayList.isEmpty()) {
+                mapWithPriceTags.put(path, byteArrayList);
             }
         }
         return mapWithPriceTags;
@@ -254,6 +255,23 @@ public class FileHelperClass {
             filePath = filePath.substring(0, filePath.lastIndexOf(".")) + "_" + extension;
         }
         return filePath;
+    }
+
+    void WriteJsonToFile(JSONArray json, String filePath) {
+
+        if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
+            filePath = filePath.substring(0, filePath.lastIndexOf(".")) + ".json";
+
+            try {
+                FileWriter file = new FileWriter(filePath);
+                file.write(json.toString(2));
+                file.flush();
+                System.out.println("Json erfolgreich im Verzeichnis: " + filePath + " abgespeichert.");
+
+            } catch (IOException ex) {
+                Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     void WriteJsonToFile(String json, String filePath) {
