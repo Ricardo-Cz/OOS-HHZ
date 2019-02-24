@@ -29,6 +29,7 @@ import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.Pred
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.CustomVisionPredictionManager;
 import com.microsoft.azure.cognitiveservices.vision.customvision.training.models.Tag;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,51 +40,55 @@ import org.json.simple.JSONObject;
  *
  * @author Valerij
  */
-public class ObjectRecognitionAPI {
-
-    public static void main(String[] args) {
+public class PriceTagRecognitionAPI {
+    /*  public static void main(String[] args) {
         final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";
         final String predictionApiKey = "68ecc463ba0c4ccfb9772717cdd1ec38";
 
         TrainingApi trainClient = CustomVisionTrainingManager.authenticate(trainingApiKey);
         PredictionEndpoint predictClient = CustomVisionPredictionManager.authenticate(predictionApiKey);
         TestImage(trainClient, predictClient);
+    } */
+ public static void main(String[] args) {
+     startAnalyse("","");
+ }
+    public static void startAnalyse(String StartTime, String directoryPath) {
+        directoryPath = "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1";
 
+        final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";
+        final String predictionApiKey = "68ecc463ba0c4ccfb9772717cdd1ec38";
+
+        TrainingApi trainClient = CustomVisionTrainingManager.authenticate(trainingApiKey);
+        PredictionEndpoint predictClient = CustomVisionPredictionManager.authenticate(predictionApiKey);
+        Map<String, ImagePrediction> imagePrediction = TestImage(trainClient, predictClient, directoryPath);
+        Map<String, List<byte[]>> mapWithPriceTags = FileHelperClass.getSubBytesPriceTagsFromImage(imagePrediction);
+        
     }
-    private static final String directoryPath = "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1";
 
-    public static void TestImage(TrainingApi trainClient, PredictionEndpoint predictor) {
+    public static Map<String, ImagePrediction> TestImage(TrainingApi trainClient, PredictionEndpoint predictor, String directoryPath) {
+        Map<String, ImagePrediction> imgPrediction = new HashMap<>();
         try {
             Map<String, byte[]> imageDictionary = FileHelperClass.getImages(directoryPath);
             for (String imagePathKey : imageDictionary.keySet()) {
                 try {
-                    
+
                     // byte[] testImage = GetImage("/ObjectTest", "test_image.jpg");
                     Trainings trainer = trainClient.trainings();
-                    Project project = trainer.getProject(UUID.fromString ("3f189348-6dee-4918-ab9f-f7e8712953db")); //("34403d0c-7022-4be0-bd90-8116c410b190"));
-                    
+                    Project project = trainer.getProject(UUID.fromString("3f189348-6dee-4918-ab9f-f7e8712953db")); //("34403d0c-7022-4be0-bd90-8116c410b190"));
+
                     // predict
                     ImagePrediction results = predictor.predictions().predictImage()
                             .withProjectId(project.id())
                             .withImageData(imageDictionary.get(imagePathKey))
                             .execute();
                     if (results != null) {
-                    // Format and display the JSON response.
-                   // String jsonString = results.toString();
-                    
-                    JSONObject newJson = new JSONObject();
-                    String jsonString = "";
-                     for (Prediction prediction : results.predictions()) {
-                            newJson.put("bounding_box", prediction.boundingBox());
-                            newJson.put("probability", prediction.probability()* 100.0f);  
-                            newJson.put("tag_name", prediction.tagName());
-                            jsonString += newJson.toJSONString();
+                    //    for (Prediction prediction : results.predictions()) {
+                        //    if (prediction.probability() * 100.0f >= PASS_THROUGH_PROBABILITY) {
+                                imgPrediction.put(imagePathKey, results);
+                      //      }
+                      //  }
                     }
-                         
-                     FileHelperClass fh = new FileHelperClass();
-                    String newImagePathKey = fh.setPostfixToPathName(imagePathKey);
-                    fh.WriteJsonToFile(jsonString, newImagePathKey);
-                      } 
+
                     for (Prediction prediction : results.predictions()) {
                         System.out.println(String.format("\t%s: %.2f%% at: %.2f, %.2f, %.2f, %.2f",
                                 prediction.tagName(),
@@ -100,18 +105,23 @@ public class ObjectRecognitionAPI {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(ObjectRecognitionAPI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PriceTagRecognitionAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return imgPrediction;
     }
-
- /*   private static byte[] GetImage(String folder, String fileName) {
-        try {
-            return ByteStreams.toByteArray(CustomVisionSamples.class.getResourceAsStream(folder + "/" + fileName));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }
-*/
 }
+// Format and display the JSON response.
+// String jsonString = results.toString();
+
+/* JSONObject newJson = new JSONObject();
+                    String jsonString = "";
+                    for (Prediction prediction : results.predictions()) {
+                            newJson.put("bounding_box", prediction.boundingBox());
+                            newJson.put("probability", prediction.probability()* 100.0f);  
+                            newJson.put("tag_name", prediction.tagName());
+                            jsonString += newJson.toJSONString();
+                    }
+                         
+                     FileHelperClass fh = new FileHelperClass();
+                    String newImagePathKey = fh.setPostfixToPathName(imagePathKey);
+                    fh.WriteJsonToFile(jsonString, newImagePathKey);*/

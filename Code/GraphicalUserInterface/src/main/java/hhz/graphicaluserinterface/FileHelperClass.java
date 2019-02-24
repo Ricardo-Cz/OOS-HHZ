@@ -5,6 +5,8 @@
  */
 package hhz.graphicaluserinterface;
 
+import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.models.ImagePrediction;
+import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.models.Prediction;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.ByteArrayOutputStream;
@@ -32,10 +34,12 @@ import org.json.simple.parser.ParseException;
  *
  * @author Valerij
  */
-
 //load and convert images to binary from directory
 public class FileHelperClass {
+
     public static final int SUB_IMAGE_Y_VALUE = 0;//2200;
+    private static final float PASS_THROUGH_PROBABILITY = (float) 70.00;
+
     public static Map<String, byte[]> getImages(String rootPath) throws IOException {
 
         ArrayList<File> files = getPaths(new File(rootPath),
@@ -44,28 +48,105 @@ public class FileHelperClass {
         if (files == null) {
             return null;
         }
-        
+
         byte[] fileContent = null;
         Map<String, byte[]> imageMap = new HashMap<>();
         for (int i = 0; i < files.size(); i++) {
 
             if (getFileExtension(files.get(i)).toLowerCase().equals("jpg")) {
                 fileContent = getSubBytesFromImage(files.get(i));
-               // fileContent = Files.readAllBytes(files.get(i).toPath());
+                // fileContent = Files.readAllBytes(files.get(i).toPath());
                 imageMap.put(files.get(i).getCanonicalPath(), fileContent);
             }
         }
-       
+
         //print(files);
         return imageMap;
     }
-    private static byte[] getSubBytesFromImage(File file){
+
+    public static Map<String, List<byte[]>> getSubBytesPriceTagsFromImage(Map<String, ImagePrediction> mapPrediction) {
+        
+        byte[] byteArray = null;
+        Map<String, List<byte[]>> mapWithPriceTags = new HashMap<>();
+        for (String path : mapPrediction.keySet()) {
+            //Get picture
+            BufferedImage bimg = null;
+            try {
+                bimg = ImageIO.read(new File(path));
+            } catch (IOException ex) {
+                Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int width = bimg.getWidth(); //width of the whole picture in px
+            int height = bimg.getHeight();  //height of the whole picture in px
+            System.out.println(width);
+            List<byte[]> byteArrayList = new ArrayList<>();
+            for (Prediction prediction : mapPrediction.get(path).predictions()) {
+                //prepare for OCR
+                double distance_left = 0.01;
+                double distance_top = 0.01;
+                double distance_width = 0.03;
+                double distance_height = 0.03;
+                int priceBox_left_abs = 0, priceBox_top_abs = 0, priceBox_width_abs = 0, priceBox_height_abs = 0;
+                double priceBox_left_rel = 0, priceBox_top_rel = 0;
+                if (prediction.probability() * 100.0f >= PASS_THROUGH_PROBABILITY) {
+                    do {
+                        if ((priceBox_left_abs + priceBox_width_abs) > width) {
+                            distance_width -= 0.005;
+                        }
+                        if ((priceBox_top_abs + priceBox_height_abs > height)) {
+                            distance_height -= 0.005;
+                        }
+                        do {
+                            priceBox_left_rel = prediction.boundingBox().left() - distance_left;
+                            if (priceBox_left_rel < 0) {
+                                distance_left -= 0.002;
+                            }
+                        } while (priceBox_left_rel < 0);
+                        do {
+                            priceBox_top_rel = prediction.boundingBox().top() - distance_top;
+                            if (priceBox_top_rel < 0) {
+                                distance_top -= 0.002;
+                            }
+                        } while (priceBox_top_rel < 0);
+
+                        double priceBox_width_rel = prediction.boundingBox().width() + distance_width;
+                        double priceBox_height_rel = prediction.boundingBox().height() + distance_height;
+
+                        priceBox_left_abs = (int) (width * priceBox_left_rel);
+                        priceBox_top_abs = (int) (height * priceBox_top_rel);
+                        priceBox_width_abs = (int) (priceBox_width_rel * width);
+                        priceBox_height_abs = (int) (priceBox_height_rel * height);
+                    } while ((priceBox_left_abs + priceBox_width_abs) > width || (priceBox_top_abs + priceBox_height_abs > height));
+                    try {
+
+                        BufferedImage newImg = bimg.getSubimage(priceBox_left_abs, priceBox_top_abs, priceBox_width_abs, priceBox_height_abs);
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        
+                        ImageIO.write(newImg, "jpg", baos);
+                        baos.flush();
+                        byteArray = baos.toByteArray();
+                        byteArrayList.add(byteArray);
+                        baos.close();
+                        
+                    } catch (IOException ex) {
+                        Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            if(!byteArrayList.isEmpty()){
+            mapWithPriceTags.put(path, byteArrayList);
+            }
+        }
+        return mapWithPriceTags;
+    }
+
+    private static byte[] getSubBytesFromImage(File file) {
         byte[] byteArray = null;
         try {
             BufferedImage img = ImageIO.read(file);
             BufferedImage newImg = img.getSubimage(0, SUB_IMAGE_Y_VALUE, img.getWidth(), img.getHeight() - SUB_IMAGE_Y_VALUE);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(newImg, "jpg", baos );
+            ImageIO.write(newImg, "jpg", baos);
             baos.flush();
             byteArray = baos.toByteArray();
             baos.close();
@@ -74,6 +155,7 @@ public class FileHelperClass {
         }
         return byteArray;
     }
+
     //Recursive directory lookup
     public static ArrayList<File> getPaths(File file, ArrayList<File> list) {
         if (file == null || list == null || !file.isDirectory()) {
@@ -129,7 +211,7 @@ public class FileHelperClass {
             throw new RuntimeException(file.getAbsolutePath(), e);
         }
     }
-    
+
     public static File[] sortPathByFolder(String directoryPath) {
         File dir = new File(directoryPath);
         File[] files = dir.listFiles();
@@ -154,23 +236,26 @@ public class FileHelperClass {
             }
         });
     }
-    public List<String> ChangeFileExtensionToDotJson(List<String> filePaths){
+
+    public List<String> ChangeFileExtensionToDotJson(List<String> filePaths) {
         List<String> newFilePathList = new ArrayList();
-        for(String str: filePaths){
-        if (str.lastIndexOf(".") != -1 && str.lastIndexOf(".") != 0) {
-            str = str.substring(0, str.lastIndexOf(".")) + ".json";
-            newFilePathList.add(str);
-       }
-      }
+        for (String str : filePaths) {
+            if (str.lastIndexOf(".") != -1 && str.lastIndexOf(".") != 0) {
+                str = str.substring(0, str.lastIndexOf(".")) + ".json";
+                newFilePathList.add(str);
+            }
+        }
         return newFilePathList;
     }
-    String setPostfixToPathName(String filePath){
-         if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
-             String extension = filePath.substring(filePath.lastIndexOf("."), filePath.length());
-             filePath = filePath.substring(0, filePath.lastIndexOf(".")) + "_" + extension;
-         }
-         return filePath;
+
+    String setPostfixToPathName(String filePath) {
+        if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
+            String extension = filePath.substring(filePath.lastIndexOf("."), filePath.length());
+            filePath = filePath.substring(0, filePath.lastIndexOf(".")) + "_" + extension;
+        }
+        return filePath;
     }
+
     void WriteJsonToFile(String json, String filePath) {
 
         if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
@@ -187,18 +272,19 @@ public class FileHelperClass {
             }
         }
     }
-    static JSONObject ReadJsonFromFile(String filePath){
+
+    static JSONObject ReadJsonFromFile(String filePath) {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
-        try{
-        Object obj = parser.parse(new FileReader(filePath));
-        
+        try {
+            Object obj = parser.parse(new FileReader(filePath));
+
             jsonObject = (JSONObject) obj;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) { 
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return jsonObject;
@@ -212,7 +298,7 @@ public class FileHelperClass {
         for (int i = 0; i < files.length; i++) {
             if (FileHelperClass.getFileExtension(files[i]).equals("")) {
                 orderedFileListByDirAndCreationTime.add(files[i].listFiles());
-                
+
             }
         }
         if (!orderedFileListByDirAndCreationTime.isEmpty()) {
