@@ -70,6 +70,25 @@ public class DBController {
             }
         });
     }
+     public List<String> handleSpecificRowsGetDB(String table ,String ... row) {
+        List<String> resultList = new ArrayList();
+       String rows = String.join(",", row);
+       
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT " + rows + " FROM " + table);
+            while (rs.next()) {
+                for(String r : row){
+                resultList.add(rs.getString(r)); 
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.err.println("Couldn't handle DB-Query");
+            e.printStackTrace();
+        }
+        return resultList;
+    }
     public List<String> handleAnyRowsGetDB(String row, int rowAmount, String table) {
         List<String> resultList = new ArrayList();
         if(row.equals("")){
