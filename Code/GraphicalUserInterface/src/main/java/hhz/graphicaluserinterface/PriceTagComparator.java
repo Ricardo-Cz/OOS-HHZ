@@ -8,6 +8,7 @@ package hhz.graphicaluserinterface;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
 import org.json.simple.JSONArray;
@@ -27,12 +28,12 @@ public class PriceTagComparator {
 
     private static final String PRICE_TAGS_TABLE = "price_tags";
     private static final String PRICE_TAGS_ROW = "";
-    private static final int ROW_AMOUNT = 14;
+    private static final int ROW_AMOUNT = 6;
 
     public static List<String> getProductNameAndPriceFromDb(){
         DBController dbc = DBController.getInstance();
         dbc.initDBConnection();
-        List<String> dataFromDB = dbc.handleSpecificRowsGetDB(PRICE_TAGS_TABLE, "product_name", "product_name2", "price");
+        List<String> dataFromDB = dbc.handleSpecificRowsGetDB(PRICE_TAGS_TABLE, "shelf_id", "row_id", "place_id","product_name1", "product_name2", "price");
         
         return dataFromDB;
     }
@@ -130,8 +131,12 @@ public class PriceTagComparator {
 
     public Map<String,String> priceTagComparator(String path) {
         List<String> dbPriceTagData = getProductNameAndPriceFromDb();
+        for(String ans : dbPriceTagData)
+        System.out.println(ans);
+        System.out.println("\n\n\n\n");
         ArrayList jsonPriceTagData = getpriceTagsFromJson(path);
-        
+        for(int i = 0; i < jsonPriceTagData.size(); i ++)
+        System.out.println(jsonPriceTagData.get(i));
         return null;
     }
     public static void main(String args[]){

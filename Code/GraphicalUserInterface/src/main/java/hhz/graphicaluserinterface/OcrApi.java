@@ -5,8 +5,7 @@
  */
 package hhz.graphicaluserinterface;
 
-import hhz.ocr.DrawBoundingBox;
-import hhz.ocr.GraphicHelper;
+
 
 import java.net.URI;
 import org.apache.http.HttpEntity;

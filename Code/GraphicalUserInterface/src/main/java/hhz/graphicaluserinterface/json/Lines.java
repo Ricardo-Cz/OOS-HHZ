@@ -11,21 +11,11 @@ import java.util.List;
  */
 public class Lines
 {
+     private Integer[] boundingBox;
+
+    private Words[] words;
+
     private String text;
-
-    private Integer[] boundingBox;
-
-    private List<Words> words;
-
-    public String getText ()
-    {
-        return text;
-    }
-
-    public void setText (String text)
-    {
-        this.text = text;
-    }
 
     public Integer[] getBoundingBox ()
     {
@@ -37,14 +27,24 @@ public class Lines
         this.boundingBox = boundingBox;
     }
 
-    public List<Words> getWords ()
+    public Words[] getWords ()
     {
         return words;
     }
 
-    public void setWords (List<Words> words)
+    public void setWords (Words[] words)
     {
         this.words = words;
+    }
+
+    public String getText ()
+    {
+        return text;
+    }
+
+    public void setText (String text)
+    {
+        this.text = text;
     }
 
     @Override

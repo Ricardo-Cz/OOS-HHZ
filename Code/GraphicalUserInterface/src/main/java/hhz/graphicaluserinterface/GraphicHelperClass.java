@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package hhz.graphicaluserinterface;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import hhz.ocr.json.BoundingBoxObject;
-import hhz.ocr.json.Lines;
+import hhz.graphicaluserinterface.json.BoundingBoxObject;
+import hhz.graphicaluserinterface.json.Lines;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,7 +17,8 @@ import java.util.List;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 /**
  *
  * @author Valerij
@@ -39,13 +41,15 @@ public class GraphicHelperClass extends JFrame {
         return ret;
     }
 
-    public static List<Integer> ExtractLineBoundingBox(BoundingBoxObject bbo) {
-
+    public static List<Integer> ExtractLineBoundingBox(ArrayList<BoundingBoxObject> bbo) {
+     
         List<Integer> coordinats = new ArrayList();
-        for (Lines line : bbo.getRecognitionResult().getLines()) {
+        for(BoundingBoxObject b: bbo){
+        for (Lines line : b.getRecognitionResult().getLines()) {
             for (Integer boundingBox : line.getBoundingBox()) {
                 coordinats.add(boundingBox);
             }
+        }
         }
         System.out.println(coordinats);
         return coordinats;
@@ -73,20 +77,24 @@ public class GraphicHelperClass extends JFrame {
         return yCoordinates;
     }
 
-    public static String ExtractLineText(BoundingBoxObject bbo) {
+    public static String ExtractLineText(ArrayList<BoundingBoxObject> bbo) {
         String text = "";
         int counter = 1;
-        for (Lines line : bbo.getRecognitionResult().getLines()) {
+        for(BoundingBoxObject b : bbo){
+        for (Lines line : b.getRecognitionResult().getLines()) {
             text += counter + ") " + line.getText() + "\n";
             counter++;
+        }
         }
         System.out.println(text);
         return text;
     }
 
-    public static BoundingBoxObject getInitializedBoundingBoxObject(String jsonPath) {
+    public static ArrayList<BoundingBoxObject> getInitializedBoundingBoxObject(String jsonPath) {
         Gson gson = new Gson();
-        JSONObject json = FileHelperClass.ReadJsonFromFile(jsonPath);
-        return gson.fromJson(json.toString(), BoundingBoxObject.class);
+        JSONArray json = FileHelperClass.ReadJsonFromFile(jsonPath);
+       // return gson.fromJson(json.toString(), BoundingBoxObject.class);
+        java.lang.reflect.Type listType = new TypeToken<List<BoundingBoxObject>>(){}.getType();
+        return gson.fromJson(json.toString(), listType);
     }
 }

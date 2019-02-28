@@ -11,20 +11,18 @@ import java.util.List;
  */
 public class Words
 {
-    private String confidence;
+    private String[] boundingBox;
 
     private String text;
 
-    private Integer[] boundingBox;
-
-    public String getConfidence ()
+    public String[] getBoundingBox ()
     {
-        return confidence;
+        return boundingBox;
     }
 
-    public void setConfidence (String confidence)
+    public void setBoundingBox (String[] boundingBox)
     {
-        this.confidence = confidence;
+        this.boundingBox = boundingBox;
     }
 
     public String getText ()
@@ -37,19 +35,9 @@ public class Words
         this.text = text;
     }
 
-    public Integer[] getBoundingBox ()
-    {
-        return boundingBox;
-    }
-
-    public void setBoundingBox (Integer[] boundingBox)
-    {
-        this.boundingBox = boundingBox;
-    }
-
     @Override
     public String toString()
     {
-        return "Class Words [Confidence = "+confidence+", text = "+text+", boundingBox = "+boundingBox+"]";
+        return "Class Words [text = "+text+", boundingBox = "+boundingBox+"]";
     }
 }

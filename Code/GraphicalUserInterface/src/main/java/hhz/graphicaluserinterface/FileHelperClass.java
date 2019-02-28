@@ -26,8 +26,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -141,7 +141,7 @@ public class FileHelperClass {
         return mapWithPriceTags;
     }
 
-    private static byte[] getSubBytesFromImage(File file) {
+private static byte[] getSubBytesFromImage(File file) {
         byte[] byteArray = null;
         try {
             BufferedImage img = ImageIO.read(file);
@@ -151,8 +151,11 @@ public class FileHelperClass {
             baos.flush();
             byteArray = baos.toByteArray();
             baos.close();
-        } catch (IOException ex) {
-            Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+        
+
+} catch (IOException ex) {
+            Logger.getLogger(FileHelperClass.class
+.getName()).log(Level.SEVERE, null, ex);
         }
         return byteArray;
     }
@@ -195,18 +198,24 @@ public class FileHelperClass {
         }
     }
 
-    public static long getFileCreationEpoch(File file) {
+    public static 
+
+long getFileCreationEpoch(File file) {
         try {
-            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class
+);
             return attr.creationTime().toInstant().toEpochMilli();
         } catch (IOException e) {
             throw new RuntimeException(file.getAbsolutePath(), e);
         }
     }
 
-    public static String getFileCreationTime(File file) {
+    public static String 
+
+getFileCreationTime(File file) {
         try {
-            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class
+);
             return attr.creationTime().toString();
         } catch (IOException e) {
             throw new RuntimeException(file.getAbsolutePath(), e);
@@ -264,12 +273,15 @@ public class FileHelperClass {
 
             try {
                 FileWriter file = new FileWriter(filePath);
-                file.write(json.toString(2));
+                file.write(json.toString());
                 file.flush();
                 System.out.println("Json erfolgreich im Verzeichnis: " + filePath + " abgespeichert.");
 
-            } catch (IOException ex) {
-                Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+            
+
+} catch (IOException ex) {
+                Logger.getLogger(FileHelperClass.class
+.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -285,19 +297,23 @@ public class FileHelperClass {
                 file.flush();
                 System.out.println("Json erfolgreich im Verzeichnis: " + filePath + " abgespeichert.");
 
-            } catch (IOException ex) {
-                Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+            
+
+} catch (IOException ex) {
+                Logger.getLogger(FileHelperClass.class
+.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    static JSONObject ReadJsonFromFile(String filePath) {
+    static JSONArray ReadJsonFromFile(String filePath) {
         JSONParser parser = new JSONParser();
-        JSONObject jsonObject = null;
+       // JSONObject jsonObject = null;
+       JSONArray jsonArray = null;
         try {
             Object obj = parser.parse(new FileReader(filePath));
-
-            jsonObject = (JSONObject) obj;
+            jsonArray = (JSONArray) obj;
+           // jsonObject = (JSONObject) obj;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -305,7 +321,7 @@ public class FileHelperClass {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return jsonObject;
+        return jsonArray;
     }
 
     List<String> sortPathsByTheFolderAndCreationTime(String directoryPath) throws IOException {
@@ -342,6 +358,21 @@ public class FileHelperClass {
             return path.substring(path.lastIndexOf("\\") - 4, path.lastIndexOf("\\"));
         } else {
             return "";
+        }
+    }
+
+    void WriteJsonToFile(org.json.JSONArray json, String filePath) {
+        if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
+            filePath = filePath.substring(0, filePath.lastIndexOf(".")) + ".json";
+
+            try {
+                FileWriter file = new FileWriter(filePath);
+                file.write(json.toString());
+                file.flush();
+                System.out.println("Json erfolgreich im Verzeichnis: " + filePath + " abgespeichert.");
+            } catch (IOException ex) {
+                Logger.getLogger(FileHelperClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

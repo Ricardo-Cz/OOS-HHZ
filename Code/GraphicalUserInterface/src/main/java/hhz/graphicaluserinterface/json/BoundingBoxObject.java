@@ -10,19 +10,9 @@ package hhz.graphicaluserinterface.json;
  */
 public class BoundingBoxObject
 {
-    private RecognitionResult recognitionResult;
-
     private String status;
 
-    public RecognitionResult getRecognitionResult ()
-    {
-        return recognitionResult;
-    }
-
-    public void setRecognitionResult (RecognitionResult recognitionResult)
-    {
-        this.recognitionResult = recognitionResult;
-    }
+    private RecognitionResult recognitionResult;
 
     public String getStatus ()
     {
@@ -32,6 +22,16 @@ public class BoundingBoxObject
     public void setStatus (String status)
     {
         this.status = status;
+    }
+
+    public RecognitionResult getRecognitionResult ()
+    {
+        return recognitionResult;
+    }
+
+    public void setRecognitionResult (RecognitionResult recognitionResult)
+    {
+        this.recognitionResult = recognitionResult;
     }
 
     @Override

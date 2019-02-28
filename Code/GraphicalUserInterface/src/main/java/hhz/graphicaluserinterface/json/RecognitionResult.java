@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class RecognitionResult
 {
-    private List<Lines> lines;
+     private Lines[] lines;
 
-     public List<Lines> getLines ()
+    public Lines[] getLines ()
     {
         return lines;
     }
-     
-     public void setLines (List<Lines> lines)
+
+    public void setLines (Lines[] lines)
     {
         this.lines = lines;
     }

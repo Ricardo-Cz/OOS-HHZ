@@ -5,13 +5,12 @@
  */
 package hhz.graphicaluserinterface;
 
-import com.google.gson.Gson;
+
 import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractLineBoundingBox;
 import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractLineText;
 import static hhz.graphicaluserinterface.GraphicHelperClass.scaleFactor;
-import hhz.ocr.DrawBoundingBox;
-import hhz.ocr.GraphicHelper;
-import hhz.ocr.json.BoundingBoxObject;
+import hhz.graphicaluserinterface.json.BoundingBoxObject;
+import hhz.graphicaluserinterface.json.Lines;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -1050,6 +1049,7 @@ public class Home extends javax.swing.JFrame {
                 FileHelperClass fhc = new FileHelperClass();
                 imagePath = fhc.sortPathsByTheFolderAndCreationTime(directoryPath);
                 if (!imagePath.isEmpty() || imagePath != null) {
+                   // PriceTagRecognitionAPI.startAnalyse("",directoryPath);            //Start REC
                     imagesJsonPath = fhc.ChangeFileExtensionToDotJson(imagePath);
                     //initialisiere g1Label bis g5Label
                     boolean emptyCondition = setFirstPictureToCamLabelN(imagePath);
@@ -1191,11 +1191,11 @@ public class Home extends javax.swing.JFrame {
         return new ImageIcon(image);
     }
 
-    private String getRecognizedText(BoundingBoxObject bbo) {
+    private String getRecognizedText(ArrayList<BoundingBoxObject> bbo) {
         return "Folgender Text wurde erkannt: " + "\n\n" + ExtractLineText(bbo);
     }
 
-    private void setXAndYCoordinates(BoundingBoxObject bbo) {
+    private void setXAndYCoordinates(ArrayList<BoundingBoxObject> bbo) {
         List<Integer> lineBoundingBox = ExtractLineBoundingBox(bbo);
         allXCoordinatesOfBoundingBox = GraphicHelperClass.ListToIntArray(GraphicHelperClass.ExtractTheXCoordinates(lineBoundingBox));
         allYCoordinatesOfBoundingBox = GraphicHelperClass.ListToIntArray(GraphicHelperClass.ExtractTheYCoordinates(lineBoundingBox));
@@ -1216,7 +1216,7 @@ public class Home extends javax.swing.JFrame {
         if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
 
             if (!changeCam) {
-                BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+                ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
                 setXAndYCoordinates(bbo);
                 String recognizedText = getRecognizedText(bbo);
                 ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
@@ -1253,8 +1253,8 @@ public class Home extends javax.swing.JFrame {
         }
         if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
 
-            //  if (sliderIndex < imagePahtCopyForCamEvent.size()) {
-            BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+              if (sliderIndex < imagePahtCopyForCamEvent.size()) {
+            ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
             setXAndYCoordinates(bbo);
             String recognizedText = getRecognizedText(bbo);
             ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
@@ -1272,7 +1272,7 @@ public class Home extends javax.swing.JFrame {
                 slideBack = true;
             }
 
-            // }
+             }
         }
     }//GEN-LAST:event_nextImageMouseClicked
     private void g1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g1LabelMouseClicked
@@ -1437,7 +1437,8 @@ public class Home extends javax.swing.JFrame {
         if (!camXImagePaths.isEmpty()) {
             imagePahtCopyForCamEvent = camXImagePaths;
             imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(camXImagePaths);
-            BoundingBoxObject bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
+            
             setXAndYCoordinates(bbo);
             String recognizedText = getRecognizedText(bbo);
             ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
