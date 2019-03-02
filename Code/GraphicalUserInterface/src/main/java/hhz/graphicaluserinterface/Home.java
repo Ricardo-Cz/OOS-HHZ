@@ -108,6 +108,9 @@ public class Home extends javax.swing.JFrame {
         jLabelLogoImage = new javax.swing.JLabel();
         footerpanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        gallaryview4 = new javax.swing.JPanel();
+        jLabelGalleryImage4 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         galleryViewPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -165,6 +168,7 @@ public class Home extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         reportingPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -289,7 +293,7 @@ public class Home extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Reporting");
+        jLabel7.setText("Analyse");
 
         javax.swing.GroupLayout reportingLayout = new javax.swing.GroupLayout(reporting);
         reporting.setLayout(reportingLayout);
@@ -387,6 +391,44 @@ public class Home extends javax.swing.JFrame {
         footerpanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 0, 115, 36));
 
         sidepanel3.add(footerpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 820, 280, 30));
+
+        gallaryview4.setBackground(new java.awt.Color(160, 35, 42));
+        gallaryview4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gallaryview4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gallaryview4gallaryviewMouseClicked(evt);
+            }
+        });
+
+        jLabelGalleryImage4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGalleryImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gallery.png"))); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Gallery View");
+
+        javax.swing.GroupLayout gallaryview4Layout = new javax.swing.GroupLayout(gallaryview4);
+        gallaryview4.setLayout(gallaryview4Layout);
+        gallaryview4Layout.setHorizontalGroup(
+            gallaryview4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gallaryview4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabelGalleryImage4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        gallaryview4Layout.setVerticalGroup(
+            gallaryview4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gallaryview4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(gallaryview4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabelGalleryImage4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        sidepanel3.add(gallaryview4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 280, -1));
 
         jPanel1.add(sidepanel3, java.awt.BorderLayout.PAGE_START);
 
@@ -762,15 +804,28 @@ public class Home extends javax.swing.JFrame {
 
         reportingPanel.setBackground(new java.awt.Color(0, 153, 51));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout reportingPanelLayout = new javax.swing.GroupLayout(reportingPanel);
         reportingPanel.setLayout(reportingPanelLayout);
         reportingPanelLayout.setHorizontalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1350, Short.MAX_VALUE)
+            .addGroup(reportingPanelLayout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(jButton1)
+                .addContainerGap(1139, Short.MAX_VALUE))
         );
         reportingPanelLayout.setVerticalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 851, Short.MAX_VALUE)
+            .addGroup(reportingPanelLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jButton1)
+                .addContainerGap(782, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportingPanel, "card3");
@@ -1407,6 +1462,17 @@ public class Home extends javax.swing.JFrame {
         ShelfPanel.setVisible(false);
         StorePanel.setVisible(true);
     }//GEN-LAST:event_jLabel34MouseClicked
+
+    private void gallaryview4gallaryviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gallaryview4gallaryviewMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gallaryview4gallaryviewMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /*Ein Bild pfad auswählen
+          PriceTagRecAPI starten (bild pfad übergeben)
+          
+        */
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void createTable() {
         PriceTagComparator.getPriceTagsFromDB();
         JTable table;
@@ -1532,8 +1598,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel g5Label;
     private javax.swing.JPanel g5Panel;
     private javax.swing.JPanel gallaryview3;
+    private javax.swing.JPanel gallaryview4;
     private javax.swing.JPanel galleryViewPanel;
     private static javax.swing.JTextField generalSettingsPathBox;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jFileName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1541,6 +1609,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -1567,6 +1636,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelFileCreateTime;
     private javax.swing.JLabel jLabelGalleryImage3;
+    private javax.swing.JLabel jLabelGalleryImage4;
     private javax.swing.JLabel jLabelLogoImage;
     private javax.swing.JLabel jLabelReportingLabel;
     private javax.swing.JLabel jLabelSettingsImage;

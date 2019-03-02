@@ -53,7 +53,7 @@ public class PriceTagRecognitionAPI {
         PredictionEndpoint predictClient = CustomVisionPredictionManager.authenticate(predictionApiKey);
         Map<String, ImagePrediction> imagePrediction = TestImage(trainClient, predictClient, directoryPath);
         Map<String, List<byte[]>> mapWithPriceTags = FileHelperClass.getSubBytesPriceTagsFromImage(imagePrediction);
-       // OcrApi.startOcrAnalyse(mapWithPriceTags);
+        OcrApi.startOcrAnalyse(mapWithPriceTags);
         
     }
 
