@@ -41,10 +41,11 @@ import org.json.simple.JSONObject;
  * @author Valerij
  */
 public class PriceTagRecognitionAPI {
-    
- public static void main(String[] args) {
-     startAnalyse("","C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1");
- }
+
+//    public static void main(String[] args) {
+//        startAnalyse("", "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1");
+//    }
+
     public static void startAnalyse(String StartTime, String directoryPath) {
         final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";
         final String predictionApiKey = "68ecc463ba0c4ccfb9772717cdd1ec38";
@@ -54,9 +55,10 @@ public class PriceTagRecognitionAPI {
         Map<String, ImagePrediction> imagePrediction = TestImage(trainClient, predictClient, directoryPath);
         Map<String, List<byte[]>> mapWithPriceTags = FileHelperClass.getSubBytesPriceTagsFromImage(imagePrediction);
         OcrApi.startOcrAnalyse(mapWithPriceTags);
-        
-    }
 
+    }
+    
+    
     public static Map<String, ImagePrediction> TestImage(TrainingApi trainClient, PredictionEndpoint predictor, String directoryPath) {
         Map<String, ImagePrediction> imgPrediction = new HashMap<>();
         try {
@@ -72,7 +74,7 @@ public class PriceTagRecognitionAPI {
                             .withImageData(imageDictionary.get(imagePathKey))
                             .execute();
                     if (results != null) {
-                                imgPrediction.put(imagePathKey, results);
+                        imgPrediction.put(imagePathKey, results);
                     }
 
                     for (Prediction prediction : results.predictions()) {

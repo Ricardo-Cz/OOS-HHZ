@@ -151,6 +151,7 @@ public class OcrApi {
             System.out.println("Response combined: \n");
             System.out.println(jArray.toString(2));
             fh.WriteJsonToFile(jArray, imagePathKey);
+            
         }
     }
 }

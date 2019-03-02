@@ -5,7 +5,6 @@
  */
 package hhz.graphicaluserinterface;
 
-
 import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractLineBoundingBox;
 import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractLineText;
 import static hhz.graphicaluserinterface.GraphicHelperClass.scaleFactor;
@@ -169,6 +168,11 @@ public class Home extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         reportingPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -804,12 +808,36 @@ public class Home extends javax.swing.JFrame {
 
         reportingPanel.setBackground(new java.awt.Color(0, 153, 51));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Analyse");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jButton2.setText("Status");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Analyse");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Soll", null, null},
+                {"Ist (OCR)", null, null},
+                {"Ist (Custom Vision)", null, null},
+                {"Status", null, null}
+            },
+            new String [] {
+                "Platz", "Name", "Preis"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton4.setText("Status");
 
         javax.swing.GroupLayout reportingPanelLayout = new javax.swing.GroupLayout(reportingPanel);
         reportingPanel.setLayout(reportingPanelLayout);
@@ -817,15 +845,32 @@ public class Home extends javax.swing.JFrame {
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportingPanelLayout.createSequentialGroup()
                 .addGap(138, 138, 138)
-                .addComponent(jButton1)
-                .addContainerGap(1139, Short.MAX_VALUE))
+                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(reportingPanelLayout.createSequentialGroup()
+                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(780, Short.MAX_VALUE))
         );
         reportingPanelLayout.setVerticalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportingPanelLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jButton1)
-                .addContainerGap(782, Short.MAX_VALUE))
+                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
+                .addGap(191, 191, 191)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(378, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportingPanel, "card3");
@@ -1015,7 +1060,7 @@ public class Home extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
@@ -1104,7 +1149,7 @@ public class Home extends javax.swing.JFrame {
                 FileHelperClass fhc = new FileHelperClass();
                 imagePath = fhc.sortPathsByTheFolderAndCreationTime(directoryPath);
                 if (!imagePath.isEmpty() || imagePath != null) {
-                   // PriceTagRecognitionAPI.startAnalyse("",directoryPath);            //Start REC
+                    // PriceTagRecognitionAPI.startAnalyse("",directoryPath);            //Start REC
                     imagesJsonPath = fhc.ChangeFileExtensionToDotJson(imagePath);
                     //initialisiere g1Label bis g5Label
                     boolean emptyCondition = setFirstPictureToCamLabelN(imagePath);
@@ -1308,26 +1353,26 @@ public class Home extends javax.swing.JFrame {
         }
         if (sliderIndex >= 0 && sliderIndex < imagePahtCopyForCamEvent.size()) {
 
-              if (sliderIndex < imagePahtCopyForCamEvent.size()) {
-            ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
-            setXAndYCoordinates(bbo);
-            String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
+            if (sliderIndex < imagePahtCopyForCamEvent.size()) {
+                ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
+                setXAndYCoordinates(bbo);
+                String recognizedText = getRecognizedText(bbo);
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
 
-            setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
-            setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
-            jTextPane1.setText(recognizedText);
-            jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
-            sliderIndex++;
-            changeCam = false;
-            if (sliderIndex == imagePahtCopyForCamEvent.size()) {
-                slideBack = false;
-            } else {
-                slideBack = true;
+                setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
+                setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
+                jTextPane1.setText(recognizedText);
+                jLabel9.setIcon(imageIcon);
+                repaint(jLabel9.getGraphics());
+                sliderIndex++;
+                changeCam = false;
+                if (sliderIndex == imagePahtCopyForCamEvent.size()) {
+                    slideBack = false;
+                } else {
+                    slideBack = true;
+                }
+
             }
-
-             }
         }
     }//GEN-LAST:event_nextImageMouseClicked
     private void g1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g1LabelMouseClicked
@@ -1374,7 +1419,7 @@ public class Home extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -1468,11 +1513,12 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_gallaryview4gallaryviewMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*Ein Bild pfad auswählen
-          PriceTagRecAPI starten (bild pfad übergeben)
-          
-        */
+        analyse(1, 1, 1);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //ShowStatus(1,1,1);
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void createTable() {
         PriceTagComparator.getPriceTagsFromDB();
         JTable table;
@@ -1504,7 +1550,7 @@ public class Home extends javax.swing.JFrame {
             imagePahtCopyForCamEvent = camXImagePaths;
             imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(camXImagePaths);
             ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
-            
+
             setXAndYCoordinates(bbo);
             String recognizedText = getRecognizedText(bbo);
             ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
@@ -1517,6 +1563,52 @@ public class Home extends javax.swing.JFrame {
             repaint(jLabel9.getGraphics());
         }
         setUnderlineCamXLabel(cam);
+    }
+
+    public void show_status(int shelf_id, int row_id, int place_id) {
+        //Datenbank werte abgleichen
+        //Soll-Wert
+//	Ist-Wert (OCR)
+//	Ist-Wert (Custom Vision)
+//      Button grün/rot bei Fehler
+//untere Tabelle anpassen
+    }
+
+    public void analyse(int shelf_id, int row_id, int place_id) {
+        //Bildordner auswählen
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+        }
+        String folder_path = chooser.getSelectedFile().getAbsolutePath();
+        
+        //Bild an OCR
+        PriceTagRecognitionAPI.startAnalyse("", folder_path);
+
+        File folder = new File(folder_path);
+        File[] listOfFiles = folder.listFiles();
+        String image_path = null;
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                String str = file.getAbsolutePath();
+                if (str.lastIndexOf(".") != -1 && str.lastIndexOf(".") != 0) {
+                    image_path = str.substring(0, str.lastIndexOf(".")) + ".json";
+                }
+            }
+        }
+        //PriceTag Analyse
+        ArrayList<String> price_Tag = PriceTagComparator.getpriceTagsFromJson(image_path);
+        String name1 = price_Tag.get(0);
+        String name2 = price_Tag.get(1);
+        String price = price_Tag.get(2);
+        System.out.println(name1 + "  " + name2 + "  " + price);
+        //Ergebnis OCR in DB (mithilfe von Regalplatz)
+        //Bild an CustomVision
+        //Ergebnis CustomVision in DB (mithilfe von Regalplatz)
+        //show_status(shelf_id, row_id, place_id)
+
     }
 
     public void repaint(Graphics g) {
@@ -1602,6 +1694,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel galleryViewPanel;
     private static javax.swing.JTextField generalSettingsPathBox;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jFileName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1647,6 +1742,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneforTable;
     private javax.swing.JSeparator jSeparator1;
@@ -1656,6 +1752,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JComboBox<String> jcombo1;
     private javax.swing.JComboBox<String> jcombo2;

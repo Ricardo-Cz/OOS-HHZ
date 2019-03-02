@@ -139,8 +139,8 @@ public class PriceTagComparator {
         System.out.println(jsonPriceTagData.get(i));
         return null;
     }
-    public static void main(String args[]){
-        PriceTagComparator obj = new PriceTagComparator();
-        obj.priceTagComparator("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1\\IMG_3789.json");
-    }
+//    public static void main(String args[]){
+//        PriceTagComparator obj = new PriceTagComparator();
+//        obj.priceTagComparator("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1\\IMG_3789.json");
+//    }
 }

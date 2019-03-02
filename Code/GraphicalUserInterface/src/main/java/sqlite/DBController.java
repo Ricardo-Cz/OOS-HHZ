@@ -23,7 +23,7 @@ public class DBController {
 
     public static final DBController dbcontroller = new DBController();
     public static Connection connection;
-    private final String DB_PATH = "jdbc:sqlite:C:\\Users\\Valerij\\Documents\\NetBeansProjects\\OOS-HHZ\\Code\\GraphicalUserInterface\\src\\main\\java\\sqlite\\settings.sqlite";
+    private final String DB_PATH = "jdbc:sqlite:.\\src\\main\\java\\sqlite\\settings.sqlite";
 
     static {
         try {
