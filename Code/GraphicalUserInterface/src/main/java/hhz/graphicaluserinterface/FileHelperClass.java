@@ -64,6 +64,7 @@ public class FileHelperClass {
         //print(files);
         return imageMap;
     }
+    
 
     public static Map<String, List<byte[]>> getSubBytesPriceTagsFromImage(Map<String, ImagePrediction> mapPrediction) {
 
