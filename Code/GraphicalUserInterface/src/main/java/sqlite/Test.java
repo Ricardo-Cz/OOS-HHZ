@@ -13,7 +13,8 @@ public class Test {
     public static void main(String[] args) {
         DBController dbc = DBController.getInstance();
         dbc.initDBConnection();
-        String settingTimeFromDB = dbc.handleGetDB2("product_name1",0,1,1);
-        System.out.println(settingTimeFromDB);
+        dbc.handleUpdateDB2("ocr_product_name2", 0, 0, 2, "abc");
+        //String settingTimeFromDB = dbc.handleGetDB2("product_name1",0,1,1);
+        //System.out.println(settingTimeFromDB);
     }
 }
