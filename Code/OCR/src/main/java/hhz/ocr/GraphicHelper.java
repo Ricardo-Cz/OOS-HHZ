@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -39,7 +39,7 @@ public class GraphicHelper {
         Map<String, byte[]> imageMap = new HashMap<>();
         for (int i = 0; i < files.size(); i++) {
 
-            if (getFileExtension(files.get(i)).equals("jpg")) {
+            if (getFileExtension(files.get(i)).equals("jpg") ||getFileExtension(files.get(i)).equals("JPG") ) {
                 System.out.println(files.get(i).getCanonicalPath());
                 fileContent = Files.readAllBytes(files.get(i).toPath());
                 imageMap.put(files.get(i).getCanonicalPath(), fileContent);

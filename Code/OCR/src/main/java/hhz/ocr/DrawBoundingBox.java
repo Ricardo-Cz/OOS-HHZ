@@ -29,7 +29,7 @@ public class DrawBoundingBox extends JFrame {
     Polygon P;
 
     //Constructor
-    public DrawBoundingBox(String imagePath) {
+ /*   public DrawBoundingBox(String imagePath) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new JFrame("Bounding Box from: " + imagePath);
@@ -155,5 +155,5 @@ public class DrawBoundingBox extends JFrame {
         }
         System.out.println(text);
         return text;
-    }
+    }*/
 }

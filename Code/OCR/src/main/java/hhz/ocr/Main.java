@@ -44,7 +44,7 @@ public class Main {
         //Path to directory with images
         
         Map<String,byte[]> imageDictionary = graphicHelper.getImages(directoryPath);
-/*
+
         CloseableHttpClient httpTextClient = HttpClientBuilder.create().build();
         CloseableHttpClient httpResultClient = HttpClientBuilder.create().build();;
 
@@ -138,9 +138,9 @@ public class Main {
                 System.out.println(e.getMessage());
             }
           
-        } */
+        } 
          // DrawBoundingBox dBB = new DrawBoundingBox(imagePathKey);
-            DrawBoundingBox dBB = new DrawBoundingBox("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\img_20150328_131815.jpg");
+          //  DrawBoundingBox dBB = new DrawBoundingBox("C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\img_20150328_131815.jpg");
     }
    
 }
