@@ -70,16 +70,17 @@ public class DBController {
             }
         });
     }
-     public List<String> handleSpecificRowsGetDB(String table ,String ... row) {
+
+    public List<String> handleSpecificRowsGetDB(String table, String... row) {
         List<String> resultList = new ArrayList();
-       String rows = String.join(",", row);
-       
+        String rows = String.join(",", row);
+
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT " + rows + " FROM " + table);
             while (rs.next()) {
-                for(String r : row){
-                resultList.add(rs.getString(r)); 
+                for (String r : row) {
+                    resultList.add(rs.getString(r));
                 }
             }
             rs.close();
@@ -89,17 +90,18 @@ public class DBController {
         }
         return resultList;
     }
+
     public List<String> handleAnyRowsGetDB(String row, int rowAmount, String table) {
         List<String> resultList = new ArrayList();
-        if(row.equals("")){
+        if (row.equals("")) {
             row = "*";
         }
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT " + row + " FROM " + table);
             while (rs.next()) {
-                for(int i = 1; i<= rowAmount; i++){
-                resultList.add(rs.getString(i)); 
+                for (int i = 1; i <= rowAmount; i++) {
+                    resultList.add(rs.getString(i));
                 }
             }
             rs.close();
@@ -116,7 +118,7 @@ public class DBController {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT " + row + " FROM " + table);
             while (rs.next()) {
-                result = rs.getString(row); 
+                result = rs.getString(row);
             }
             rs.close();
         } catch (SQLException e) {
@@ -129,23 +131,21 @@ public class DBController {
     public void handleUpdateDB(String data, String row, String table) {
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("UPDATE "+table+"\n"
-                    + "  SET  "+row+"= \""+data+"\"");
+            stmt.executeUpdate("UPDATE " + table + "\n"
+                    + "  SET  " + row + "= \"" + data + "\"");
         } catch (SQLException e) {
             System.err.println("Couldn't handle DB-Execute");
             e.printStackTrace();
         }
     }
-    
-    
-    
-        public String handleGetDB2(String column_name, int shelf_id, int row_id, int place_id) {
+
+    public String handleGetDB2(String column_name, int shelf_id, int row_id, int place_id) {
         String result = "";
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM price_tags WHERE shelf_id = " + shelf_id +  " AND row_id = "+row_id+ " AND place_id = " + place_id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM price_tags WHERE shelf_id = " + shelf_id + " AND row_id = " + row_id + " AND place_id = " + place_id);
             while (rs.next()) {
-                result = rs.getString(column_name); 
+                result = rs.getString(column_name);
             }
             rs.close();
         } catch (SQLException e) {
@@ -154,4 +154,19 @@ public class DBController {
         }
         return result;
     }
+    
+    public void handleUpdateDB2(String column_name, int shelf_id, int row_id, int place_id, String value){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE price_tags SET " + column_name + " = '" + value + "' WHERE shelf_id = '" + shelf_id + "' AND row_id = '" + row_id + "' AND place_id = '" + place_id + "'";
+            System.out.println(query);
+            stmt.executeUpdate(query);
+            
+        } catch (SQLException e) {
+            System.err.println("Couldn't handle DB-Execute");
+            e.printStackTrace();
+        }
+       
+    }
+    
 }
