@@ -36,12 +36,12 @@ public class TableCellRenderer
 
         // Only for specific cell
         
-        if(status_table[row][column] == "gut"){
+        if(status_table[row][column] == "Gut"){
             c.setBackground(GREEN);
             return c;
         }
         
-        if(status_table[row][column] == "schlecht"){
+        if(status_table[row][column] == "Schlecht"){
             c.setBackground(RED);
             return c;
         }

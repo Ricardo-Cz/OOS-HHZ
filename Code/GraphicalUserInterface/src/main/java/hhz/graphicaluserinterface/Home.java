@@ -74,6 +74,8 @@ public class Home extends javax.swing.JFrame {
     private final static String CAM5 = "cam5";
 
     TableCellRenderer renderer = new TableCellRenderer();
+    static DBController dbc2 = DBController.getInstance();
+
     /**
      * Creates new form Home
      */
@@ -856,9 +858,9 @@ public class Home extends javax.swing.JFrame {
             .addGroup(reportingPanelLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(270, 270, 270)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(107, 107, 107)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(469, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportingPanel, "card3");
@@ -1501,16 +1503,16 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_gallaryview4gallaryviewMouseClicked
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        int shelf_id = 1; //immer 1
+        int shelf_id = 0; //immer 0
         int row_id = jTable2.getSelectedRow();
         int place_id = jTable2.getSelectedColumn();
-        
-        if(SwingUtilities.isLeftMouseButton(evt)){
+
+        if (SwingUtilities.isLeftMouseButton(evt)) {
             System.out.println("links");
             show_status(shelf_id, row_id, place_id);
-              
+
         }
-        if(SwingUtilities.isRightMouseButton(evt)){
+        if (SwingUtilities.isRightMouseButton(evt)) {
             System.out.println("rechts");
             analyse(shelf_id, row_id, place_id);
         }
@@ -1562,16 +1564,59 @@ public class Home extends javax.swing.JFrame {
     }
 
     public void show_status(int shelf_id, int row_id, int place_id) {
-        //Datenbank werte abgleichen
+        String product_name1 = dbc2.handleGetDB2("product_name1", shelf_id, row_id, place_id);
+        String product_name2 = dbc2.handleGetDB2("product_name2", shelf_id, row_id, place_id);
+        
+        String product_name = product_name1 + " "+ product_name2;
+        String price = dbc2.handleGetDB2("price", shelf_id, row_id, place_id);
+        String ocr_price = dbc2.handleGetDB2("ocr_price", shelf_id, row_id, place_id);
+        String ocr_product_name1 = dbc2.handleGetDB2("ocr_product_name1", shelf_id, row_id, place_id);
+        String ocr_product_name2 = dbc2.handleGetDB2("ocr_product_name2", shelf_id, row_id, place_id);
+        String ocr_product_name = ocr_product_name1 + " "+ ocr_product_name2;
+        if(null == ocr_product_name2){
+            ocr_product_name = ocr_product_name1;
+        }
+        String cv_product_name = dbc2.handleGetDB2("cv_product_name", shelf_id, row_id, place_id);
+
+        
+        //Datenbank werte abgleichen - set status_table values
+            //names
+        jTable1.setValueAt(product_name, 0, 1);
+        jTable1.setValueAt(ocr_product_name, 1, 1);
+        jTable1.setValueAt(cv_product_name, 2, 1);
+            //prices
+        jTable1.setValueAt(price, 0, 2);
+        jTable1.setValueAt(ocr_price, 1, 2);
+        jTable1.setValueAt("  -  ", 2, 2);
+            //status
+        String status = "Gut";
+        
+        if(!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)){
+            status = "Schlecht";
+            jTable1.setValueAt("Fehler!", 3, 1);
+        }
+        else{
+            jTable1.setValueAt("Korrekt!", 3, 1);
+        }
+        
+        if(!price.equals(ocr_price)){
+            status = "Schlecht";
+            jTable1.setValueAt("Fehler!", 3, 2);
+        }
+        else{
+            jTable1.setValueAt("Korrekt!", 3, 2);
+        }
+
+        
+
         //Soll-Wert
 //	Ist-Wert (OCR)
 
 //	Ist-Wert (Custom Vision)
-        
         //Übersichtstabelle färben:
-        renderer.status_table[row_id][place_id] = "gut"; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
+        renderer.status_table[row_id][place_id] = status; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
         jTable2.repaint();
-        
+
 //untere Tabelle anpassen
     }
 
@@ -1584,7 +1629,7 @@ public class Home extends javax.swing.JFrame {
             currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
         }
         String folder_path = chooser.getSelectedFile().getAbsolutePath();
-        
+
         //Bild an OCR
         PriceTagRecognitionAPI.startAnalyse("", folder_path);
 
@@ -1650,6 +1695,7 @@ public class Home extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        dbc2.initDBConnection();
         try {
             /* Create and display the form */
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
