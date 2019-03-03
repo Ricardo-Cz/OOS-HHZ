@@ -45,6 +45,7 @@ public class PriceTagRecognitionAPI {
 //    public static void main(String[] args) {
 //        startAnalyse("", "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1");
 //    }
+    
 
     public static void startAnalyse(String StartTime, String directoryPath) {
         final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";
