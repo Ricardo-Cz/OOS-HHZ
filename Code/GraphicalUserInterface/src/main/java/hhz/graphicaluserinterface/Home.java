@@ -1685,25 +1685,33 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         jTable1.setValueAt(ocr_price, 1, 2);
         jTable1.setValueAt("  -  ", 2, 2);
         //status
-        String status = "Gut";
-
+        String gesamt_status = "Gut";
+        String price_status = "Gut";
+        String name_status = "Gut";
+            //name_status
         if (!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)) {
-            status = "Schlecht";
-            jTable1.setValueAt("Fehler!", 3, 1);
-            //dbc2.handleUpdateDB2("status_price", shelf_id, row_id, place_id, status);
+            name_status = "Fehlplatzierung";
+            gesamt_status = "Schlecht";
+            jTable1.setValueAt(name_status, 3, 1);
         } else {
-            jTable1.setValueAt("Korrekt!", 3, 1);
+            name_status = "Platz korrekt";
+            jTable1.setValueAt(name_status, 3, 1);
         }
-
+        dbc2.handleUpdateDB2("status_name", shelf_id, row_id, place_id, name_status);
+            //price_status
         if (!price.equals(ocr_price)) {
-            status = "Schlecht";
-            jTable1.setValueAt("Fehler!", 3, 2);
+            price_status = "Falscher Preis";
+            gesamt_status = "Schlecht";
+            jTable1.setValueAt(price_status, 3, 2);
         } else {
-            jTable1.setValueAt("Korrekt!", 3, 2);
+            price_status = "Preis korrekt";
+            jTable1.setValueAt(price_status, 3, 2);
         }
+        dbc2.handleUpdateDB2("status_price", shelf_id, row_id, place_id, price_status);
 
+        
         if ((ocr_price == null || ocr_price.isEmpty()) && (ocr_product_name == null || ocr_product_name.isEmpty()) && (cv_product_name == null || cv_product_name.isEmpty())) {
-            status = "Neutral";
+            gesamt_status = "Neutral";
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 2);
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 1);
         }
@@ -1712,7 +1720,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 //	Ist-Wert (OCR)
 //	Ist-Wert (Custom Vision)
         //Übersichtstabelle färben:
-        renderer.status_table[row_id][place_id] = status; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
+        renderer.status_table[row_id][place_id] = gesamt_status; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
         jTable2.repaint();
 
 //untere Tabelle anpassen
