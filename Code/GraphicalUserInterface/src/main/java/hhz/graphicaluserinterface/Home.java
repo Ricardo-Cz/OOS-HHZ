@@ -15,10 +15,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Menu;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -35,6 +39,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -49,6 +54,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
@@ -61,7 +67,7 @@ import sqlite.DBController;
  *
  * @author Valerij
  */
-public class Home extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 
     private final static String ROOT_PATH = "root_path";
     private final static String SETTINGS_DATA = "settings_data";
@@ -78,6 +84,7 @@ public class Home extends javax.swing.JFrame {
     static int gl_shelf_id = -1;
     static int gl_row_id = -1;
     static int gl_place_id = -1;
+    private Task task;
 
     /**
      * Creates new form Home
@@ -182,6 +189,7 @@ public class Home extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -856,6 +864,11 @@ public class Home extends javax.swing.JFrame {
         });
 
         jButton2.setText("Alle Plätze: Analysieren");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Alle Plätze: Letzter Status");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -870,10 +883,10 @@ public class Home extends javax.swing.JFrame {
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportingPanelLayout.createSequentialGroup()
                 .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(reportingPanelLayout.createSequentialGroup()
-                            .addGap(138, 138, 138)
+                    .addGroup(reportingPanelLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(reportingPanelLayout.createSequentialGroup()
                         .addGap(177, 177, 177)
@@ -881,7 +894,9 @@ public class Home extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(600, Short.MAX_VALUE))
         );
         reportingPanelLayout.setVerticalGroup(
@@ -896,7 +911,9 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(428, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(386, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportingPanel, "card3");
@@ -1446,7 +1463,7 @@ public class Home extends javax.swing.JFrame {
         }
     }
 
-    
+
     private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -1544,25 +1561,27 @@ public class Home extends javax.swing.JFrame {
             gl_shelf_id = 0; //immer 0
             gl_row_id = jTable2.getSelectedRow();
             gl_place_id = jTable2.getSelectedColumn();
-            System.out.println("shelf_id: " + gl_shelf_id + "  row_id:" + gl_row_id + "  place_id:"  + gl_place_id);
+            System.out.println("shelf_id: " + gl_shelf_id + "  row_id:" + gl_row_id + "  place_id:" + gl_place_id);
             show_status(gl_shelf_id, gl_row_id, gl_place_id);
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(gl_shelf_id != -1 && gl_row_id != -1 && gl_place_id != -1){
-            analyse(gl_shelf_id, gl_row_id, gl_place_id);
+        if (gl_shelf_id != -1 && gl_row_id != -1 && gl_place_id != -1) {
+            analyse(gl_shelf_id, gl_row_id, gl_place_id, "");
             show_status(gl_shelf_id, gl_row_id, gl_place_id);
-        } 
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        for(int i = 0; i<=1; i++){
-            for(int j = 0; j<=8; j++){
-                show_status(0, i, j);
-            }
-        }
+        show_status_all();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        task = new Task();
+        task.addPropertyChangeListener(this);
+        task.execute();
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void createTable() {
         PriceTagComparator.getPriceTagsFromDB();
         JTable table;
@@ -1609,52 +1628,81 @@ public class Home extends javax.swing.JFrame {
         setUnderlineCamXLabel(cam);
     }
 
+    public void analyze_all() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = chooser.showOpenDialog(chooser);
+//            if (returnVal == JFileChooser.APPROVE_OPTION) {
+//                currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+//            }
+        String parentfolder_path = chooser.getSelectedFile().getAbsolutePath();
+        File[] subfolders = new File(parentfolder_path).listFiles(File::isDirectory);
+        double progress_steps = 100 / subfolders.length;
+        double progress_status = 0;
+        for (File f : subfolders) {
+            String subfolder_path = f.getAbsolutePath();
+            System.out.println("Choosen folder with subfolders: " + subfolder_path);
+            String folder_name = f.getName();
+            String[] ids = folder_name.split("_");
+            System.out.println(ids[0] + ids[1] + ids[2]);
+            int shelf_id = Integer.parseInt(ids[0]);
+            int row_id = Integer.parseInt(ids[1]);
+            int place_id = Integer.parseInt(ids[2]);
+            analyse(shelf_id, row_id, place_id, subfolder_path);
+            show_status(shelf_id, row_id, place_id);
+            progress_status += progress_steps;
+            if (progress_status < 100) {
+                jProgressBar1.setValue((int) progress_status);
+            } else {
+                jProgressBar1.setValue(jProgressBar1.getMaximum());
+            }
+            jProgressBar1.repaint();
+        }
+    }
+
     public void show_status(int shelf_id, int row_id, int place_id) {
         String product_name1 = dbc2.handleGetDB2("product_name1", shelf_id, row_id, place_id);
         String product_name2 = dbc2.handleGetDB2("product_name2", shelf_id, row_id, place_id);
-        
-        String product_name = product_name1 + " "+ product_name2;
+
+        String product_name = product_name1 + " " + product_name2;
         String price = dbc2.handleGetDB2("price", shelf_id, row_id, place_id);
         String ocr_price = dbc2.handleGetDB2("ocr_price", shelf_id, row_id, place_id);
         String ocr_product_name1 = dbc2.handleGetDB2("ocr_product_name1", shelf_id, row_id, place_id);
         String ocr_product_name2 = dbc2.handleGetDB2("ocr_product_name2", shelf_id, row_id, place_id);
-        String ocr_product_name = ocr_product_name1 + " "+ ocr_product_name2;
-        if(null == ocr_product_name2){
+        String ocr_product_name = ocr_product_name1 + " " + ocr_product_name2;
+        if (null == ocr_product_name2) {
             ocr_product_name = ocr_product_name1;
         }
         String cv_product_name = dbc2.handleGetDB2("cv_product_name", shelf_id, row_id, place_id);
 
-        
         //Datenbank werte abgleichen - set status_table values
-            //names
+        //names
         jTable1.setValueAt(product_name, 0, 1);
         jTable1.setValueAt(ocr_product_name, 1, 1);
         jTable1.setValueAt(cv_product_name, 2, 1);
-            //prices
+        //prices
         jTable1.setValueAt(price, 0, 2);
         jTable1.setValueAt(ocr_price, 1, 2);
         jTable1.setValueAt("  -  ", 2, 2);
-            //status
+        //status
         String status = "Gut";
-        
-        if(!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)){
+
+        if (!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)) {
             status = "Schlecht";
             jTable1.setValueAt("Fehler!", 3, 1);
             //dbc2.handleUpdateDB2("status_price", shelf_id, row_id, place_id, status);
-        }
-        else{
+        } else {
             jTable1.setValueAt("Korrekt!", 3, 1);
         }
-        
-        if(!price.equals(ocr_price)){
+
+        if (!price.equals(ocr_price)) {
             status = "Schlecht";
             jTable1.setValueAt("Fehler!", 3, 2);
-        }
-        else{
+        } else {
             jTable1.setValueAt("Korrekt!", 3, 2);
         }
 
-        if((ocr_price == null ||ocr_price.isEmpty()) && (ocr_product_name == null ||ocr_product_name.isEmpty()) && (cv_product_name == null ||cv_product_name.isEmpty())){
+        if ((ocr_price == null || ocr_price.isEmpty()) && (ocr_product_name == null || ocr_product_name.isEmpty()) && (cv_product_name == null || cv_product_name.isEmpty())) {
             status = "Neutral";
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 2);
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 1);
@@ -1662,7 +1710,6 @@ public class Home extends javax.swing.JFrame {
 
         //Soll-Wert
 //	Ist-Wert (OCR)
-
 //	Ist-Wert (Custom Vision)
         //Übersichtstabelle färben:
         renderer.status_table[row_id][place_id] = status; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
@@ -1671,15 +1718,26 @@ public class Home extends javax.swing.JFrame {
 //untere Tabelle anpassen
     }
 
-    public void analyse(int shelf_id, int row_id, int place_id) {
-        //Bildordner auswählen
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int returnVal = chooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+    public void show_status_all() {
+        for (int i = 0; i <= 1; i++) {
+            for (int j = 0; j <= 8; j++) {
+                show_status(0, i, j);
+            }
         }
-        String folder_path = chooser.getSelectedFile().getAbsolutePath();
+    }
+
+    public void analyse(int shelf_id, int row_id, int place_id, String folder_path) {
+        //Bildordner auswählen
+
+        if (folder_path.isEmpty()) {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnVal = chooser.showOpenDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+            }
+            folder_path = chooser.getSelectedFile().getAbsolutePath();
+        }
 
         //Bild an OCR
         PriceTagRecognitionAPI.startAnalyse("", folder_path);
@@ -1700,18 +1758,17 @@ public class Home extends javax.swing.JFrame {
         String ocr_product_name1 = price_Tag.get(0);
         String ocr_product_name2 = price_Tag.get(1);
         String ocr_price = price_Tag.get(2);
-        System.out.println("Erkannt:" +ocr_product_name1 + "  " + ocr_product_name2 + "  " + ocr_price);
+        System.out.println("Erkannt:" + ocr_product_name1 + "  " + ocr_product_name2 + "  " + ocr_price);
         //Ergebnis OCR in DB (mithilfe von Regalplatz)
-        dbc2.handleUpdateDB2("ocr_product_name1", shelf_id, row_id, place_id,ocr_product_name1);
-        dbc2.handleUpdateDB2("ocr_product_name2", shelf_id, row_id, place_id,ocr_product_name2);
-        dbc2.handleUpdateDB2("ocr_price", shelf_id, row_id, place_id,ocr_price);
-        
-        //Bild an CustomVision schicken
-            //Todo
-        //Ergebnis CustomVision in DB (mithilfe von Regalplatz)
-            //Todo
-        //show_status(shelf_id, row_id, place_id);
+        dbc2.handleUpdateDB2("ocr_product_name1", shelf_id, row_id, place_id, ocr_product_name1);
+        dbc2.handleUpdateDB2("ocr_product_name2", shelf_id, row_id, place_id, ocr_product_name2);
+        dbc2.handleUpdateDB2("ocr_price", shelf_id, row_id, place_id, ocr_price);
 
+        //Bild an CustomVision schicken
+        //Todo
+        //Ergebnis CustomVision in DB (mithilfe von Regalplatz)
+        //Todo
+        //show_status(shelf_id, row_id, place_id);
     }
 
     public void repaint(Graphics g) {
@@ -1856,6 +1913,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1896,4 +1954,84 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel virtualRunaroundPanel;
     private javax.swing.JPanel virtualrunaround;
     // End of variables declaration//GEN-END:variables
+
+        /**
+     * Invoked when task's progress property changes.
+     */
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("progress" == evt.getPropertyName()) {
+            int progress = (Integer) evt.getNewValue();
+            jProgressBar1.setValue(progress);
+//            taskOutput.append(String.format(
+//                    "Completed %d%% of task.\n", task.getProgress()));
+        } 
+    }
+
+class Task extends SwingWorker<Void, Void> {
+        /*
+         * Main task. Executed in background thread.
+         */
+        @Override
+        public Void doInBackground() {
+            Random random = new Random();
+            int progress = 0;
+            //Initialize progress property.
+            setProgress(0);
+            JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = chooser.showOpenDialog(chooser);
+//            if (returnVal == JFileChooser.APPROVE_OPTION) {
+//                currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+//            }
+        String parentfolder_path = chooser.getSelectedFile().getAbsolutePath();
+        File[] subfolders = new File(parentfolder_path).listFiles(File::isDirectory);
+        double progress_steps = 100 / subfolders.length;
+        double progress_status = 0;
+        for (File f : subfolders) {
+            String subfolder_path = f.getAbsolutePath();
+            System.out.println("Choosen folder with subfolders: " + subfolder_path);
+            String folder_name = f.getName();
+            String[] ids = folder_name.split("_");
+            System.out.println(ids[0] + ids[1] + ids[2]);
+            int shelf_id = Integer.parseInt(ids[0]);
+            int row_id = Integer.parseInt(ids[1]);
+            int place_id = Integer.parseInt(ids[2]);
+            analyse(shelf_id, row_id, place_id, subfolder_path);
+            show_status(shelf_id, row_id, place_id);
+            progress_status += progress_steps;
+            if (progress_status < 100) {
+                //jProgressBar1.setValue((int) progress_status);
+                setProgress((int)progress_status);
+            } else {
+                setProgress(100);
+            }
+            jProgressBar1.repaint();
+        }
+            
+            
+            
+//            while (progress < 100) {
+//                //Sleep for up to one second.
+//                try {
+//                    Thread.sleep(random.nextInt(1000));
+//                } catch (InterruptedException ignore) {}
+//                //Make random progress.
+//                progress += random.nextInt(10);
+//                setProgress(Math.min(progress, 100));
+//            }
+            return null;
+        }
+
+        /*
+         * Executed in event dispatching thread
+         */
+        @Override
+        public void done() {
+//            Toolkit.getDefaultToolkit().beep();
+//            startButton.setEnabled(true);
+//            setCursor(null); //turn off the wait cursor
+//            taskOutput.append("Done!\n");
+        }
+    }    
+    
 }
