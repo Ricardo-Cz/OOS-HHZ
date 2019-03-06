@@ -59,6 +59,9 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
                     break;
                 }
                 case "Preisschilder": {
+                    
+                    
+                    
                     sendMsg (message, "Regal 1 - Gang 2:\n Sauce Hollandaise - Preis: 1.29 \n Preis soll 1.39 sein");
                     break;
                 }

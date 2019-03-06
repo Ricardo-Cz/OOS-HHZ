@@ -12,9 +12,11 @@ import java.awt.image.DataBufferByte;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -84,50 +86,85 @@ public class FileHelperClass {
             List<byte[]> byteArrayList = new ArrayList<>();
             for (Prediction prediction : mapPrediction.get(path).predictions()) {
                 //prepare for OCR
-                double distance_left = 0.01;
-                double distance_top = 0.01;
-                double distance_width = 0.03;
-                double distance_height = 0.03;
-                int priceBox_left_abs = 0, priceBox_top_abs = 0, priceBox_width_abs = 0, priceBox_height_abs = 0;
-                double priceBox_left_rel = 0, priceBox_top_rel = 0;
+//                double distance_left = 0.01;
+//                double distance_top = 0.01;
+//                double distance_width = 0.03;
+//                double distance_height = 0.03;
+//                int priceBox_left_abs = 0, priceBox_top_abs = 0, priceBox_width_abs = 0, priceBox_height_abs = 0;
+//                double priceBox_left_rel = 0, priceBox_top_rel = 0;
                 if (prediction.probability() * 100.0f >= PASS_THROUGH_PROBABILITY) {
-                    do {
-                        if ((priceBox_left_abs + priceBox_width_abs) > width) {
-                            distance_width -= 0.005;
-                        }
-                        if ((priceBox_top_abs + priceBox_height_abs > height)) {
-                            distance_height -= 0.005;
-                        }
-                        do {
-                            priceBox_left_rel = prediction.boundingBox().left() - distance_left;
-                            if (priceBox_left_rel < 0) {
-                                distance_left -= 0.002;
-                            }
-                        } while (priceBox_left_rel < 0);
-                        do {
-                            priceBox_top_rel = prediction.boundingBox().top() - distance_top;
-                            if (priceBox_top_rel < 0) {
-                                distance_top -= 0.002;
-                            }
-                        } while (priceBox_top_rel < 0);
 
-                        double priceBox_width_rel = prediction.boundingBox().width() + distance_width;
-                        double priceBox_height_rel = prediction.boundingBox().height() + distance_height;
+                                //prepare for OCR
+                    System.out.println("Bild zuschneiden:");
+                    double priceBox_left_rel = prediction.boundingBox().left()-0.06;
+                    if (priceBox_left_rel < 0){
+                        priceBox_left_rel = 0;
+                    }
+                    System.out.println(priceBox_left_rel);
 
-                        priceBox_left_abs = (int) (width * priceBox_left_rel);
-                        priceBox_top_abs = (int) (height * priceBox_top_rel);
-                        priceBox_width_abs = (int) (priceBox_width_rel * width);
-                        priceBox_height_abs = (int) (priceBox_height_rel * height);
-                    } while ((priceBox_left_abs + priceBox_width_abs) > width || (priceBox_top_abs + priceBox_height_abs > height));
+                    double priceBox_top_rel = prediction.boundingBox().top()-0.04;
+                    if (priceBox_top_rel < 0){
+                        priceBox_top_rel = 0;
+                    }
+                    System.out.println(priceBox_top_rel);
+                    double priceBox_width_rel = prediction.boundingBox().width()+0.08;
+                    if ((priceBox_left_rel + priceBox_width_rel) > 1){
+                        priceBox_width_rel = 1 - priceBox_left_rel - 0.001;
+                    }
+                    System.out.println(priceBox_width_rel);
+                    double priceBox_height_rel = prediction.boundingBox().height()+0.10;
+                    if ((priceBox_top_rel + priceBox_height_rel) > 1){
+                        priceBox_height_rel = 1- priceBox_top_rel - 0.001;
+                    }
+                    System.out.println(priceBox_height_rel);
+
+                    int priceBox_left_abs = (int)(width*priceBox_left_rel);
+                    int priceBox_top_abs = (int)(height*priceBox_top_rel);
+                    int priceBox_width_abs = (int) (priceBox_width_rel*width);
+                    int priceBox_height_abs =(int) (priceBox_height_rel*height);
+                    
+                    
+//                    do {
+//                        if ((priceBox_left_abs + priceBox_width_abs) > width) {
+//                            distance_width -= 0.005;
+//                        }
+//                        if ((priceBox_top_abs + priceBox_height_abs > height)) {
+//                            distance_height -= 0.005;
+//                        }
+//                        do {
+//                            priceBox_left_rel = prediction.boundingBox().left() - distance_left;
+//                            if (priceBox_left_rel < 0) {
+//                                distance_left -= 0.002;
+//                            }
+//                        } while (priceBox_left_rel < 0);
+//                        do {
+//                            priceBox_top_rel = prediction.boundingBox().top() - distance_top;
+//                            if (priceBox_top_rel < 0) {
+//                                distance_top -= 0.002;
+//                            }
+//                        } while (priceBox_top_rel < 0);
+//
+//                        double priceBox_width_rel = prediction.boundingBox().width() + distance_width;
+//                        double priceBox_height_rel = prediction.boundingBox().height() + distance_height;
+//
+//                        priceBox_left_abs = (int) (width * priceBox_left_rel);
+//                        priceBox_top_abs = (int) (height * priceBox_top_rel);
+//                        priceBox_width_abs = (int) (priceBox_width_rel * width);
+//                        priceBox_height_abs = (int) (priceBox_height_rel * height);
+//                    } while ((priceBox_left_abs + priceBox_width_abs) > width || (priceBox_top_abs + priceBox_height_abs > height));
                     try {
 
                         BufferedImage newImg = bimg.getSubimage(priceBox_left_abs, priceBox_top_abs, priceBox_width_abs, priceBox_height_abs);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
                         ImageIO.write(newImg, "jpg", baos);
                         baos.flush();
                         byteArray = baos.toByteArray();
                         byteArrayList.add(byteArray);
+                        
+                        OutputStream outputStream = new FileOutputStream("C:/OOS_KL/test.jpg");
+                        
+                        baos.writeTo(outputStream);
+
                         baos.close();
 
                     } catch (IOException ex) {

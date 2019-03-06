@@ -75,6 +75,9 @@ public class Home extends javax.swing.JFrame {
 
     TableCellRenderer renderer = new TableCellRenderer();
     static DBController dbc2 = DBController.getInstance();
+    static int gl_shelf_id = -1;
+    static int gl_row_id = -1;
+    static int gl_place_id = -1;
 
     /**
      * Creates new form Home
@@ -176,6 +179,9 @@ public class Home extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -842,25 +848,55 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable2);
 
+        jButton1.setText("Gewählten Platz: Analysieren");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Alle Plätze: Analysieren");
+
+        jButton3.setText("Alle Plätze: Letzter Status");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout reportingPanelLayout = new javax.swing.GroupLayout(reportingPanel);
         reportingPanel.setLayout(reportingPanelLayout);
         reportingPanelLayout.setHorizontalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportingPanelLayout.createSequentialGroup()
-                .addGap(138, 138, 138)
                 .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(590, Short.MAX_VALUE))
+                    .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(reportingPanelLayout.createSequentialGroup()
+                            .addGap(138, 138, 138)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(reportingPanelLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jButton1)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(600, Short.MAX_VALUE))
         );
         reportingPanelLayout.setVerticalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportingPanelLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
+                .addGap(60, 60, 60)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(469, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportingPanel, "card3");
@@ -1504,20 +1540,29 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_gallaryview4gallaryviewMouseClicked
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        int shelf_id = 0; //immer 0
-        int row_id = jTable2.getSelectedRow();
-        int place_id = jTable2.getSelectedColumn();
-
         if (SwingUtilities.isLeftMouseButton(evt)) {
-            System.out.println("links");
-            show_status(shelf_id, row_id, place_id);
-
-        }
-        if (SwingUtilities.isRightMouseButton(evt)) {
-            System.out.println("rechts");
-            analyse(shelf_id, row_id, place_id);
+            gl_shelf_id = 0; //immer 0
+            gl_row_id = jTable2.getSelectedRow();
+            gl_place_id = jTable2.getSelectedColumn();
+            System.out.println("shelf_id: " + gl_shelf_id + "  row_id:" + gl_row_id + "  place_id:"  + gl_place_id);
+            show_status(gl_shelf_id, gl_row_id, gl_place_id);
         }
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(gl_shelf_id != -1 && gl_row_id != -1 && gl_place_id != -1){
+            analyse(gl_shelf_id, gl_row_id, gl_place_id);
+            show_status(gl_shelf_id, gl_row_id, gl_place_id);
+        } 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        for(int i = 0; i<=1; i++){
+            for(int j = 0; j<=8; j++){
+                show_status(0, i, j);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
     public void createTable() {
         PriceTagComparator.getPriceTagsFromDB();
         JTable table;
@@ -1595,6 +1640,7 @@ public class Home extends javax.swing.JFrame {
         if(!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)){
             status = "Schlecht";
             jTable1.setValueAt("Fehler!", 3, 1);
+            //dbc2.handleUpdateDB2("status_price", shelf_id, row_id, place_id, status);
         }
         else{
             jTable1.setValueAt("Korrekt!", 3, 1);
@@ -1608,7 +1654,11 @@ public class Home extends javax.swing.JFrame {
             jTable1.setValueAt("Korrekt!", 3, 2);
         }
 
-        
+        if((ocr_price == null ||ocr_price.isEmpty()) && (ocr_product_name == null ||ocr_product_name.isEmpty()) && (cv_product_name == null ||cv_product_name.isEmpty())){
+            status = "Neutral";
+            jTable1.setValueAt("Überprüfung ausstehend!", 3, 2);
+            jTable1.setValueAt("Überprüfung ausstehend!", 3, 1);
+        }
 
         //Soll-Wert
 //	Ist-Wert (OCR)
@@ -1645,16 +1695,22 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         }
-        //PriceTag Analyse
+        //PriceTag Analyse durchführen
         ArrayList<String> price_Tag = PriceTagComparator.getpriceTagsFromJson(image_path);
-        String name1 = price_Tag.get(0);
-        String name2 = price_Tag.get(1);
-        String price = price_Tag.get(2);
-        System.out.println(name1 + "  " + name2 + "  " + price);
+        String ocr_product_name1 = price_Tag.get(0);
+        String ocr_product_name2 = price_Tag.get(1);
+        String ocr_price = price_Tag.get(2);
+        System.out.println("Erkannt:" +ocr_product_name1 + "  " + ocr_product_name2 + "  " + ocr_price);
         //Ergebnis OCR in DB (mithilfe von Regalplatz)
-        //Bild an CustomVision
+        dbc2.handleUpdateDB2("ocr_product_name1", shelf_id, row_id, place_id,ocr_product_name1);
+        dbc2.handleUpdateDB2("ocr_product_name2", shelf_id, row_id, place_id,ocr_product_name2);
+        dbc2.handleUpdateDB2("ocr_price", shelf_id, row_id, place_id,ocr_price);
+        
+        //Bild an CustomVision schicken
+            //Todo
         //Ergebnis CustomVision in DB (mithilfe von Regalplatz)
-        //show_status(shelf_id, row_id, place_id)
+            //Todo
+        //show_status(shelf_id, row_id, place_id);
 
     }
 
@@ -1752,6 +1808,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel gallaryview4;
     private javax.swing.JPanel galleryViewPanel;
     private static javax.swing.JTextField generalSettingsPathBox;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jFileName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

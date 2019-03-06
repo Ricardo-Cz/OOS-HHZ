@@ -28,6 +28,9 @@ import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.mode
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.PredictionEndpoint;
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.CustomVisionPredictionManager;
 import com.microsoft.azure.cognitiveservices.vision.customvision.training.models.Tag;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -43,13 +46,14 @@ import org.json.simple.JSONObject;
 public class PriceTagRecognitionAPI {
 
 //    public static void main(String[] args) {
-//        startAnalyse("", "C:\\Users\\Valerij\\Desktop\\Projekt 2\\OCR\\cam1");
+//        startAnalyse("", "C:\\Users\\Ricardo\\Pictures\\test2");
 //    }
-    
-
     public static void startAnalyse(String StartTime, String directoryPath) {
-        final String trainingApiKey = "bd4397c8393b4dd994628fb2b3facb12";
-        final String predictionApiKey = "68ecc463ba0c4ccfb9772717cdd1ec38";
+        String[] keys = getKey();
+        String trainingApiKey = keys[0];
+        String predictionApiKey = keys[1];
+        System.out.println(trainingApiKey + " " + predictionApiKey);
+
 
         TrainingApi trainClient = CustomVisionTrainingManager.authenticate(trainingApiKey);
         PredictionEndpoint predictClient = CustomVisionPredictionManager.authenticate(predictionApiKey);
@@ -58,9 +62,9 @@ public class PriceTagRecognitionAPI {
         OcrApi.startOcrAnalyse(mapWithPriceTags);
 
     }
-    
-    
+
     public static Map<String, ImagePrediction> TestImage(TrainingApi trainClient, PredictionEndpoint predictor, String directoryPath) {
+        
         Map<String, ImagePrediction> imgPrediction = new HashMap<>();
         try {
             Map<String, byte[]> imageDictionary = FileHelperClass.getImages(directoryPath);
@@ -68,7 +72,6 @@ public class PriceTagRecognitionAPI {
                 try {
                     Trainings trainer = trainClient.trainings();
                     Project project = trainer.getProject(UUID.fromString("3f189348-6dee-4918-ab9f-f7e8712953db")); //("34403d0c-7022-4be0-bd90-8116c410b190"));
-
                     // predict
                     ImagePrediction results = predictor.predictions().predictImage()
                             .withProjectId(project.id())
@@ -77,7 +80,6 @@ public class PriceTagRecognitionAPI {
                     if (results != null) {
                         imgPrediction.put(imagePathKey, results);
                     }
-
                     for (Prediction prediction : results.predictions()) {
                         System.out.println(String.format("\t%s: %.2f%% at: %.2f, %.2f, %.2f, %.2f",
                                 prediction.tagName(),
@@ -97,5 +99,20 @@ public class PriceTagRecognitionAPI {
             Logger.getLogger(PriceTagRecognitionAPI.class.getName()).log(Level.SEVERE, null, ex);
         }
         return imgPrediction;
+    }
+    
+        public static String[] getKey() {
+        String keys[] = {"dummy", "dummy"};
+        try {
+            FileReader fr = new FileReader("C:/OOS_KL/PriceTagRecognitionAPI.txt");
+            BufferedReader br = new BufferedReader(fr);
+            keys[0] = br.readLine();
+            keys[1] = br.readLine();
+            br.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return keys;
     }
 }

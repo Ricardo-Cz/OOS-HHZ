@@ -5,8 +5,8 @@
  */
 package hhz.graphicaluserinterface;
 
-
-
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.net.URI;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -40,7 +40,7 @@ public class OcrApi {
     // *** Update or verify the following values. ***
     // **********************************************
     // Replace <Subscription Key> with your valid subscription key.
-    private static final String subscriptionKey = "c4e7960dcdbb4b55a0577631903670b6";
+    private static String subscriptionKey = "dummy";
 
     // You must use the same Azure region in your REST API method as you used to
     // get your subscription keys. For example, if you got your subscription keys
@@ -54,6 +54,7 @@ public class OcrApi {
             = "https://westeurope.api.cognitive.microsoft.com/vision/v2.0/recognizeText";
 
     public static void startOcrAnalyse(Map<String, List<byte[]>> mapWithPriceTags) {
+        subscriptionKey = getKey();
         FileHelperClass fh = new FileHelperClass();
 
         CloseableHttpClient httpTextClient = HttpClientBuilder.create().build();
@@ -151,7 +152,21 @@ public class OcrApi {
             System.out.println("Response combined: \n");
             System.out.println(jArray.toString(2));
             fh.WriteJsonToFile(jArray, imagePathKey);
-            
+
         }
+    }
+
+    public static String getKey() {
+        String key = "dummy";
+        try {
+            FileReader fr = new FileReader("C:/OOS_KL/OCRAPI.txt");
+            BufferedReader br = new BufferedReader(fr);
+            key = br.readLine();
+            br.close();
+            System.out.println(key);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return key;
     }
 }

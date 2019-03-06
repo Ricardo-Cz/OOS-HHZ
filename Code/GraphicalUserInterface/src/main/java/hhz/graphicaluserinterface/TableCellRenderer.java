@@ -45,6 +45,10 @@ public class TableCellRenderer
             c.setBackground(RED);
             return c;
         }
+        if(status_table[row][column] == "Neutral"){
+            c.setBackground(GRAY);
+            return c;
+        }
         
         else {
             c.setBackground(Color.GRAY);
