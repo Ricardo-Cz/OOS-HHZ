@@ -22,15 +22,18 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import sqlite.DBController;
 
 /**
  *
  * @author Valerij
  */
 public class MessagingBotAPI extends TelegramLongPollingBot {
-
+    static DBController dbc = DBController.getInstance();
+        
     public static void main(String[] args) {
         ApiContextInitializer.init();
+        dbc.initDBConnection();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try {
             telegramBotsApi.registerBot(new MessagingBotAPI());
@@ -60,7 +63,7 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
                 }
                 case "Preisschilder": {
                     
-                    
+                String handleGetDBBot = dbc.handleGetDBBot(command, 0, 0, 0);
                     
                     sendMsg (message, "Regal 1 - Gang 2:\n Sauce Hollandaise - Preis: 1.29 \n Preis soll 1.39 sein");
                     break;

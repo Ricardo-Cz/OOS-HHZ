@@ -17,7 +17,7 @@ public class Test {
         //start method with path to JSON file
         ArrayList priceTagResult = priceTagAnalysis("./src/main/java/recources/test.json");
         for (int i = 0; i < priceTagResult.size(); i++) {
-            System.err.println(priceTagResult.get(i));
+            System.out.println(priceTagResult.get(i));
         }
     }
     

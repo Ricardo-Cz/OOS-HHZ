@@ -169,4 +169,20 @@ public class DBController {
        
     }
     
+    public String handleGetDBBot(String column_name, int shelf_id, int row_id, int place_id) {
+        String result = "";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM price_tags WHERE shelf_id = " + shelf_id + " AND row_id = " + row_id + " AND place_id = " + place_id);
+            while (rs.next()) {
+                result = rs.getString(column_name);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.err.println("Couldn't handle DB-Query");
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
 }
