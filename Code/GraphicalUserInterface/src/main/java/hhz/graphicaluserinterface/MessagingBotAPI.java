@@ -54,8 +54,14 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
         if (message != null && message.hasText()) {
             String command = message.getText();
             switch (command){
-                case "Leerbestände": {
-                    sendMsg(message, "Toskana Kräuter soll bald nachgefüllt werden\n aktuelle Menge 3 Stück");
+                case "Felmeldung": {
+                     //logik um Fehlstatus zu entfernen, weil kein Fehler da war
+                    sendMsg(message, "");
+                    break;
+                }
+                case "Behoben": {
+                     //logik um Fehlstatus zu entfernen und in ok Status umzuformen
+                    sendMsg(message, "");
                     break;
                 }
                 case "Report": {
@@ -114,11 +120,11 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
         
         keyboardFirstRow.add(new KeyboardButton("Preisschilder"));
         
-        keyboardSecondRow.add(new KeyboardButton("Falschplatzierung"));
-        keyboardSecondRow.add(new KeyboardButton("Leerbestände"));
+        keyboardSecondRow.add(new KeyboardButton("Fehlplatzierungen"));
+        //keyboardSecondRow.add(new KeyboardButton("Leerbestände"));
         
         keyboardThirdRow.add(new KeyboardButton("Behoben"));
-        keyboardThirdRow.add(new KeyboardButton("Nicht behoben"));
+        //keyboardThirdRow.add(new KeyboardButton("Nicht behoben"));
         keyboardThirdRow.add(new KeyboardButton("Fehlmeldung"));
         
         
