@@ -72,7 +72,7 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
                     }
                     break;
                 }
-                case "Falschplatzierung": {
+                case "Fehlplatzierungen": {
                     ArrayList<String[]> result = dbc.handleGetDBBotMisplacement();
                     for (int i = 0; i < result.size(); i++) {
                         String[] row = result.get(i);
