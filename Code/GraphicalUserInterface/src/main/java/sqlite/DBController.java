@@ -169,13 +169,37 @@ public class DBController {
        
     }
     
-    public String handleGetDBBot(String column_name, int shelf_id, int row_id, int place_id) {
-        String result = "";
+    public ArrayList handleGetDBBotMislabeling() {
+        ArrayList<String[]> result = new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM price_tags WHERE shelf_id = " + shelf_id + " AND row_id = " + row_id + " AND place_id = " + place_id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM price_tags WHERE status_price = 'Falscher Preis'");
             while (rs.next()) {
-                result = rs.getString(column_name);
+                String[] row = new String[13];
+                for (int i = 0; i < row.length; i++) {
+                    row[i] = rs.getString(i+1);
+                }
+                result.add(row);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.err.println("Couldn't handle DB-Query");
+            e.printStackTrace();
+        }
+        return result;
+    }   
+    
+    public ArrayList handleGetDBBotMisplacement() {
+        ArrayList<String[]> result = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM price_tags WHERE status_name = 'Fehlplatzierung'");
+            while (rs.next()) {
+                String[] row = new String[13];
+                for (int i = 0; i < row.length; i++) {
+                    row[i] = rs.getString(i+1);
+                }
+                result.add(row);
             }
             rs.close();
         } catch (SQLException e) {
@@ -185,4 +209,19 @@ public class DBController {
         return result;
     }
     
+    public boolean handleCheckSecondName(String productName1) {
+        boolean bool = false;
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT product_name2 FROM price_tags WHERE product_name1 = '" + productName1 + "'");
+            if (rs.getString(1).equals("")){
+                bool = true;
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.err.println("Couldn't handle DB-Query");
+            e.printStackTrace();
+        }
+        return bool;
+    }
 }

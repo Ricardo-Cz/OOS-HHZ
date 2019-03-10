@@ -50,6 +50,7 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
+        String chatMsg = "";
         if (message != null && message.hasText()) {
             String command = message.getText();
             switch (command){
@@ -62,18 +63,32 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
                     break;
                 }
                 case "Preisschilder": {
-                    
-                String handleGetDBBot = dbc.handleGetDBBot(command, 0, 0, 0);
-                    
-                    sendMsg (message, "Regal 1 - Gang 2:\n Sauce Hollandaise - Preis: 1.29 \n Preis soll 1.39 sein");
+                    ArrayList<String[]> result = dbc.handleGetDBBotMislabeling(); 
+                    for (int i = 0; i < result.size(); i++) {
+                        String[] row = result.get(i);
+                        if (row[7] == null){row[7] = "Kein Preis erkannt";}
+                        chatMsg = "Im Regal " + row[1] + " in der Reihe " + row[2] + " am Platz " + row[3] + " ist das Produkt " + row[4] + " " + row[5] + " mit einem falschen Preis ausgezeichent!\n Preisauszeichnung: " + row[7] + "\n Richtiger Preis: " + row[6];
+                        sendMsg (message, chatMsg);
+                    }
                     break;
                 }
                 case "Falschplatzierung": {
-                    sendMsg (message, "Regal 3 - Gang 2:\n Das Produkt x befindet sich nicht im Richtigen Regal");
+                    ArrayList<String[]> result = dbc.handleGetDBBotMisplacement();
+                    for (int i = 0; i < result.size(); i++) {
+                        String[] row = result.get(i);
+                        if (row[8] == null && row[9] == null) {
+                            row[8] = "Kein Produkt erkannt";
+                            row[9] = "";
+                        } else if (row[9] == null) {
+                            row[9] = "";
+                        }
+                        chatMsg = "Im Regal " + row[1] + " in der Reihe " + row[2] + " am Platz " + row[3] + " gibt es eine Fehlplatzierung!" + "\nFalsches Produkt: " + row[8] + " " + row[9] + "\nRichtiges Produkt: " + row[4] + " " + row[5];
+                        sendMsg (message, chatMsg);
+                    }
                     break;
                 }
                 default: {
-                sendMsg(message, "Kann die Eingabe nicht zuordnen!");
+                sendMsg(message, "Das habe ich nicht verstanden!");
                 break;
                 } 
             }

@@ -5,6 +5,11 @@
  */
 package sqlite;
 
+import hhz.graphicaluserinterface.MessagingBotAPI;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import org.telegram.telegrambots.meta.api.objects.Update;
+
 /**
  *
  * @author Ricardo
@@ -13,7 +18,10 @@ public class Test {
     public static void main(String[] args) {
         DBController dbc = DBController.getInstance();
         dbc.initDBConnection();
-        dbc.handleUpdateDB2("ocr_product_name2", 0, 0, 2, "abc");
+        
+        String productName1 = "Spritzgebäck"; 
+        boolean b = dbc.handleCheckSecondName(productName1);
+        System.out.println(b);
         //String settingTimeFromDB = dbc.handleGetDB2("product_name1",0,1,1);
         //System.out.println(settingTimeFromDB);
     }

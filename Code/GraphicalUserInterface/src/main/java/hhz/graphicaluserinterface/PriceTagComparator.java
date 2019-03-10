@@ -82,7 +82,7 @@ public class PriceTagComparator {
                     Long correlationID = (Long) loopObject.get("id");
                     if (Objects.equals(correlationID, loopID)) {
                         try {
-                            //searchin for price of product
+                            //searching for price of product
                             String text = (String) loopObject.get("text");
                             double potentialPrice = Double.parseDouble(text);
                             JSONArray boundaryBox = (JSONArray) loopObject.get("boundingBox");
@@ -116,6 +116,15 @@ public class PriceTagComparator {
                         lines.remove(j);
                     }
                 }
+                
+                //check if product has two names
+                DBController dbc = DBController.getInstance();
+                dbc.initDBConnection();
+                boolean bool = dbc.handleCheckSecondName(productName1);
+                if (bool) {
+                    productName2 = "";
+                }
+                
                 productPriceboundaryBoxArea = 0l;
                 productName1Y = Long.MAX_VALUE;
                 productName2Y = Long.MAX_VALUE;
