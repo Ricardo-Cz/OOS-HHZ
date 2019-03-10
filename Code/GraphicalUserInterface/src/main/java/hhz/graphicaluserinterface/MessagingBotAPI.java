@@ -54,14 +54,55 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
         if (message != null && message.hasText()) {
             String command = message.getText();
             switch (command){
-                case "Felmeldung": {
-                     //logik um Fehlstatus zu entfernen, weil kein Fehler da war
-                    sendMsg(message, "");
+                case "Fehlmeldung": {
+                    if (message.isReply()) {
+                        String text = message.getReplyToMessage().getText();
+                        if (text.contains("falschen Preis")) {
+                            String[] dividedText = text.split(" ");
+                            DBController dbc = DBController.getInstance();
+                            dbc.initDBConnection();
+                            dbc.handleUpdateDB2("status_price", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "Preis korrekt");
+                            sendMsg(message, "Wurde vermerkt!");
+                        } else if (text.contains("Fehlplatzierung")) {
+                            String[] dividedText = text.split(" ");
+                            DBController dbc = DBController.getInstance();
+                            dbc.initDBConnection();
+                            dbc.handleUpdateDB2("status_name", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "OK");
+                            sendMsg(message, "Wurde vermerkt!");
+                        } else {
+                            sendMsg(message, "Das ist keine Meldung!");
+                        }
+                    } else {
+                        sendMsg(message, "Bitte verweisen Sie auf eine Meldung!");
+                    }
+
                     break;
                 }
                 case "Behoben": {
-                     //logik um Fehlstatus zu entfernen und in ok Status umzuformen
-                    sendMsg(message, "");
+                    if (message.isReply()) {
+                        String text = message.getReplyToMessage().getText();
+                        if (text.contains("falschen Preis")){
+                            String[] dividedText = text.split(" ");
+                            DBController dbc = DBController.getInstance();
+                            dbc.initDBConnection();
+                            dbc.handleUpdateDB2("status_price", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "Preis korrekt");
+                            sendMsg(message, "Wurde vermerkt!");
+                        }
+                        else if (text.contains("Fehlplatzierung")){
+                            String[] dividedText = text.split(" ");
+                            DBController dbc = DBController.getInstance();
+                            dbc.initDBConnection();
+                            dbc.handleUpdateDB2("status_name", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "OK");
+                            sendMsg(message, "Wurde vermerkt!");
+                        }
+                        else {
+                            sendMsg(message, "Das ist keine Meldung!");
+                        }
+                    }
+                    else {
+                        sendMsg(message, "Bitte verweisen Sie auf eine Meldung!");
+                    }
+         
                     break;
                 }
                 case "Report": {

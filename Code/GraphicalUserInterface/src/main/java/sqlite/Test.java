@@ -18,10 +18,8 @@ public class Test {
     public static void main(String[] args) {
         DBController dbc = DBController.getInstance();
         dbc.initDBConnection();
-        
-        String productName1 = "Spritzgebäck"; 
-        boolean b = dbc.handleCheckSecondName(productName1);
-        System.out.println(b);
+         
+        dbc.handleUpdateDB2("status_name",0,0,0,"Fehlplatzierung");
         //String settingTimeFromDB = dbc.handleGetDB2("product_name1",0,1,1);
         //System.out.println(settingTimeFromDB);
     }
