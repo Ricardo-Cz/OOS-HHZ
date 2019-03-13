@@ -9,6 +9,7 @@ import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.mode
 import com.microsoft.azure.cognitiveservices.vision.customvision.prediction.models.Prediction;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,7 +67,6 @@ public class FileHelperClass {
         //print(files);
         return imageMap;
     }
-    
 
     public static Map<String, List<byte[]>> getSubBytesPriceTagsFromImage(Map<String, ImagePrediction> mapPrediction) {
 
@@ -94,36 +94,35 @@ public class FileHelperClass {
 //                double priceBox_left_rel = 0, priceBox_top_rel = 0;
                 if (prediction.probability() * 100.0f >= PASS_THROUGH_PROBABILITY) {
 
-                                //prepare for OCR
+                    //prepare for OCR
                     System.out.println("Bild zuschneiden:");
-                    double priceBox_left_rel = prediction.boundingBox().left()-0.06;
-                    if (priceBox_left_rel < 0){
+                    double priceBox_left_rel = prediction.boundingBox().left() - 0.06;
+                    if (priceBox_left_rel < 0) {
                         priceBox_left_rel = 0;
                     }
                     System.out.println(priceBox_left_rel);
 
-                    double priceBox_top_rel = prediction.boundingBox().top()-0.04;
-                    if (priceBox_top_rel < 0){
+                    double priceBox_top_rel = prediction.boundingBox().top() - 0.04;
+                    if (priceBox_top_rel < 0) {
                         priceBox_top_rel = 0;
                     }
                     System.out.println(priceBox_top_rel);
-                    double priceBox_width_rel = prediction.boundingBox().width()+0.08;
-                    if ((priceBox_left_rel + priceBox_width_rel) > 1){
+                    double priceBox_width_rel = prediction.boundingBox().width() + 0.08;
+                    if ((priceBox_left_rel + priceBox_width_rel) > 1) {
                         priceBox_width_rel = 1 - priceBox_left_rel - 0.001;
                     }
                     System.out.println(priceBox_width_rel);
-                    double priceBox_height_rel = prediction.boundingBox().height()+0.10;
-                    if ((priceBox_top_rel + priceBox_height_rel) > 1){
-                        priceBox_height_rel = 1- priceBox_top_rel - 0.001;
+                    double priceBox_height_rel = prediction.boundingBox().height() + 0.10;
+                    if ((priceBox_top_rel + priceBox_height_rel) > 1) {
+                        priceBox_height_rel = 1 - priceBox_top_rel - 0.001;
                     }
                     System.out.println(priceBox_height_rel);
 
-                    int priceBox_left_abs = (int)(width*priceBox_left_rel);
-                    int priceBox_top_abs = (int)(height*priceBox_top_rel);
-                    int priceBox_width_abs = (int) (priceBox_width_rel*width);
-                    int priceBox_height_abs =(int) (priceBox_height_rel*height);
-                    
-                    
+                    int priceBox_left_abs = (int) (width * priceBox_left_rel);
+                    int priceBox_top_abs = (int) (height * priceBox_top_rel);
+                    int priceBox_width_abs = (int) (priceBox_width_rel * width);
+                    int priceBox_height_abs = (int) (priceBox_height_rel * height);
+
 //                    do {
 //                        if ((priceBox_left_abs + priceBox_width_abs) > width) {
 //                            distance_width -= 0.005;
@@ -160,9 +159,9 @@ public class FileHelperClass {
                         baos.flush();
                         byteArray = baos.toByteArray();
                         byteArrayList.add(byteArray);
-                        
+
                         OutputStream outputStream = new FileOutputStream("C:/OOS_KL/test.jpg");
-                        
+
                         baos.writeTo(outputStream);
 
                         baos.close();
@@ -179,7 +178,7 @@ public class FileHelperClass {
         return mapWithPriceTags;
     }
 
-private static byte[] getSubBytesFromImage(File file) {
+    private static byte[] getSubBytesFromImage(File file) {
         byte[] byteArray = null;
         try {
             BufferedImage img = ImageIO.read(file);
@@ -189,11 +188,10 @@ private static byte[] getSubBytesFromImage(File file) {
             baos.flush();
             byteArray = baos.toByteArray();
             baos.close();
-        
 
-} catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(FileHelperClass.class
-.getName()).log(Level.SEVERE, null, ex);
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return byteArray;
     }
@@ -236,24 +234,21 @@ private static byte[] getSubBytesFromImage(File file) {
         }
     }
 
-    public static 
-
-long getFileCreationEpoch(File file) {
+    public static long getFileCreationEpoch(File file) {
         try {
             BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class
-);
+            );
             return attr.creationTime().toInstant().toEpochMilli();
         } catch (IOException e) {
             throw new RuntimeException(file.getAbsolutePath(), e);
         }
     }
 
-    public static String 
-
-getFileCreationTime(File file) {
+    public static String
+            getFileCreationTime(File file) {
         try {
             BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class
-);
+            );
             return attr.creationTime().toString();
         } catch (IOException e) {
             throw new RuntimeException(file.getAbsolutePath(), e);
@@ -283,6 +278,20 @@ getFileCreationTime(File file) {
                 return Long.valueOf(l1).compareTo(l2);
             }
         });
+    }
+
+    public static String[] getKey() {
+        String[] keys = {"dummy", "dummy"};
+        try {
+            FileReader fr = new FileReader("C:/OOS_KL/PriceTagRecognitionAPI.txt");
+            BufferedReader br = new BufferedReader(fr);
+            keys[0] = br.readLine();
+            keys[1] = br.readLine();
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return keys;
     }
 
     public List<String> ChangeFileExtensionToDotJson(List<String> filePaths) {
@@ -315,15 +324,12 @@ getFileCreationTime(File file) {
                 file.flush();
                 System.out.println("Json erfolgreich im Verzeichnis: " + filePath + " abgespeichert.");
 
-            
-
-} catch (IOException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(FileHelperClass.class
-.getName()).log(Level.SEVERE, null, ex);
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-
     void WriteJsonToFile(String json, String filePath) {
 
         if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
@@ -335,23 +341,21 @@ getFileCreationTime(File file) {
                 file.flush();
                 System.out.println("Json erfolgreich im Verzeichnis: " + filePath + " abgespeichert.");
 
-            
-
-} catch (IOException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(FileHelperClass.class
-.getName()).log(Level.SEVERE, null, ex);
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
     static JSONArray ReadJsonFromFile(String filePath) {
         JSONParser parser = new JSONParser();
-       // JSONObject jsonObject = null;
-       JSONArray jsonArray = null;
+        // JSONObject jsonObject = null;
+        JSONArray jsonArray = null;
         try {
             Object obj = parser.parse(new FileReader(filePath));
             jsonArray = (JSONArray) obj;
-           // jsonObject = (JSONObject) obj;
+            // jsonObject = (JSONObject) obj;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
