@@ -859,6 +859,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 "Platz", "Name", "Preis"
             }
         ));
+        jScrollPane1.setViewportView(jTable1);
 
         reportingPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 622, 100));
 
