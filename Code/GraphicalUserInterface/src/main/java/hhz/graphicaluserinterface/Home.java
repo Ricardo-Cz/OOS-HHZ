@@ -31,6 +31,7 @@ import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -59,6 +60,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.json.simple.JSONObject;
 import sqlite.DBController;
@@ -190,7 +192,8 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jButton5 = new javax.swing.JButton();
+        original_Image = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -878,35 +881,42 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setFont(new java.awt.Font("Segoe UI Symbol", 0, 36)); // NOI18N
-        jButton5.setText("Gewählten Platz analysieren");
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
+        original_Image.setText("Image");
+
+        jButton4.setText("Show original Image");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout reportingPanelLayout = new javax.swing.GroupLayout(reportingPanel);
         reportingPanel.setLayout(reportingPanelLayout);
         reportingPanelLayout.setHorizontalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reportingPanelLayout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(600, 600, 600))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportingPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(reportingPanelLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jButton1)
+                .addGap(37, 37, 37)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(606, 606, 606))
+            .addGroup(reportingPanelLayout.createSequentialGroup()
+                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(reportingPanelLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(reportingPanelLayout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4)
+                            .addComponent(original_Image))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         reportingPanelLayout.setVerticalGroup(
             reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -922,9 +932,11 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                .addGap(321, 321, 321))
+                .addGap(29, 29, 29)
+                .addComponent(jButton4)
+                .addGap(33, 33, 33)
+                .addComponent(original_Image)
+                .addContainerGap(355, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportingPanel, "card3");
@@ -1594,6 +1606,20 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         task.execute();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        try {
+            Image image = ImageIO.read(new File("src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg")); // transform it 
+            Image newimg = image.getScaledInstance(280, 280, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+
+            original_Image.setIcon(new ImageIcon(newimg));
+            original_Image.repaint();
+        } catch (IOException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     public void createTable() {
         PriceTagComparator.getPriceTagsFromDB();
         JTable table;
@@ -1747,22 +1773,50 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 
     public void analyse(int shelf_id, int row_id, int place_id, String folder_path) {
         FileHelperClass fh = new FileHelperClass();
+        File destination_folder;
         //Bildordner auswählen
         if (folder_path.isEmpty()) {
+            folder_path = "./src/main/resources/original/" + shelf_id + "_" + row_id + "_" + place_id;
+            destination_folder = new File(folder_path);
+            String old_files = "./src/main/resources/original_old/" + shelf_id + "_" + row_id + "_" + place_id;
+
             JFileChooser chooser = new JFileChooser();
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int returnVal = chooser.showOpenDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
             }
-            folder_path = chooser.getSelectedFile().getAbsolutePath();
+            File source_file = chooser.getSelectedFile();
+            File destination_file = new File(folder_path + "/1.jpg");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_");
+            if (null != destination_folder.list() && destination_folder.list().length != 0) {
+                System.out.println("yes");
+                for (File f : destination_folder.listFiles()) {
+                    try {
+                        FileUtils.copyFile(f, new File(old_files + "/" + sdf.format(destination_file.lastModified()) + f.getName()));
+                        f.delete();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            try {
+                FileUtils.copyFile(source_file, destination_file);
+            } catch (IOException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            destination_folder = new File(folder_path);
         }
 
         //Bild an OCR
         PriceTagRecognitionAPI.startAnalyse("", folder_path);
         ProductRecognitionAPI.startAnalyse("", folder_path);
-        File folder = new File(folder_path);
-        File[] listOfFiles = folder.listFiles();
+
+        File[] listOfFiles = destination_folder.listFiles();
         String image_path = null;
         for (File file : listOfFiles) {
             if (file.isFile() && FileHelperClass.getFileExtension(file).toLowerCase().equals("jpg")) {
@@ -1786,7 +1840,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         dbc2.handleUpdateDB2("ocr_price", shelf_id, row_id, place_id, ocr_price);
         //Ergebnis CV in DB (mithilfe von Regalplatz)
         dbc2.handleUpdateDB2("cv_product_name", shelf_id, row_id, place_id, cv_product_name);
-        
+
         //show_status(shelf_id, row_id, place_id);
     }
 
@@ -1846,7 +1900,8 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 Home home = new Home();
                 home.setVisible(true);
                 home.setTitle("Kaufland - Shelf Management System");
-                home.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo40.jpg")).getImage());
+                //home.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo40.jpg")).getImage());
+                home.setIconImage(new javax.swing.ImageIcon("src/images/logo40.jpg").getImage());
                 //Aus DB PATH abfragen -> der in settings gewählt wurde
                 DBController dbc = DBController.getInstance();
                 dbc.initDBConnection();
@@ -1887,7 +1942,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jFileName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1966,6 +2021,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JPanel logopanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel nextImage;
+    private javax.swing.JLabel original_Image;
     private javax.swing.JPanel reporting;
     private javax.swing.JPanel reportingPanel;
     private javax.swing.JPanel settings;

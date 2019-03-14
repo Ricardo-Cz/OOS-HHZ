@@ -160,7 +160,14 @@ public class FileHelperClass {
                         byteArray = baos.toByteArray();
                         byteArrayList.add(byteArray);
 
-                        OutputStream outputStream = new FileOutputStream("C:/OOS_KL/test.jpg");
+                        //OutputStream outputStream = new FileOutputStream("C:/OOS_KL/test.jpg");
+                        File fittedImage = new File("src/main/resources/ocr/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id);
+                        if(!fittedImage.exists()){
+                            fittedImage.mkdirs();
+                        }
+                        //fittedImage.createNewFile(); // if file already exists will do nothing 
+                        //FileOutputStream oFile = new FileOutputStream(fittedImage, false);
+                        OutputStream outputStream = new FileOutputStream("src/main/resources/ocr/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id +"/1.jpg");
 
                         baos.writeTo(outputStream);
 
@@ -330,6 +337,7 @@ public class FileHelperClass {
             }
         }
     }
+
     void WriteJsonToFile(String json, String filePath) {
 
         if (filePath.lastIndexOf(".") != -1 && filePath.lastIndexOf(".") != 0) {
