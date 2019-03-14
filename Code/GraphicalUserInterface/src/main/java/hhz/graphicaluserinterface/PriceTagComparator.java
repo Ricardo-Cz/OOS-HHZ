@@ -29,7 +29,7 @@ import sqlite.DBController;
  */
 public class PriceTagComparator {
 
-    private static final float PASS_THROUGH_PROBABILITY = (float) 60.00;
+    public static final float PASS_THROUGH_PROBABILITY = (float) 60.00;
     private static final String PRICE_TAGS_TABLE = "price_tags";
     private static final String PRICE_TAGS_ROW = "";
     private static final int ROW_AMOUNT = 6;

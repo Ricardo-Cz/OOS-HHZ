@@ -5,11 +5,14 @@
  */
 package hhz.graphicaluserinterface;
 
+import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractCvBoundingBox;
 import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractLineBoundingBox;
 import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractLineText;
+import static hhz.graphicaluserinterface.GraphicHelperClass.ExtractCvLineText;
 import static hhz.graphicaluserinterface.GraphicHelperClass.scaleFactor;
 import hhz.graphicaluserinterface.json.BoundingBoxObject;
 import hhz.graphicaluserinterface.json.Lines;
+import hhz.graphicaluserinterface.json2.MainObject;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -191,9 +194,22 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
         original_Image = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jLabel35 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        priceTag_Image = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -828,7 +844,10 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         mainPanel.add(virtualRunaroundPanel, "card4");
 
         reportingPanel.setBackground(new java.awt.Color(255, 255, 255));
+        reportingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(204, 35, 42));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Soll", null, null},
@@ -840,9 +859,11 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 "Platz", "Name", "Preis"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+
+        reportingPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 622, 100));
 
         jTable2.setDefaultRenderer(Object.class, renderer);
+        jTable2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -860,84 +881,104 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         });
         jScrollPane3.setViewportView(jTable2);
 
+        reportingPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 622, 90));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 35, 42));
         jButton1.setText("Gewählten Platz: Analysieren");
+        jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        reportingPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 200, 40));
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(204, 35, 42));
         jButton2.setText("Alle Plätze: Analysieren");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        reportingPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 200, 40));
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(204, 35, 42));
         jButton3.setText("Alle Plätze: Letzter Status");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        reportingPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 250, 200, 40));
 
         original_Image.setText("Image");
+        reportingPanel.add(original_Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 550, 310));
+        reportingPanel.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 200, -1));
 
-        jButton4.setText("Show original Image");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/down-arrow.png"))); // NOI18N
+        reportingPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 20, 30));
 
-        javax.swing.GroupLayout reportingPanelLayout = new javax.swing.GroupLayout(reportingPanel);
-        reportingPanel.setLayout(reportingPanelLayout);
-        reportingPanelLayout.setHorizontalGroup(
-            reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportingPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(37, 37, 37)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(606, 606, 606))
-            .addGroup(reportingPanelLayout.createSequentialGroup()
-                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(reportingPanelLayout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(reportingPanelLayout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addComponent(original_Image))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        reportingPanelLayout.setVerticalGroup(
-            reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reportingPanelLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(reportingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jButton4)
-                .addGap(33, 33, 33)
-                .addComponent(original_Image)
-                .addContainerGap(355, Short.MAX_VALUE))
-        );
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel17.setText("Product Recognition Image");
+        reportingPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel18.setText("Platz");
+        reportingPanel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 30, -1));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/right-arrow (1).png"))); // NOI18N
+        reportingPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 60, -1));
+
+        jSeparator8.setForeground(new java.awt.Color(204, 35, 42));
+        reportingPanel.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 620, 10));
+
+        jTextPane2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jTextPane2.setForeground(new java.awt.Color(204, 35, 42));
+        jScrollPane4.setViewportView(jTextPane2);
+
+        reportingPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 270, 340));
+
+        jLabel35.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel35.setText("Infobox - Product Recognition");
+        reportingPanel.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, -1, -1));
+
+        jTextPane3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jTextPane3.setForeground(new java.awt.Color(204, 35, 42));
+        jScrollPane5.setViewportView(jTextPane3);
+
+        reportingPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, 270, 340));
+
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel37.setText("Infobox - Price Tag Recognition");
+        reportingPanel.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, -1, -1));
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel38.setText("Reihe");
+        reportingPanel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        reportingPanel.add(priceTag_Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 400, 560, 350));
+
+        jLabel39.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel39.setText("Price Tag Image");
+        reportingPanel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, -1, -1));
 
         mainPanel.add(reportingPanel, "card3");
 
@@ -1197,8 +1238,8 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     }//GEN-LAST:event_gallaryviewMouseClicked
 
     //Globale shared Variablen
-    static float newScaleFactorHeight;
-    static float newScaleFactorWidth;
+    static double newScaleFactorHeight = 0;
+    static double newScaleFactorWidth = 0;
     static List<String> imagePath;
     static List<String> imagesJsonPath;
     int[] allXCoordinatesOfBoundingBox;
@@ -1224,7 +1265,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                     imagesJsonPahtCopyForCamEvent = imagesJsonPath;
                     //Skalierungswerte für Start der Application festlegen
                     if (!emptyCondition) {
-                        getScaledImageIconFromImagePath(imagePath.get(0));
+                        getScaledImageIconFromImagePath(imagePath.get(0),jLabel9);
                         jLabel9.setText("Please choose an available cam view from below");
                         jLabel9.setHorizontalAlignment(JLabel.CENTER);
                     } else {
@@ -1323,19 +1364,18 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         return emptyCondition;
     }
 
-    private ImageIcon getScaledImageIconFromImagePath(String imagePath) {
+    private ImageIcon getScaledImageIconFromImagePath(String imagePath, JLabel jlabel) {
         BufferedImage img = null;
         Image image = null;
         try {
             img = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
         }
-        newScaleFactorWidth = (float) ((img.getWidth() / jLabel9.getWidth()));
-        newScaleFactorHeight = (float) (img.getHeight() / jLabel9.getHeight());
+        newScaleFactorWidth = (double)jlabel.getWidth() / (double) img.getWidth();
+        newScaleFactorHeight = (double)jlabel.getHeight() / (double) img.getHeight();
         if (newScaleFactorWidth != 0 || newScaleFactorHeight != 0) {
-            image = img.getScaledInstance((int) (img.getWidth() / newScaleFactorWidth), (int) (img.getHeight() / newScaleFactorHeight), Image.SCALE_SMOOTH);
+            image = img.getScaledInstance((int) (img.getWidth() * newScaleFactorWidth), (int) (img.getHeight() * newScaleFactorHeight), Image.SCALE_SMOOTH);
         } else {
             image = img;
         }
@@ -1360,13 +1400,15 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private String getRecognizedText(ArrayList<BoundingBoxObject> bbo) {
         return "Folgender Text wurde erkannt: " + "\n\n" + ExtractLineText(bbo);
     }
+    private String getCvRecognizedText(MainObject obj) {
+        return "Folgende Produkte wurden erkannt: " + "\n\n" + ExtractCvLineText(obj);
+    }
 
-    private void setXAndYCoordinates(ArrayList<BoundingBoxObject> bbo) {
+    private void setXAndYCoordinatesOfOcr(ArrayList<BoundingBoxObject> bbo) {
         List<Integer> lineBoundingBox = ExtractLineBoundingBox(bbo);
         allXCoordinatesOfBoundingBox = GraphicHelperClass.ListToIntArray(GraphicHelperClass.ExtractTheXCoordinates(lineBoundingBox));
         allYCoordinatesOfBoundingBox = GraphicHelperClass.ListToIntArray(GraphicHelperClass.ExtractTheYCoordinates(lineBoundingBox));
     }
-
     int sliderIndex = 1;
     boolean changeCam = false;
     boolean slideBack = false;
@@ -1383,14 +1425,14 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 
             if (!changeCam) {
                 ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
-                setXAndYCoordinates(bbo);
+                setXAndYCoordinatesOfOcr(bbo);
                 String recognizedText = getRecognizedText(bbo);
-                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex), jLabel9);
                 setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
                 setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
                 jTextPane1.setText(recognizedText);
                 jLabel9.setIcon(imageIcon);
-                repaint(jLabel9.getGraphics());
+                repaintOcr(jLabel9.getGraphics());
                 sliderIndex--;
                 if (sliderIndex < 0) {
                     slideNext = false;
@@ -1421,15 +1463,15 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 
             if (sliderIndex < imagePahtCopyForCamEvent.size()) {
                 ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
-                setXAndYCoordinates(bbo);
+                setXAndYCoordinatesOfOcr(bbo);
                 String recognizedText = getRecognizedText(bbo);
-                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex));
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex),jLabel9);
 
                 setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
                 setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
                 jTextPane1.setText(recognizedText);
                 jLabel9.setIcon(imageIcon);
-                repaint(jLabel9.getGraphics());
+                repaintOcr(jLabel9.getGraphics());
                 sliderIndex++;
                 changeCam = false;
                 if (sliderIndex == imagePahtCopyForCamEvent.size()) {
@@ -1586,6 +1628,8 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             gl_place_id = jTable2.getSelectedColumn();
             System.out.println("shelf_id: " + gl_shelf_id + "  row_id:" + gl_row_id + "  place_id:" + gl_place_id);
             show_status(gl_shelf_id, gl_row_id, gl_place_id);
+            showOcrAnalyse(gl_shelf_id, gl_row_id, gl_place_id);
+            showCvAnalyse(gl_shelf_id, gl_row_id, gl_place_id);
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
@@ -1594,6 +1638,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             analyse(gl_shelf_id, gl_row_id, gl_place_id, "");
             show_status(gl_shelf_id, gl_row_id, gl_place_id);
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1605,21 +1650,32 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         task.addPropertyChangeListener(this);
         task.execute();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-        try {
-            Image image = ImageIO.read(new File("src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg")); // transform it 
-            Image newimg = image.getScaledInstance(280, 280, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-
-            original_Image.setIcon(new ImageIcon(newimg));
-            original_Image.repaint();
-        } catch (IOException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+    public void showCvAnalyse(int shelf_id, int row_id, int place_id){
+        String originalImagePath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg";
+        String originalJsonPath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1_.json";
+        ImageIcon newimg = getScaledImageIconFromImagePath(originalImagePath, original_Image);
+        if(newimg !=null){
+        MainObject obj = GraphicHelperClass.getInitializedMainObject(originalJsonPath);
+        String recognizedText = getCvRecognizedText(obj);
+        jTextPane2.setText(recognizedText);
+        original_Image.setIcon(newimg);
+        repaintCv(original_Image.getGraphics(), ExtractCvBoundingBox(obj), newimg);
         }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
+    }
+    public void showOcrAnalyse(int shelf_id, int row_id, int place_id){
+        String priceTagImagePath = "src/main/resources/ocr/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg";
+        String priceTagJsonPath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.json";
+        ImageIcon newimg = getScaledImageIconFromImagePath(priceTagImagePath, priceTag_Image);
+        if(newimg !=null){
+        ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(priceTagJsonPath);
+        setXAndYCoordinatesOfOcr(bbo);
+        String recognizedText = getRecognizedText(bbo);
+        jTextPane3.setText(recognizedText);
+        priceTag_Image.setIcon(newimg);
+        repaintOcr(priceTag_Image.getGraphics()); 
+        }
+    }
+    
     public void createTable() {
         PriceTagComparator.getPriceTagsFromDB();
         JTable table;
@@ -1652,16 +1708,16 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             imagesJsonPahtCopyForCamEvent = fhc.ChangeFileExtensionToDotJson(camXImagePaths);
             ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(0));
 
-            setXAndYCoordinates(bbo);
+            setXAndYCoordinatesOfOcr(bbo);
             String recognizedText = getRecognizedText(bbo);
-            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0));
+            ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(0), jLabel9);
 
             setFileNameToJLabel(imagePahtCopyForCamEvent.get(0));
             setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(0));
             jTextPane1.setText(recognizedText);
             jLabel9.setHorizontalAlignment(jLabel9.LEADING);
             jLabel9.setIcon(imageIcon);
-            repaint(jLabel9.getGraphics());
+            repaintOcr(jLabel9.getGraphics());
         }
         setUnderlineCamXLabel(cam);
     }
@@ -1844,7 +1900,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         //show_status(shelf_id, row_id, place_id);
     }
 
-    public void repaint(Graphics g) {
+    public void repaintOcr(Graphics g) {
         super.paint(g);
         Thread t = new Thread(new Runnable() {
             public void run() {
@@ -1877,7 +1933,37 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         });
         t.start();
     }
-
+    //coordinates contains: left,top,width,height,left,top,... in row state
+    public void repaintCv(Graphics g, List<Double> coordinates, ImageIcon img) {
+        super.paint(g);
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                SwingUtilities.invokeLater(() -> {
+                    if (!coordinates.isEmpty()) {
+                        int number = 1;
+                        double iw = img.getIconWidth();
+                        double ih = img.getIconHeight();
+                        for (int i = 0; i < coordinates.size(); i+=4) {
+                            int x = (int) Math.round(coordinates.get(i) * iw);
+                            int y = (int) Math.round(coordinates.get(i + 1) * ih);
+                            int w = (int) Math.round(coordinates.get(i + 2) * iw);
+                            int h = (int) Math.round(coordinates.get(i + 3) * ih);
+                            g.setColor(Color.red);
+                            g.drawRect(x, y, w, h);
+                            g.setColor(Color.RED);
+                            g.setFont(new Font("Normal", Font.BOLD, 14));
+                            g.drawString(number + ") ", x + w / 2, y + h / 2);
+                            number++;
+                            if (i == coordinates.size()) {
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        t.start();
+    }
     /**
      * @param args the command line arguments
      */
@@ -1942,7 +2028,6 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jFileName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1951,6 +2036,10 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -1968,7 +2057,11 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1992,6 +2085,8 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPaneforTable;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -2000,9 +2095,12 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
     private javax.swing.JComboBox<String> jcombo1;
     private javax.swing.JComboBox<String> jcombo2;
     private javax.swing.JComboBox<String> jcomboTime1;
@@ -2022,6 +2120,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel nextImage;
     private javax.swing.JLabel original_Image;
+    private javax.swing.JLabel priceTag_Image;
     private javax.swing.JPanel reporting;
     private javax.swing.JPanel reportingPanel;
     private javax.swing.JPanel settings;

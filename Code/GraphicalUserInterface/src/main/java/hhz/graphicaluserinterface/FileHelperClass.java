@@ -373,7 +373,23 @@ public class FileHelperClass {
         }
         return jsonArray;
     }
-
+    static JSONObject ReadJsonObjectFromFile(String filePath) {
+        JSONParser parser = new JSONParser();
+        // JSONObject jsonObject = null;
+        JSONObject jsonObject = null;
+        try {
+            Object obj = parser.parse(new FileReader(filePath));
+            jsonObject = (JSONObject)obj;
+            // jsonObject = (JSONObject) obj;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
     List<String> sortPathsByTheFolderAndCreationTime(String directoryPath) throws IOException {
         //sort by directory
         File[] files = sortPathByFolder(directoryPath);
