@@ -1809,7 +1809,19 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 2);
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 1);
         }
-
+        
+        //Webservice LED aufrufen
+        if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis")) {
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FF0000\"}", row_id, place_id); //platz rot
+        }
+        if (name_status.equals("Fehlplatzierung") && price_status.equals("Preis korrekt")){
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FFFF00\"}", row_id, place_id); //platz gelb
+        }
+        if (name_status.equals("Platz korrekt") && price_status.equals("Falscher Preis")) {
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#ffa500\"}", row_id, place_id); //platz orange
+        } else {
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#00ff00\"}", row_id, place_id); //platz grün
+        }
         //Soll-Wert
 //	Ist-Wert (OCR)
 //	Ist-Wert (Custom Vision)
