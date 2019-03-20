@@ -143,7 +143,8 @@ public class DBController {
         String result = "";
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM price_tags WHERE shelf_id = " + shelf_id + " AND row_id = " + row_id + " AND place_id = " + place_id);
+            String query = "SELECT * FROM price_tags WHERE shelf_id = " + shelf_id + " AND row_id = " + row_id + " AND place_id = " + place_id;
+            ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 result = rs.getString(column_name);
             }
