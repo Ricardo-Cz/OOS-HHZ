@@ -42,12 +42,12 @@ public class WebServiceLED {
             os.write(json.getBytes("UTF-8"));
             os.close();
             // read the response
-           // InputStream in = new BufferedInputStream(conn.getInputStream());
-           // String result = IOUtils.toString(in, "UTF-8");
-            //System.out.println(result);
-            //JSONObject myResponse = new JSONObject(result);
-            //System.out.println("jsonrpc- " + myResponse.getString("jsonrpc"));
-            //in.close();
+            InputStream in = new BufferedInputStream(conn.getInputStream());
+            String result = IOUtils.toString(in, "UTF-8");
+            System.out.println(result);
+            JSONObject myResponse = new JSONObject(result);
+            System.out.println("jsonrpc- " + myResponse.getString("jsonrpc"));
+            in.close();
             
             conn.disconnect();
         } catch (Exception e) {

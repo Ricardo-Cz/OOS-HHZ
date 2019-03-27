@@ -159,15 +159,26 @@ public class FileHelperClass {
                         baos.flush();
                         byteArray = baos.toByteArray();
                         byteArrayList.add(byteArray);
-
+                        int sID,rID,pID = 0;
                         //OutputStream outputStream = new FileOutputStream("C:/OOS_KL/test.jpg");
-                        File fittedImage = new File("src/main/resources/ocr/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id);
+                        if(Home.gl_shelf_id == -1 && Home.gl_row_id == -1 && Home.gl_place_id == -1){
+                          String folder_name = new File(path).getParentFile().getName();
+                          String[] ids = folder_name.split("_");
+                          sID = Integer.parseInt(ids[0]);
+                          rID = Integer.parseInt(ids[1]);
+                          pID = Integer.parseInt(ids[2]);
+                        } else {
+                            sID = Home.gl_shelf_id;
+                            rID = Home.gl_row_id;
+                            pID = Home.gl_place_id;
+                        }
+                        File fittedImage = new File("src/main/resources/ocr/" + sID + "_" + rID + "_" + pID);
                         if(!fittedImage.exists()){
                             fittedImage.mkdirs();
                         }
                         //fittedImage.createNewFile(); // if file already exists will do nothing 
                         //FileOutputStream oFile = new FileOutputStream(fittedImage, false);
-                        OutputStream outputStream = new FileOutputStream("src/main/resources/ocr/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id +"/1.jpg");
+                        OutputStream outputStream = new FileOutputStream("src/main/resources/ocr/" + sID + "_" + rID + "_" + pID +"/1.jpg");
 
                         baos.writeTo(outputStream);
 

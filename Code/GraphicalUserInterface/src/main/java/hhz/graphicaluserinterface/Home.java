@@ -1636,7 +1636,15 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (gl_shelf_id != -1 && gl_row_id != -1 && gl_place_id != -1) {
-            analyse(gl_shelf_id, gl_row_id, gl_place_id, "");
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnVal = chooser.showOpenDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+            }
+            File source_file = chooser.getSelectedFile();
+            analyse(gl_shelf_id, gl_row_id, gl_place_id, source_file.getAbsolutePath());
+            //analyse(gl_shelf_id, gl_row_id, gl_place_id, "");
             show_status(gl_shelf_id, gl_row_id, gl_place_id);
         }
         
@@ -1754,7 +1762,22 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             jProgressBar1.repaint();
         }
     }
-
+    public boolean matchName(String original, String recognition){
+        String[][] UMLAUT_REPLACEMENTS = { { "Ä", "A" }, { "Ü", "U" }, { "Ö", "O" }, { "ä", "a" }, { "ü", "u" }, { "ö", "o" }, { "-", "" }};
+        original = original.trim();//Entferne leerzeichen am begin und ende
+        recognition = recognition.trim(); //Entferne leerzeichen am begin und ende
+        String resultOriginal= original;
+        String resultRecognition = recognition;
+        if(original.equals(recognition)){
+            return true;
+        } else {
+            for (int i = 0; i < UMLAUT_REPLACEMENTS.length; i++) {
+                resultOriginal = resultOriginal.replaceAll(UMLAUT_REPLACEMENTS[i][0], UMLAUT_REPLACEMENTS[i][1]);
+                resultRecognition = resultRecognition.replaceAll(UMLAUT_REPLACEMENTS[i][0], UMLAUT_REPLACEMENTS[i][1]); 
+            }
+            return resultOriginal.equals(resultRecognition);
+        }
+    } 
     public void show_status(int shelf_id, int row_id, int place_id) {
         String product_name1 = dbc2.handleGetDB2("product_name1", shelf_id, row_id, place_id);
         String product_name2 = dbc2.handleGetDB2("product_name2", shelf_id, row_id, place_id);
@@ -1769,7 +1792,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             ocr_product_name = ocr_product_name1;
         }
         String cv_product_name = dbc2.handleGetDB2("cv_product_name", shelf_id, row_id, place_id);
-
+        
         //Datenbank werte abgleichen - set status_table values
         //names
         jTable1.setValueAt(product_name, 0, 1);
@@ -1784,7 +1807,8 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         String price_status = "Gut";
         String name_status = "Gut";
         //name_status
-        if (!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)) {
+      //  if (!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)) {
+        if (!matchName(product_name,ocr_product_name) || !matchName(product_name,cv_product_name)) {
             name_status = "Fehlplatzierung";
             gesamt_status = "Schlecht";
             jTable1.setValueAt(name_status, 3, 1);
@@ -1809,19 +1833,19 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 2);
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 1);
         }
-        
+        //TODO 2te reihe mappin anpassen
         //Webservice LED aufrufen
-//        if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis")) {
-//            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FF0000\"}", row_id, place_id); //platz rot
-//        }
-//        if (name_status.equals("Fehlplatzierung") && price_status.equals("Preis korrekt")){
-//            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FFFF00\"}", row_id, place_id); //platz gelb
-//        }
-//        if (name_status.equals("Platz korrekt") && price_status.equals("Falscher Preis")) {
-//            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#ffa500\"}", row_id, place_id); //platz orange
-//        } else {
-//            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#00ff00\"}", row_id, place_id); //platz grün
-//        }
+      /* if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis")) {
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FF0000\"}", row_id, (place_id-7) *(-1)); //platz rot
+        }
+       else if (name_status.equals("Fehlplatzierung") && price_status.equals("Preis korrekt")){
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FFFF00\"}", row_id, place_id); //platz gelb
+        }
+       else if (name_status.equals("Platz korrekt") && price_status.equals("Falscher Preis")) {
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#ffa500\"}", row_id, 8-place_id); //platz orange
+        } else {
+            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#00ff00\"}", row_id, 8-place_id); //platz grün
+        } */
         
         //Soll-Wert
 //	Ist-Wert (OCR)
@@ -1841,47 +1865,39 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         }
     }
 
-    public void analyse(int shelf_id, int row_id, int place_id, String folder_path) {
+      public void analyse(int shelf_id, int row_id, int place_id, String folder_path) {
         FileHelperClass fh = new FileHelperClass();
-        File destination_folder;
-        //Bildordner auswählen
-        if (folder_path.isEmpty()) {
-            folder_path = "./src/main/resources/original/" + shelf_id + "_" + row_id + "_" + place_id;
-            destination_folder = new File(folder_path);
-            String old_files = "./src/main/resources/original_old/" + shelf_id + "_" + row_id + "_" + place_id;
+        File destination_folder = null;
+        String old_files = "";
 
-            JFileChooser chooser = new JFileChooser();
-            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int returnVal = chooser.showOpenDialog(this);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                currentDirectoryPathField.setText(chooser.getSelectedFile().getAbsolutePath());
+        File[] files = new File(folder_path).listFiles();
+        File source_file = null;
+        for (File f : files) {
+            if (fh.getFileExtension(f).toLowerCase().equals("jpg")) {
+                source_file = f;
+                folder_path = "./src/main/resources/original/" + shelf_id + "_" + row_id + "_" + place_id;
+                destination_folder = new File(folder_path);
+                old_files = "./src/main/resources/original_old/" + shelf_id + "_" + row_id + "_" + place_id;
             }
-            File source_file = chooser.getSelectedFile();
-            File destination_file = new File(folder_path + "/1.jpg");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_");
-            if (null != destination_folder.list() && destination_folder.list().length != 0) {
-                System.out.println("yes");
-                for (File f : destination_folder.listFiles()) {
-                    try {
-                        FileUtils.copyFile(f, new File(old_files + "/" + sdf.format(destination_file.lastModified()) + f.getName()));
-                        f.delete();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-
-            try {
-                FileUtils.copyFile(source_file, destination_file);
-            } catch (IOException ex) {
-                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-            destination_folder = new File(folder_path);
         }
-
+        if(destination_folder != null){
+        File destination_file = new File(folder_path + "/1.jpg");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_");
+        if (null != destination_folder.list() && destination_folder.list().length != 0) {
+            for (File f : destination_folder.listFiles()) {
+                try {
+                    FileUtils.copyFile(f, new File(old_files + "/" + sdf.format(destination_file.lastModified()) + f.getName()));
+                    f.delete();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        try {
+            FileUtils.copyFile(source_file, destination_file);
+        } catch (IOException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //Bild an OCR
         PriceTagRecognitionAPI.startAnalyse("", folder_path);
         ProductRecognitionAPI.startAnalyse("", folder_path);
@@ -1912,6 +1928,10 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         dbc2.handleUpdateDB2("cv_product_name", shelf_id, row_id, place_id, cv_product_name);
 
         //show_status(shelf_id, row_id, place_id);
+        } else {
+            JOptionPane.showMessageDialog(mainPanel, "You have selected wrong folder, please choose: " + shelf_id + "_" + row_id + "_" + place_id 
+                    + "/n or the selected folder does not contain a shelf image");
+        }
     }
 
     public void repaintOcr(Graphics g) {
