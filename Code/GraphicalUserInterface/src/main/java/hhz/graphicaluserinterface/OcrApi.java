@@ -142,15 +142,15 @@ public class OcrApi {
                         JSONObject json = new JSONObject(jsonString);
 
                         jArray.put(json);
-                        System.out.println("Text recognition result response: \n");
-                        System.out.println(json.toString(2));
+                        //System.out.println("Text recognition result response: \n");
+                        //System.out.println(json.toString(2));
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
             }
-            System.out.println("Response combined: \n");
-            System.out.println(jArray.toString(2));
+            //System.out.println("Response combined: \n");
+            //System.out.println(jArray.toString(2));
             fh.WriteJsonToFile(jArray, imagePathKey);
 
         }

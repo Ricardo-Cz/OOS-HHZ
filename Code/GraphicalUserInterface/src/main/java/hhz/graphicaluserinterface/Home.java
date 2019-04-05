@@ -13,10 +13,12 @@ import static hhz.graphicaluserinterface.GraphicHelperClass.scaleFactor;
 import hhz.graphicaluserinterface.json.BoundingBoxObject;
 import hhz.graphicaluserinterface.json.Lines;
 import hhz.graphicaluserinterface.json2.MainObject;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Menu;
 import java.awt.image.BufferedImage;
@@ -65,6 +67,7 @@ import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import sqlite.DBController;
 
@@ -197,7 +200,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         original_Image = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jLabelPlaceId1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -210,6 +213,23 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         jLabel38 = new javax.swing.JLabel();
         priceTag_Image = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabelPlaceId2 = new javax.swing.JLabel();
         settingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -861,7 +881,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        reportingPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 622, 100));
+        reportingPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 622, 100));
 
         jTable2.setDefaultRenderer(Object.class, renderer);
         jTable2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -895,7 +915,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 jButton1ActionPerformed(evt);
             }
         });
-        reportingPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 200, 40));
+        reportingPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 200, 40));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -907,7 +927,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 jButton2ActionPerformed(evt);
             }
         });
-        reportingPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 200, 40));
+        reportingPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 200, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -919,21 +939,21 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 jButton3ActionPerformed(evt);
             }
         });
-        reportingPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 250, 200, 40));
+        reportingPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 200, 40));
 
-        original_Image.setText("Image");
-        reportingPanel.add(original_Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 550, 310));
-        reportingPanel.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 200, -1));
+        original_Image.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        original_Image.setForeground(new java.awt.Color(204, 35, 42));
+        reportingPanel.add(original_Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 570, 370));
+        reportingPanel.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 200, -1));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 35, 42));
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/down-arrow.png"))); // NOI18N
         reportingPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 20, 30));
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel17.setText("Product Recognition Image");
-        reportingPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
+        jLabelPlaceId1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabelPlaceId1.setForeground(new java.awt.Color(204, 35, 42));
+        reportingPanel.add(jLabelPlaceId1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 430, 40, 30));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(204, 35, 42));
@@ -946,7 +966,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         reportingPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 60, -1));
 
         jSeparator8.setForeground(new java.awt.Color(204, 35, 42));
-        reportingPanel.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 620, 10));
+        reportingPanel.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 620, 10));
 
         jTextPane2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTextPane2.setForeground(new java.awt.Color(204, 35, 42));
@@ -972,14 +992,151 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 
         jLabel38.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel38.setText("Reihe");
-        reportingPanel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-        reportingPanel.add(priceTag_Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 400, 560, 350));
+        jLabel38.setText("& Preis korrekt");
+        reportingPanel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, -1, -1));
+
+        priceTag_Image.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priceTag_Image.setForeground(new java.awt.Color(204, 35, 42));
+        reportingPanel.add(priceTag_Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, 570, 360));
 
         jLabel39.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(204, 35, 42));
         jLabel39.setText("Price Tag Image");
-        reportingPanel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, -1, -1));
+        reportingPanel.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 430, -1, 30));
+
+        jPanel5.setBackground(java.awt.Color.red);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        reportingPanel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 70, 30));
+
+        jPanel6.setBackground(java.awt.Color.orange);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        reportingPanel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
+
+        jPanel7.setBackground(java.awt.Color.yellow);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        reportingPanel.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+
+        jPanel8.setBackground(java.awt.Color.green);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        reportingPanel.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
+
+        jLabel41.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel41.setText("Reihe");
+        reportingPanel.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel42.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel42.setText("& falscher Preis");
+        reportingPanel.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+
+        jLabel40.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel40.setText("& Preis korrekt");
+        reportingPanel.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+
+        jLabel43.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel43.setText("& falscher Preis");
+        reportingPanel.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
+
+        jLabel44.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel44.setText("Falschplazierung");
+        reportingPanel.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+
+        jLabel45.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel45.setText("Falschplazierung");
+        reportingPanel.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
+
+        jLabel46.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel46.setText("Platz korrekt");
+        reportingPanel.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, -1, -1));
+
+        jLabel47.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel47.setText("anstehend");
+        reportingPanel.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, -1, -1));
+
+        jPanel9.setBackground(java.awt.Color.gray);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        reportingPanel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, -1));
+
+        jLabel48.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel48.setText("Platz korrekt");
+        reportingPanel.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, -1, -1));
+
+        jLabel49.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel49.setText("Überprüfung");
+        reportingPanel.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, -1));
+
+        jLabel50.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(204, 35, 42));
+        jLabel50.setText("Product Recognition Image");
+        reportingPanel.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, 20));
+
+        jLabelPlaceId2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        jLabelPlaceId2.setForeground(new java.awt.Color(204, 35, 42));
+        reportingPanel.add(jLabelPlaceId2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 120, 20));
 
         mainPanel.add(reportingPanel, "card3");
 
@@ -1266,7 +1423,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                     imagesJsonPahtCopyForCamEvent = imagesJsonPath;
                     //Skalierungswerte für Start der Application festlegen
                     if (!emptyCondition) {
-                        getScaledImageIconFromImagePath(imagePath.get(0),jLabel9);
+                        getScaledImageIconFromImagePath(imagePath.get(0), jLabel9);
                         jLabel9.setText("Please choose an available cam view from below");
                         jLabel9.setHorizontalAlignment(JLabel.CENTER);
                     } else {
@@ -1369,19 +1526,26 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         BufferedImage img = null;
         Image image = null;
         try {
-            img = ImageIO.read(new File(imagePath));
+            File file = new File(imagePath);
+            if (file.exists()) {
+                img = ImageIO.read(file);
+                newScaleFactorWidth = (double) jlabel.getWidth() / (double) img.getWidth();
+                newScaleFactorHeight = (double) jlabel.getHeight() / (double) img.getHeight();
+                if (newScaleFactorWidth != 0 || newScaleFactorHeight != 0) {
+                    image = img.getScaledInstance((int) (img.getWidth() * newScaleFactorWidth), (int) (img.getHeight() * newScaleFactorHeight), Image.SCALE_SMOOTH);
+                } else {
+                    image = img;
+                }
+                return new ImageIcon(image);
+            } else {
+                jlabel.setIcon(null);
+                jlabel.setHorizontalAlignment(JLabel.CENTER);
+                jlabel.setText("Analyse steht bevor, zurzeit keine Daten vorhanden");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        newScaleFactorWidth = (double)jlabel.getWidth() / (double) img.getWidth();
-        newScaleFactorHeight = (double)jlabel.getHeight() / (double) img.getHeight();
-        if (newScaleFactorWidth != 0 || newScaleFactorHeight != 0) {
-            image = img.getScaledInstance((int) (img.getWidth() * newScaleFactorWidth), (int) (img.getHeight() * newScaleFactorHeight), Image.SCALE_SMOOTH);
-        } else {
-            image = img;
-        }
-
-        return new ImageIcon(image);
+        return null;
     }
 
     private ImageIcon getScaledImageIconFromImagePathForCamLabel(String imagePath) {
@@ -1401,6 +1565,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private String getRecognizedText(ArrayList<BoundingBoxObject> bbo) {
         return "Folgender Text wurde erkannt: " + "\n\n" + ExtractLineText(bbo);
     }
+
     private String getCvRecognizedText(MainObject obj) {
         return "Folgende Produkte wurden erkannt: " + "\n\n" + ExtractCvLineText(obj);
     }
@@ -1466,7 +1631,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(imagesJsonPahtCopyForCamEvent.get(sliderIndex));
                 setXAndYCoordinatesOfOcr(bbo);
                 String recognizedText = getRecognizedText(bbo);
-                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex),jLabel9);
+                ImageIcon imageIcon = getScaledImageIconFromImagePath(imagePahtCopyForCamEvent.get(sliderIndex), jLabel9);
 
                 setFileNameToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
                 setCreationTimeToJLabel(imagePahtCopyForCamEvent.get(sliderIndex));
@@ -1647,7 +1812,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             //analyse(gl_shelf_id, gl_row_id, gl_place_id, "");
             show_status(gl_shelf_id, gl_row_id, gl_place_id);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1659,32 +1824,37 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         task.addPropertyChangeListener(this);
         task.execute();
     }//GEN-LAST:event_jButton2ActionPerformed
-    public void showCvAnalyse(int shelf_id, int row_id, int place_id){
+    public void showCvAnalyse(int shelf_id, int row_id, int place_id) {
         String originalImagePath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg";
         String originalJsonPath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1_.json";
         ImageIcon newimg = getScaledImageIconFromImagePath(originalImagePath, original_Image);
-        if(newimg !=null){
-        MainObject obj = GraphicHelperClass.getInitializedMainObject(originalJsonPath);
-        String recognizedText = getCvRecognizedText(obj);
-        jTextPane2.setText(recognizedText);
-        original_Image.setIcon(newimg);
-        repaintCv(original_Image.getGraphics(), ExtractCvBoundingBox(obj), newimg);
+        if (newimg != null) {
+            MainObject obj = GraphicHelperClass.getInitializedMainObject(originalJsonPath);
+            String recognizedText = getCvRecognizedText(obj);
+            jTextPane2.setText(recognizedText);
+            original_Image.setIcon(newimg);
+            repaintCv(original_Image.getGraphics(), ExtractCvBoundingBox(obj), newimg);
+        } else{
+             jTextPane2.setText("");
         }
     }
-    public void showOcrAnalyse(int shelf_id, int row_id, int place_id){
+
+    public void showOcrAnalyse(int shelf_id, int row_id, int place_id) {
         String priceTagImagePath = "src/main/resources/ocr/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg";
         String priceTagJsonPath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.json";
         ImageIcon newimg = getScaledImageIconFromImagePath(priceTagImagePath, priceTag_Image);
-        if(newimg !=null){
-        ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(priceTagJsonPath);
-        setXAndYCoordinatesOfOcr(bbo);
-        String recognizedText = getRecognizedText(bbo);
-        jTextPane3.setText(recognizedText);
-        priceTag_Image.setIcon(newimg);
-        repaintOcr(priceTag_Image.getGraphics()); 
+        if (newimg != null) {
+            ArrayList<BoundingBoxObject> bbo = GraphicHelperClass.getInitializedBoundingBoxObject(priceTagJsonPath);
+            setXAndYCoordinatesOfOcr(bbo);
+            String recognizedText = getRecognizedText(bbo);
+            jTextPane3.setText(recognizedText);
+            priceTag_Image.setIcon(newimg);
+            repaintOcr(priceTag_Image.getGraphics());
+        } else {
+            jTextPane3.setText("");
         }
     }
-    
+
     public void createTable() {
         PriceTagComparator.getPriceTagsFromDB();
         JTable table;
@@ -1762,23 +1932,52 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             jProgressBar1.repaint();
         }
     }
-    public boolean matchName(String original, String recognition){
-        String[][] UMLAUT_REPLACEMENTS = { { "Ä", "A" }, { "Ü", "U" }, { "Ö", "O" }, { "ä", "a" }, { "ü", "u" }, { "ö", "o" }, { "-", "" }};
-        original = original.trim();//Entferne leerzeichen am begin und ende
-        recognition = recognition.trim(); //Entferne leerzeichen am begin und ende
-        String resultOriginal= original;
+
+    public boolean matchPrice(String original, String recognition) {
+        if (recognition == null) {
+            return false;
+        }
+        original = original.trim();
+        recognition = recognition.trim().replaceAll(",", ".");
+        if (original.equals(recognition)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean matchName(String original, String recognition) {
+        if (recognition == null) {
+            return false;
+        }
+        String[][] UMLAUT_REPLACEMENTS = {{"ä", "a"}, {"ü", "u"}, {"ö", "o"},
+        {"-", " "}, {"\\+", " "}, {"/", " "}, {"\\\\", " "}, {"&", " "}, {"   ", " "}, {"  ", " "}};
+        original = original.trim().toLowerCase();//Entferne leerzeichen am begin und ende,setze auf kleinbuchstaben
+        recognition = recognition.trim().toLowerCase(); //Entferne leerzeichen am begin und ende, setze auf kleinbuchstaben
+        String resultOriginal = original;
         String resultRecognition = recognition;
-        if(original.equals(recognition)){
+        if (original.equals(recognition)) {
             return true;
         } else {
             for (int i = 0; i < UMLAUT_REPLACEMENTS.length; i++) {
                 resultOriginal = resultOriginal.replaceAll(UMLAUT_REPLACEMENTS[i][0], UMLAUT_REPLACEMENTS[i][1]);
-                resultRecognition = resultRecognition.replaceAll(UMLAUT_REPLACEMENTS[i][0], UMLAUT_REPLACEMENTS[i][1]); 
+                resultRecognition = resultRecognition.replaceAll(UMLAUT_REPLACEMENTS[i][0], UMLAUT_REPLACEMENTS[i][1]);
             }
-            return resultOriginal.equals(resultRecognition);
+            //resultOriginal.equals(resultRecognition);
+            if (resultOriginal.length() <= 10) {
+                return StringUtils.getLevenshteinDistance(resultOriginal, resultRecognition) < 2;
+            } else {
+                return StringUtils.getLevenshteinDistance(resultOriginal, resultRecognition) < 3;
+            }
+
         }
-    } 
+        // if (StringUtils.getLevenshteinDistance(resultOriginal, resultRecognition) < 3) {
+
+        // }
+    }
+
     public void show_status(int shelf_id, int row_id, int place_id) {
+        
         String product_name1 = dbc2.handleGetDB2("product_name1", shelf_id, row_id, place_id);
         String product_name2 = dbc2.handleGetDB2("product_name2", shelf_id, row_id, place_id);
 
@@ -1792,7 +1991,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
             ocr_product_name = ocr_product_name1;
         }
         String cv_product_name = dbc2.handleGetDB2("cv_product_name", shelf_id, row_id, place_id);
-        
+
         //Datenbank werte abgleichen - set status_table values
         //names
         jTable1.setValueAt(product_name, 0, 1);
@@ -1803,56 +2002,76 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         jTable1.setValueAt(ocr_price, 1, 2);
         jTable1.setValueAt("  -  ", 2, 2);
         //status
-        String gesamt_status = "Gut";
-        String price_status = "Gut";
-        String name_status = "Gut";
+        String gesamt_status = "";
+       // String price_status = "Gut";
+       // String name_status = "Gut";
+        String price_status = dbc2.handleGetDB2("status_price", shelf_id, row_id, place_id);
+        String name_status = dbc2.handleGetDB2("status_name", shelf_id, row_id, place_id);
         //name_status
-      //  if (!product_name.equals(ocr_product_name) || !product_name.equals(cv_product_name)) {
-        if (!matchName(product_name,ocr_product_name) || !matchName(product_name,cv_product_name)) {
-            name_status = "Fehlplatzierung";
-            gesamt_status = "Schlecht";
-            jTable1.setValueAt(name_status, 3, 1);
-        } else {
-            name_status = "Platz korrekt";
-            jTable1.setValueAt(name_status, 3, 1);
-        }
-        dbc2.handleUpdateDB2("status_name", shelf_id, row_id, place_id, name_status);
-        //price_status
-        if (!price.equals(ocr_price)) {
-            price_status = "Falscher Preis";
-            gesamt_status = "Schlecht";
-            jTable1.setValueAt(price_status, 3, 2);
-        } else {
-            price_status = "Preis korrekt";
-            jTable1.setValueAt(price_status, 3, 2);
-        }
-        dbc2.handleUpdateDB2("status_price", shelf_id, row_id, place_id, price_status);
-
-        if ((ocr_price == null || ocr_price.isEmpty()) && (ocr_product_name == null || ocr_product_name.isEmpty()) && (cv_product_name == null || cv_product_name.isEmpty())) {
-            gesamt_status = "Neutral";
+       // if (price_status.equals("Preis korrekt") && name_status.equals("Fehlplatzierung")) {
+            if ((product_name != null || !product_name.isEmpty() || product_name.equals(" "))) {
+                if (!name_status.equals("Platz OK")) {
+                    if (!matchName(product_name, ocr_product_name) || !matchName(product_name, cv_product_name)) {
+                        name_status = "Fehlplatzierung";
+                        // gesamt_status = "Schlecht";
+                        jTable1.setValueAt(name_status, 3, 1);
+                    } else {
+                        name_status = "Platz korrekt";
+                        jTable1.setValueAt(name_status, 3, 1);
+                    }
+                    dbc2.handleUpdateDB2("status_name", shelf_id, row_id, place_id, name_status);
+                }
+                //price_status
+                if (!price_status.equals("Preis OK")) {
+                    if (!matchPrice(price, ocr_price)) {
+                        price_status = "Falscher Preis";
+                        //gesamt_status = "Schlecht";
+                        jTable1.setValueAt(price_status, 3, 2);
+                    } else {
+                        price_status = "Preis korrekt";
+                        jTable1.setValueAt(price_status, 3, 2);
+                    }
+                    dbc2.handleUpdateDB2("status_price", shelf_id, row_id, place_id, price_status);
+                }
+            }
+      //  }
+        if ((ocr_price == null || ocr_price.isEmpty()) && (ocr_product_name == null
+                || ocr_product_name.isEmpty()) && (cv_product_name == null || cv_product_name.isEmpty())
+                || (product_name == null || product_name.isEmpty() || product_name.equals(" "))) {
+            gesamt_status = "Neutral"; //Grau
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 2);
             jTable1.setValueAt("Überprüfung ausstehend!", 3, 1);
         }
-        //TODO 2te reihe mappin anpassen
-        //Webservice LED aufrufen
-      /* if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis")) {
-            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FF0000\"}", row_id, (place_id-7) *(-1)); //platz rot
-        }
-       else if (name_status.equals("Fehlplatzierung") && price_status.equals("Preis korrekt")){
-            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FFFF00\"}", row_id, place_id); //platz gelb
-        }
-       else if (name_status.equals("Platz korrekt") && price_status.equals("Falscher Preis")) {
-            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#ffa500\"}", row_id, 8-place_id); //platz orange
-        } else {
-            WebServiceLED.shelfLedMapping("{\"rgb\" : \"#00ff00\"}", row_id, 8-place_id); //platz grün
-        } */
         
+        if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis") && !gesamt_status.equals("Neutral")) {
+            gesamt_status = "Rot"; //platz rot
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#110000\"}", shelf_id + "" +row_id + "" +place_id);
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FF0000\"}", row_id, place_id-7);
+        } else if (name_status.equals("Fehlplatzierung") && (price_status.equals("Preis korrekt") || price_status.equals("Preis OK") ) && !gesamt_status.equals("Neutral")) {
+            gesamt_status = "Gelb"; //platz gelb
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#111100\"}", shelf_id + "" +row_id + "" +place_id);
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FFFF00\"}", row_id, place_id);
+        } else if ((name_status.equals("Platz korrekt") || name_status.equals("Platz OK") ) && price_status.equals("Falscher Preis") && !gesamt_status.equals("Neutral")) {
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#110500\"}", shelf_id + "" +row_id + "" +place_id);
+            gesamt_status = "Orange"; //platz orange
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#ffa500\"}", row_id, 8-place_id);
+        } else if ( (name_status.equals("Platz korrekt") || name_status.equals("Platz OK")) && (price_status.equals("Preis korrekt") || price_status.equals("Preis OK")) && !gesamt_status.equals("Neutral")) {
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id);
+            gesamt_status = "Grün"; //platz grün
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#00ff00\"}", row_id, 8-place_id); 
+        }
         //Soll-Wert
 //	Ist-Wert (OCR)
 //	Ist-Wert (Custom Vision)
+        //Label mit PlatzId setzen:
+        jLabelPlaceId1.setText(shelf_id + "_" + row_id + "_" + place_id);
+        jLabelPlaceId2.setText(shelf_id + "_" + row_id + "_" + place_id);
         //Übersichtstabelle färben:
         renderer.status_table[row_id][place_id] = gesamt_status; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
         jTable2.repaint();
+        jTable2.validate();
+        jScrollPane3.repaint();
+        jScrollPane3.validate();
 
 //untere Tabelle anpassen
     }
@@ -1865,7 +2084,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         }
     }
 
-      public void analyse(int shelf_id, int row_id, int place_id, String folder_path) {
+    public void analyse(int shelf_id, int row_id, int place_id, String folder_path) {
         FileHelperClass fh = new FileHelperClass();
         File destination_folder = null;
         String old_files = "";
@@ -1880,58 +2099,66 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 old_files = "./src/main/resources/original_old/" + shelf_id + "_" + row_id + "_" + place_id;
             }
         }
-        if(destination_folder != null){
-        File destination_file = new File(folder_path + "/1.jpg");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_");
-        if (null != destination_folder.list() && destination_folder.list().length != 0) {
-            for (File f : destination_folder.listFiles()) {
-                try {
-                    FileUtils.copyFile(f, new File(old_files + "/" + sdf.format(destination_file.lastModified()) + f.getName()));
-                    f.delete();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (destination_folder != null) {
+            File destination_file = new File(folder_path + "/1.jpg");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_");
+            if (null != destination_folder.list() && destination_folder.list().length != 0) {
+                for (File f : destination_folder.listFiles()) {
+                    try {
+                        FileUtils.copyFile(f, new File(old_files + "/" + sdf.format(destination_file.lastModified()) + f.getName()));
+                        f.delete();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
-        try {
-            FileUtils.copyFile(source_file, destination_file);
-        } catch (IOException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //Bild an OCR
-        PriceTagRecognitionAPI.startAnalyse("", folder_path);
-        ProductRecognitionAPI.startAnalyse("", folder_path);
+            try {
+                FileUtils.copyFile(source_file, destination_file);
+            } catch (IOException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //Bild an OCR
+            PriceTagRecognitionAPI.startAnalyse("", folder_path);
+            ProductRecognitionAPI.startAnalyse("", folder_path);
 
-        File[] listOfFiles = destination_folder.listFiles();
-        String image_path = null;
-        for (File file : listOfFiles) {
-            if (file.isFile() && FileHelperClass.getFileExtension(file).toLowerCase().equals("jpg")) {
-                String str = file.getAbsolutePath();
-                if (str.lastIndexOf(".") != -1 && str.lastIndexOf(".") != 0) {
-                    image_path = str.substring(0, str.lastIndexOf(".")) + ".json";
+            File[] listOfFiles = destination_folder.listFiles();
+            String image_path = null;
+            for (File file : listOfFiles) {
+                if (file.isFile() && FileHelperClass.getFileExtension(file).toLowerCase().equals("jpg")) {
+                    String str = file.getAbsolutePath();
+                    if (str.lastIndexOf(".") != -1 && str.lastIndexOf(".") != 0) {
+                        image_path = str.substring(0, str.lastIndexOf(".")) + ".json";
+                    }
                 }
             }
+            //PriceTag Analyse durchführen
+            ArrayList<String> price_Tag = PriceTagComparator.getpriceTagsFromJson(image_path);
+            ArrayList<String> product_Tag = PriceTagComparator.getProductTagsFromJson(fh.setPostfixToPathName(image_path));
+            String ocr_product_name1 = "", ocr_product_name2 = "", ocr_price = "";
+            if (!price_Tag.isEmpty()) {
+                ocr_product_name1 = price_Tag.get(0);
+                ocr_product_name2 = price_Tag.get(1);
+                ocr_price = price_Tag.get(2);
+                System.out.println("Erkannt:" + ocr_product_name1 + "  " + ocr_product_name2 + "  " + ocr_price);
+                //Ergebnis OCR in DB (mithilfe von Regalplatz)
+                dbc2.handleUpdateDB2("ocr_product_name1", shelf_id, row_id, place_id, ocr_product_name1);
+                dbc2.handleUpdateDB2("ocr_product_name2", shelf_id, row_id, place_id, ocr_product_name2);
+                dbc2.handleUpdateDB2("ocr_price", shelf_id, row_id, place_id, ocr_price);
+                dbc2.handleUpdateDB2("status_name", shelf_id, row_id, place_id, "");
+                dbc2.handleUpdateDB2("status_price", shelf_id, row_id, place_id, "");
+            }
+            String cv_product_name = "";
+            if (!product_Tag.isEmpty()) {
+                cv_product_name = product_Tag.get(0);
+                //Ergebnis CV in DB (mithilfe von Regalplatz)
+                dbc2.handleUpdateDB2("cv_product_name", shelf_id, row_id, place_id, cv_product_name);
+            }
+            //show_status(shelf_id, row_id, place_id);
         }
-        //PriceTag Analyse durchführen
-        ArrayList<String> price_Tag = PriceTagComparator.getpriceTagsFromJson(image_path);
-        ArrayList<String> product_Tag = PriceTagComparator.getProductTagsFromJson(fh.setPostfixToPathName(image_path));
-        String ocr_product_name1 = price_Tag.get(0);
-        String ocr_product_name2 = price_Tag.get(1);
-        String ocr_price = price_Tag.get(2);
-        String cv_product_name = product_Tag.get(0);
-        System.out.println("Erkannt:" + ocr_product_name1 + "  " + ocr_product_name2 + "  " + ocr_price);
-        //Ergebnis OCR in DB (mithilfe von Regalplatz)
-        dbc2.handleUpdateDB2("ocr_product_name1", shelf_id, row_id, place_id, ocr_product_name1);
-        dbc2.handleUpdateDB2("ocr_product_name2", shelf_id, row_id, place_id, ocr_product_name2);
-        dbc2.handleUpdateDB2("ocr_price", shelf_id, row_id, place_id, ocr_price);
-        //Ergebnis CV in DB (mithilfe von Regalplatz)
-        dbc2.handleUpdateDB2("cv_product_name", shelf_id, row_id, place_id, cv_product_name);
-
-        //show_status(shelf_id, row_id, place_id);
-        } else {
+        /* else {
             JOptionPane.showMessageDialog(mainPanel, "You have selected wrong folder, please choose: " + shelf_id + "_" + row_id + "_" + place_id 
                     + "/n or the selected folder does not contain a shelf image");
-        }
+        } `*/
     }
 
     public void repaintOcr(Graphics g) {
@@ -1967,6 +2194,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         });
         t.start();
     }
+
     //coordinates contains: left,top,width,height,left,top,... in row state
     public void repaintCv(Graphics g, List<Double> coordinates, ImageIcon img) {
         super.paint(g);
@@ -1977,12 +2205,14 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                         int number = 1;
                         double iw = img.getIconWidth();
                         double ih = img.getIconHeight();
-                        for (int i = 0; i < coordinates.size(); i+=4) {
+                        for (int i = 0; i < coordinates.size(); i += 4) {
                             int x = (int) Math.round(coordinates.get(i) * iw);
                             int y = (int) Math.round(coordinates.get(i + 1) * ih);
                             int w = (int) Math.round(coordinates.get(i + 2) * iw);
                             int h = (int) Math.round(coordinates.get(i + 3) * ih);
                             g.setColor(Color.red);
+                            Graphics2D g2 = (Graphics2D) g;
+                            g2.setStroke(new BasicStroke(2f));
                             g.drawRect(x, y, w, h);
                             g.setColor(Color.RED);
                             g.setFont(new Font("Normal", Font.BOLD, 14));
@@ -1998,6 +2228,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         });
         t.start();
     }
+
     /**
      * @param args the command line arguments
      */
@@ -2021,7 +2252,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
                 home.setVisible(true);
                 home.setTitle("Kaufland - Shelf Management System");
                 //home.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/logo40.jpg")).getImage());
-                home.setIconImage(new javax.swing.ImageIcon("src/images/logo40.jpg").getImage());
+                home.setIconImage(new javax.swing.ImageIcon("src/main/resources/images/logo40.jpg").getImage());
                 //Aus DB PATH abfragen -> der in settings gewählt wurde
                 DBController dbc = DBController.getInstance();
                 dbc.initDBConnection();
@@ -2071,7 +2302,6 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -2097,7 +2327,18 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2106,6 +2347,8 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JLabel jLabelGalleryImage3;
     private javax.swing.JLabel jLabelGalleryImage4;
     private javax.swing.JLabel jLabelLogoImage;
+    private javax.swing.JLabel jLabelPlaceId1;
+    private javax.swing.JLabel jLabelPlaceId2;
     private javax.swing.JLabel jLabelReportingLabel;
     private javax.swing.JLabel jLabelSettingsImage;
     private javax.swing.JLabel jLabelShelf;
@@ -2115,6 +2358,11 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

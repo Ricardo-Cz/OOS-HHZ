@@ -36,23 +36,21 @@ public class TableCellRenderer
 
         // Only for specific cell
         
-        if(status_table[row][column] == "Gut"){
+        if (status_table[row][column] == "Grün") {
             c.setBackground(GREEN);
             return c;
-        }
-        
-        if(status_table[row][column] == "Schlecht"){
+        } else if (status_table[row][column] == "Rot") {
             c.setBackground(RED);
             return c;
-        }
-        if(status_table[row][column] == "Neutral"){
+        } else if (status_table[row][column] == "Gelb") {
+            c.setBackground(YELLOW);
+            return c;
+        } else if (status_table[row][column] == "Orange") {
+            c.setBackground(ORANGE);
+            return c;
+        } else {
             c.setBackground(GRAY);
             return c;
         }
-        
-        else {
-            c.setBackground(Color.GRAY);
-        }
-        return c;
     }
 }

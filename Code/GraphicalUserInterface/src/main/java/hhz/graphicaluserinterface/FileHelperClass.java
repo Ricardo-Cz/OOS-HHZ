@@ -161,17 +161,13 @@ public class FileHelperClass {
                         byteArrayList.add(byteArray);
                         int sID,rID,pID = 0;
                         //OutputStream outputStream = new FileOutputStream("C:/OOS_KL/test.jpg");
-                        if(Home.gl_shelf_id == -1 && Home.gl_row_id == -1 && Home.gl_place_id == -1){
-                          String folder_name = new File(path).getParentFile().getName();
-                          String[] ids = folder_name.split("_");
-                          sID = Integer.parseInt(ids[0]);
-                          rID = Integer.parseInt(ids[1]);
-                          pID = Integer.parseInt(ids[2]);
-                        } else {
-                            sID = Home.gl_shelf_id;
-                            rID = Home.gl_row_id;
-                            pID = Home.gl_place_id;
-                        }
+                        String folder_name = new File(path).getParentFile().getName();
+                        String[] ids = folder_name.split("_");
+                        sID = Integer.parseInt(ids[0]);
+                        rID = Integer.parseInt(ids[1]);
+                        pID = Integer.parseInt(ids[2]);
+                         
+                        
                         File fittedImage = new File("src/main/resources/ocr/" + sID + "_" + rID + "_" + pID);
                         if(!fittedImage.exists()){
                             fittedImage.mkdirs();

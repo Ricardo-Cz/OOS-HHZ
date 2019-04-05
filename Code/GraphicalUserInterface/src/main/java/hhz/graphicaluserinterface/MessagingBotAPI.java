@@ -46,13 +46,32 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
     public String getBotToken() {
         return "680951345:AAGVFtRd4kuWcmyyl-Hrp77C7vCIYHyttn0";
     }
-
+ private void setLedColors(String name_status, String price_status, int shelf_id, int row_id, int place_id){
+     if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis")) {
+           // gesamt_status = "Rot"; //platz rot
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#110000\"}", shelf_id + "" +row_id + "" +place_id);
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FF0000\"}", row_id, place_id-7);
+        } else if (name_status.equals("Fehlplatzierung") && price_status.equals("Preis korrekt")) {
+           // gesamt_status = "Gelb"; //platz gelb
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#111100\"}", shelf_id + "" +row_id + "" +place_id);
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FFFF00\"}", row_id, place_id);
+        } else if (name_status.equals("Platz korrekt") && price_status.equals("Falscher Preis")) {
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#110500\"}", shelf_id + "" +row_id + "" +place_id);
+          //  gesamt_status = "Orange"; //platz orange
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#ffa500\"}", row_id, 8-place_id);
+        } else if (name_status.equals("Platz korrekt") && price_status.equals("Preis korrekt")) {
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id);
+          //  gesamt_status = "Grün"; //platz grün
+            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#00ff00\"}", row_id, 8-place_id); 
+        }
+ }
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
         String chatMsg = "";
         if (message != null && message.hasText()) {
             String command = message.getText();
+            Home home = new Home();
             switch (command){
                 case "Fehlmeldung": {
                     if (message.isReply()) {
@@ -61,13 +80,22 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
                             String[] dividedText = text.split(" ");
                             DBController dbc = DBController.getInstance();
                             dbc.initDBConnection();
-                            dbc.handleUpdateDB2("status_price", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "Preis korrekt");
+                            int shelf_id = Integer.parseInt(dividedText[2]);
+                            int row_id = Integer.parseInt(dividedText[6]);
+                            int place_id = Integer.parseInt(dividedText[9]);
+                            dbc.handleUpdateDB2("status_price", shelf_id, row_id, place_id, "Preis OK");
+                            //WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id); //Farbe setzten
+                            home.show_status(shelf_id, row_id, place_id);
                             sendMsg(message, "Wurde vermerkt!");
                         } else if (text.contains("Fehlplatzierung")) {
                             String[] dividedText = text.split(" ");
                             DBController dbc = DBController.getInstance();
                             dbc.initDBConnection();
-                            dbc.handleUpdateDB2("status_name", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "OK");
+                            int shelf_id = Integer.parseInt(dividedText[2]);
+                            int row_id = Integer.parseInt(dividedText[6]);
+                            int place_id = Integer.parseInt(dividedText[9]);
+                            dbc.handleUpdateDB2("status_name", shelf_id, row_id, place_id, "Platz OK");
+                            home.show_status(shelf_id, row_id, place_id);
                             sendMsg(message, "Wurde vermerkt!");
                         } else {
                             sendMsg(message, "Das ist keine Meldung!");
@@ -85,14 +113,25 @@ public class MessagingBotAPI extends TelegramLongPollingBot {
                             String[] dividedText = text.split(" ");
                             DBController dbc = DBController.getInstance();
                             dbc.initDBConnection();
-                            dbc.handleUpdateDB2("status_price", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "Preis korrekt");
+                            int shelf_id = Integer.parseInt(dividedText[2]);
+                            int row_id = Integer.parseInt(dividedText[6]);
+                            int place_id = Integer.parseInt(dividedText[9]);
+                            dbc.handleUpdateDB2("status_price", shelf_id, row_id, place_id, "Preis OK");
+                            
+                            home.show_status(shelf_id, row_id, place_id);
+                           // WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id); //Regal LED Grün setzten
                             sendMsg(message, "Wurde vermerkt!");
                         }
                         else if (text.contains("Fehlplatzierung")){
                             String[] dividedText = text.split(" ");
                             DBController dbc = DBController.getInstance();
                             dbc.initDBConnection();
-                            dbc.handleUpdateDB2("status_name", Integer.parseInt(dividedText[2]), Integer.parseInt(dividedText[6]), Integer.parseInt(dividedText[9]), "OK");
+                             int shelf_id = Integer.parseInt(dividedText[2]);
+                            int row_id = Integer.parseInt(dividedText[6]);
+                            int place_id = Integer.parseInt(dividedText[9]);
+                            dbc.handleUpdateDB2("status_name", shelf_id, row_id, place_id, "Platz OK");
+                            home.show_status(shelf_id, row_id, place_id);
+                            //WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id); //Farbe setzten
                             sendMsg(message, "Wurde vermerkt!");
                         }
                         else {
