@@ -190,6 +190,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         jLabel34 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         reportingPanel = new javax.swing.JPanel();
+        jLabelPlaceId4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -866,6 +867,9 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         reportingPanel.setBackground(new java.awt.Color(255, 255, 255));
         reportingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabelPlaceId4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        reportingPanel.add(jLabelPlaceId4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 50, 30));
+
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jTable1.setForeground(new java.awt.Color(204, 35, 42));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -1086,7 +1090,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
 
         jLabel44.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(204, 35, 42));
-        jLabel44.setText("Falschplazierung");
+        jLabel44.setText("Fehlplazierung");
         reportingPanel.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         jLabel45.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -2045,20 +2049,16 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         
         if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis") && !gesamt_status.equals("Neutral")) {
             gesamt_status = "Rot"; //platz rot
-            WebServiceLED.webserviceCall("{\"rgb\" : \"#110000\"}", shelf_id + "" +row_id + "" +place_id);
-            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FF0000\"}", row_id, place_id-7);
+//            WebServiceLED.webserviceCall("{\"rgb\" : \"#110000\"}", shelf_id + "" +row_id + "" +place_id);
         } else if (name_status.equals("Fehlplatzierung") && (price_status.equals("Preis korrekt") || price_status.equals("Preis OK") ) && !gesamt_status.equals("Neutral")) {
             gesamt_status = "Gelb"; //platz gelb
-            WebServiceLED.webserviceCall("{\"rgb\" : \"#111100\"}", shelf_id + "" +row_id + "" +place_id);
-            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#FFFF00\"}", row_id, place_id);
+//            WebServiceLED.webserviceCall("{\"rgb\" : \"#111100\"}", shelf_id + "" +row_id + "" +place_id);
         } else if ((name_status.equals("Platz korrekt") || name_status.equals("Platz OK") ) && price_status.equals("Falscher Preis") && !gesamt_status.equals("Neutral")) {
-            WebServiceLED.webserviceCall("{\"rgb\" : \"#110500\"}", shelf_id + "" +row_id + "" +place_id);
+//            WebServiceLED.webserviceCall("{\"rgb\" : \"#110500\"}", shelf_id + "" +row_id + "" +place_id);
             gesamt_status = "Orange"; //platz orange
-            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#ffa500\"}", row_id, 8-place_id);
         } else if ( (name_status.equals("Platz korrekt") || name_status.equals("Platz OK")) && (price_status.equals("Preis korrekt") || price_status.equals("Preis OK")) && !gesamt_status.equals("Neutral")) {
-            WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id);
+//            WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id);
             gesamt_status = "Grün"; //platz grün
-            // WebServiceLED.shelfLedMapping("{\"rgb\" : \"#00ff00\"}", row_id, 8-place_id); 
         }
         //Soll-Wert
 //	Ist-Wert (OCR)
@@ -2066,12 +2066,10 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         //Label mit PlatzId setzen:
         jLabelPlaceId1.setText(shelf_id + "_" + row_id + "_" + place_id);
         jLabelPlaceId2.setText(shelf_id + "_" + row_id + "_" + place_id);
+        jLabelPlaceId4.setText(shelf_id + "_" + row_id + "_" + place_id);
         //Übersichtstabelle färben:
         renderer.status_table[row_id][place_id] = gesamt_status; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
         jTable2.repaint();
-        jTable2.validate();
-        jScrollPane3.repaint();
-        jScrollPane3.validate();
 
 //untere Tabelle anpassen
     }
@@ -2349,6 +2347,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
     private javax.swing.JLabel jLabelLogoImage;
     private javax.swing.JLabel jLabelPlaceId1;
     private javax.swing.JLabel jLabelPlaceId2;
+    private javax.swing.JLabel jLabelPlaceId4;
     private javax.swing.JLabel jLabelReportingLabel;
     private javax.swing.JLabel jLabelSettingsImage;
     private javax.swing.JLabel jLabelShelf;
