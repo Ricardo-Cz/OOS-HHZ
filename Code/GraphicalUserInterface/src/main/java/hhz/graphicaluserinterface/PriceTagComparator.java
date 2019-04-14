@@ -25,7 +25,7 @@ import sqlite.DBController;
 
 /**
  *
- * @author Valerij
+ * @author Mustafa
  */
 public class PriceTagComparator {
 
