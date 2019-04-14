@@ -55,12 +55,11 @@ public class OcrApi {
 
     public static void startOcrAnalyse(Map<String, List<byte[]>> mapWithPriceTags) {
         subscriptionKey = getKey();
-        FileHelperClass fh = new FileHelperClass();
-
         CloseableHttpClient httpTextClient = HttpClientBuilder.create().build();
         CloseableHttpClient httpResultClient = HttpClientBuilder.create().build();;
 
         for (String imagePathKey : mapWithPriceTags.keySet()) {
+            
             JSONArray jArray = new JSONArray();
             for (byte[] priceTag : mapWithPriceTags.get(imagePathKey)) {
                 try {
@@ -151,6 +150,7 @@ public class OcrApi {
             }
             //System.out.println("Response combined: \n");
             //System.out.println(jArray.toString(2));
+            FileHelperClass fh = new FileHelperClass();
             fh.WriteJsonToFile(jArray, imagePathKey);
 
         }

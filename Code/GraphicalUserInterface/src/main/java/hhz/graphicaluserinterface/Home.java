@@ -65,6 +65,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.AbstractTableModel;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.lang3.StringUtils;
@@ -1829,17 +1830,21 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         task.execute();
     }//GEN-LAST:event_jButton2ActionPerformed
     public void showCvAnalyse(int shelf_id, int row_id, int place_id) {
-        String originalImagePath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg";
-        String originalJsonPath = "src/main/resources/original/" + Home.gl_shelf_id + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1_.json";
-        ImageIcon newimg = getScaledImageIconFromImagePath(originalImagePath, original_Image);
+        String originalImagePath = "src/main/resources/original/" + Home.gl_shelf_id
+                + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1.jpg";
+        String originalJsonPath = "src/main/resources/original/" + Home.gl_shelf_id
+                + "_" + Home.gl_row_id + "_" + Home.gl_place_id + "/1_.json";
+        ImageIcon newimg
+                = getScaledImageIconFromImagePath(originalImagePath, original_Image);
         if (newimg != null) {
-            MainObject obj = GraphicHelperClass.getInitializedMainObject(originalJsonPath);
+            MainObject obj
+                    = GraphicHelperClass.getInitializedMainObject(originalJsonPath);
             String recognizedText = getCvRecognizedText(obj);
             jTextPane2.setText(recognizedText);
             original_Image.setIcon(newimg);
             repaintCv(original_Image.getGraphics(), ExtractCvBoundingBox(obj), newimg);
-        } else{
-             jTextPane2.setText("");
+        } else {
+            jTextPane2.setText("");
         }
     }
 
@@ -2049,15 +2054,15 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         
         if (name_status.equals("Fehlplatzierung") && price_status.equals("Falscher Preis") && !gesamt_status.equals("Neutral")) {
             gesamt_status = "Rot"; //platz rot
-//            WebServiceLED.webserviceCall("{\"rgb\" : \"#110000\"}", shelf_id + "" +row_id + "" +place_id);
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#110000\"}", shelf_id + "" +row_id + "" +place_id);
         } else if (name_status.equals("Fehlplatzierung") && (price_status.equals("Preis korrekt") || price_status.equals("Preis OK") ) && !gesamt_status.equals("Neutral")) {
             gesamt_status = "Gelb"; //platz gelb
-//            WebServiceLED.webserviceCall("{\"rgb\" : \"#111100\"}", shelf_id + "" +row_id + "" +place_id);
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#111100\"}", shelf_id + "" +row_id + "" +place_id);
         } else if ((name_status.equals("Platz korrekt") || name_status.equals("Platz OK") ) && price_status.equals("Falscher Preis") && !gesamt_status.equals("Neutral")) {
-//            WebServiceLED.webserviceCall("{\"rgb\" : \"#110500\"}", shelf_id + "" +row_id + "" +place_id);
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#110500\"}", shelf_id + "" +row_id + "" +place_id);
             gesamt_status = "Orange"; //platz orange
         } else if ( (name_status.equals("Platz korrekt") || name_status.equals("Platz OK")) && (price_status.equals("Preis korrekt") || price_status.equals("Preis OK")) && !gesamt_status.equals("Neutral")) {
-//            WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id);
+            WebServiceLED.webserviceCall("{\"rgb\" : \"#001100\"}", shelf_id + "" +row_id + "" +place_id);
             gesamt_status = "Grün"; //platz grün
         }
         //Soll-Wert
@@ -2069,6 +2074,7 @@ public class Home extends javax.swing.JFrame implements PropertyChangeListener {
         jLabelPlaceId4.setText(shelf_id + "_" + row_id + "_" + place_id);
         //Übersichtstabelle färben:
         renderer.status_table[row_id][place_id] = gesamt_status; //Statt "gut" den Wert für Status eingeben und TableCellRenderer bearbeiten
+        //((AbstractTableModel)jTable2.getModel()).fireTableCellUpdated(row_id, place_id);
         jTable2.repaint();
 
 //untere Tabelle anpassen
