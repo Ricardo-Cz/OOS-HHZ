@@ -26,7 +26,7 @@ import sqlite.DBController;
 
 /**
  *
- * @author Valerij
+ * @author Mustafa
  */
 public class MessagingBotAPI extends TelegramLongPollingBot {
     static DBController dbc = DBController.getInstance();
